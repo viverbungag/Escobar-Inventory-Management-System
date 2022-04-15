@@ -1,7 +1,8 @@
 package com.exe.EscobarIMS;
 
-import com.exe.EscobarIMS.MenuCategory.MenuCategoryForm.MenuCategoryForm;
+import com.exe.EscobarIMS.MenuCategory.MenuCategoryForm.AddMenuCategoryForm;
 import com.exe.EscobarIMS.Utilities.LookAndFeelUtils;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -26,7 +27,7 @@ public class EscobarInventoryManagementSystemApplication {
 
 	private static void displayMainFrame(ConfigurableApplicationContext context){
 		SwingUtilities.invokeLater(()->{
-			MenuCategoryForm menuCategoryForm = context.getBean(MenuCategoryForm.class);
+			AddMenuCategoryForm menuCategoryForm = context.getBean(AddMenuCategoryForm.class);
 			menuCategoryForm.setVisible(true);
 		});
 	}
