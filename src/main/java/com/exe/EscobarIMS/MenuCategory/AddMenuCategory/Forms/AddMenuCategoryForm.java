@@ -5,6 +5,8 @@
 package com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms;
 
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
+import com.exe.EscobarIMS.MenuCategory.MessageDialogues;
+import com.exe.EscobarIMS.MenuCategory.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,12 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
      */
     @Autowired
     AddMenuCategoryController menuCategoryController;
+
+    @Autowired
+    Validations validations;
+
+    @Autowired
+    MessageDialogues messageDialogues;
     
     public AddMenuCategoryForm() {
         initComponents();
@@ -90,10 +98,23 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private boolean isValidToAddMenuCategory(){
         String newMenuCategoryName = menuCategoryNameTextField.getText();
-        menuCategoryController.addNewMenuCategory(newMenuCategoryName);
-        
+
+        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void addMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        if (isValidToAddMenuCategory()){
+            String newMenuCategoryName = menuCategoryNameTextField.getText();
+            menuCategoryController.addNewMenuCategory(newMenuCategoryName);
+            messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
+        }
     }
 
     /**

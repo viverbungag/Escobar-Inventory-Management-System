@@ -12,13 +12,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<MenuCategory, Long> {
 
-    @Query(value = "SELECT * FROM #{#entityName} AS m WHERE m.menu_category_name = :menuCategoryName", nativeQuery = true)
-    MenuCategory findByMenuCategoryName(@Param("menuCategoryName") String name);
 
-    @Query(value = "SELECT * FROM #{#entityName}", nativeQuery = true)
+    @Query(value = "SELECT * FROM #{#entityName}",
+            nativeQuery = true)
     List<MenuCategory> getAllMenuCategories();
 
     @Modifying
-    @Query(value = "DELETE FROM #{#entityName} AS m WHERE m.menu_category_name IN :listOfMenuCategoryNames", nativeQuery = true)
+    @Query(value = "DELETE FROM #{#entityName} " +
+            "AS m WHERE m.menu_category_name IN :listOfMenuCategoryNames",
+            nativeQuery = true)
     void deleteAllMenuCategoriesByName(@Param("listOfMenuCategoryNames") List<String> names);
+
+    @Modifying
+    @Query(value = "UPDATE #{#entityName} " +
+            "AS m SET m.menu_category_name = :newMenuCategoryName " +
+            "WHERE m.menu_category_id = :menuCategoryId",
+            nativeQuery = true)
+    void updateMenuCategoryNameById(@Param("menuCategoryId") Long id,
+                                    @Param("newMenuCategoryName") String name);
 }

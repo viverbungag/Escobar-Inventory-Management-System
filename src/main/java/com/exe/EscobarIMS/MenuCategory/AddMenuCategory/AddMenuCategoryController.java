@@ -12,21 +12,9 @@ public class AddMenuCategoryController {
     @Autowired
     private AddMenuCategoryRepository addMenuCategoryRepository;
 
-    @Autowired
-    private Validations validations;
-
-    @Autowired
-    private MessageDialogues messageDialogues;
-
-
     public void addNewMenuCategory(String menuCategoryName){
-        if (validations.isMenuCategoryExisting(menuCategoryName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-        }else{
-            MenuCategory newMenuCategory = new MenuCategory();
-            newMenuCategory.setMenuCategoryName(menuCategoryName);
-            addMenuCategoryRepository.save(newMenuCategory);
-            messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
-        }
+        MenuCategory newMenuCategory = new MenuCategory();
+        newMenuCategory.setMenuCategoryName(menuCategoryName);
+        addMenuCategoryRepository.save(newMenuCategory);
     }
 }

@@ -36,6 +36,3 @@ out/
 ### VS Code ###
 .vscode/
 
-### Additionals ###
-*.properties
-!spec/*.properties

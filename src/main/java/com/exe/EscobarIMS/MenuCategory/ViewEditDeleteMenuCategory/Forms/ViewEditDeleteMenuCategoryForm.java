@@ -5,6 +5,7 @@
 package com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategory;
+import com.exe.EscobarIMS.MenuCategory.MessageDialogues;
 import com.exe.EscobarIMS.MenuCategory.Validations;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.MENU_CATEGORY_NAME_COLUMN_NUMBER;
 
 /**
  *
@@ -28,7 +31,11 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     ViewEditDeleteMenuCategoryController viewEditDeleteMenuCategoryController;
 
     @Autowired
+    MessageDialogues messageDialogues;
+
+    @Autowired
     Validations validations;
+
     
     public ViewEditDeleteMenuCategoryForm() {
         initComponents();
@@ -48,6 +55,8 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         editMenuCategoryButton = new javax.swing.JButton();
         deleteMenuCategoryButton = new javax.swing.JButton();
         MenuCategoryFormTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        menuCategoryNameTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,6 +82,11 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        menuCategoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuCategoryTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(menuCategoryTable);
 
         editMenuCategoryButton.setText("Edit");
@@ -92,26 +106,34 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         MenuCategoryFormTitle.setText("Menu Categories");
 
+        jLabel1.setText("Menu Category Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(197, 197, 197)
+                        .addComponent(MenuCategoryFormTitle)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(deleteMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(MenuCategoryFormTitle))
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()
+                                .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(deleteMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 82, Short.MAX_VALUE)))
+                                .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -119,17 +141,29 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(MenuCategoryFormTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel1)
+                        .addGap(15, 15, 15)
+                        .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(editMenuCategoryButton)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editMenuCategoryButton)
-                    .addComponent(deleteMenuCategoryButton))
-                .addGap(26, 26, 26))
+                .addComponent(deleteMenuCategoryButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuCategoryTableMouseClicked(java.awt.event.MouseEvent evt) {
+        String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
+        menuCategoryNameTextField.setText(selectedMenuCategoryName);
+    }
 
 
     private void addTableRow(MenuCategory menuCategory, DefaultTableModel tableModel){
@@ -157,7 +191,11 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         List<String> menuCategoryNames = new ArrayList<String>();
         int[] selectedTableRows = menuCategoryTable.getSelectedRows();
         for (int selectedTableRow:selectedTableRows){
-            String selectedMenuCategoryName =  menuCategoryTable.getValueAt(selectedTableRow, 0).toString();
+
+            String selectedMenuCategoryName =  menuCategoryTable
+                    .getValueAt(selectedTableRow,
+                            MENU_CATEGORY_NAME_COLUMN_NUMBER).toString();
+
             menuCategoryNames.add(selectedMenuCategoryName);
         }
 
@@ -172,14 +210,73 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         generateTableContents();
     }
 
+
+    private String getSelectedRowMenuCategoryName(){
+        int selectedTableRow = menuCategoryTable.getSelectedRow();
+        String selectedMenuCategoryName = menuCategoryTable.getValueAt(selectedTableRow, MENU_CATEGORY_NAME_COLUMN_NUMBER).toString();
+
+        return selectedMenuCategoryName;
+    }
+
+    private boolean isValidToEditMenuCategory(){
+        String newMenuCategoryName = menuCategoryNameTextField.getText();
+        System.out.println(menuCategoryTable.getSelectedRowCount());
+
+        if (validations.isNotSelectingOneTableRow(menuCategoryTable)){
+            messageDialogues.showSelectJustOneRowMessageDialogue();
+            return false;
+        }
+
+        if(validations.isTextFieldEmpty(menuCategoryNameTextField)) {
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+            return false;
+        }
+
+        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidToDeleteMenuCategory(){
+        if (validations.isNotSelectingATableRow(menuCategoryTable)){
+            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
+            return false;
+        }
+
+        return true;
+    }
+
+
     private void editMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String newMenuCategoryName = menuCategoryNameTextField.getText();
+        if (isValidToEditMenuCategory()){
+            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
+            Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
+                    .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
+
+
+            viewEditDeleteMenuCategoryController
+                    .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
+                            newMenuCategoryName);
+
+            messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
+            updateTableContents();
+        }
     }
 
     private void deleteMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        List<String> menuCategoryNames = generateToBeDeletedList();
-        viewEditDeleteMenuCategoryController.deleteAllMenuCategoriesByName(menuCategoryNames);
-        updateTableContents();
+        if (isValidToDeleteMenuCategory()){
+            List<String> menuCategoryNames = generateToBeDeletedList();
+
+            viewEditDeleteMenuCategoryController
+                    .deleteAllMenuCategoriesByName(menuCategoryNames);
+
+            messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
+            updateTableContents();
+        }
     }
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
@@ -225,7 +322,9 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     private javax.swing.JLabel MenuCategoryFormTitle;
     private javax.swing.JButton deleteMenuCategoryButton;
     private javax.swing.JButton editMenuCategoryButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField menuCategoryNameTextField;
     private javax.swing.JTable menuCategoryTable;
     // End of variables declaration//GEN-END:variables
 }
