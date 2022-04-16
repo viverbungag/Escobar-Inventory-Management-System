@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.exe.EscobarIMS.MenuCategory.MenuCategoryForm;
+package com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms;
 
-import com.exe.EscobarIMS.MenuCategory.MenuCategoryController;
+import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
      * Creates new form AddMenuCategoryForm
      */
     @Autowired
-    MenuCategoryController menuCategoryController;
+    AddMenuCategoryController menuCategoryController;
     
     public AddMenuCategoryForm() {
         initComponents();
@@ -36,6 +36,8 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
 
         addMenuCategoryButton = new javax.swing.JButton();
         menuCategoryNameTextField = new javax.swing.JTextField();
+        MenuCategoryFormTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,25 +48,43 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
             }
         });
 
+        MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        MenuCategoryFormTitle.setText("Add Menu Category Form");
+
+        jLabel1.setText("Menu Category Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addMenuCategoryButton))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(MenuCategoryFormTitle))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(addMenuCategoryButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel1)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
-                .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addContainerGap()
+                .addComponent(MenuCategoryFormTitle)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuCategoryNameTextField)
+                .addGap(18, 18, 18)
                 .addComponent(addMenuCategoryButton)
-                .addGap(56, 56, 56))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,7 +133,9 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel MenuCategoryFormTitle;
     private javax.swing.JButton addMenuCategoryButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField menuCategoryNameTextField;
     // End of variables declaration//GEN-END:variables
 }

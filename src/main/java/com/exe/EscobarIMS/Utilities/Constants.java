@@ -3,7 +3,7 @@ package com.exe.EscobarIMS.Utilities;
 public interface Constants {
 
     interface ErrorTitles{
-        String NOT_SAVED_TITLE = "Not Saved!";
+        String ERROR_TITLE = "Something is Wrong!";
     }
 
     interface ErrorMessages  {
@@ -16,5 +16,6 @@ public interface Constants {
 
     interface SuccessMessages{
         String MENU_CATEGORY_ADDED_MESSAGE = "The Menu Category was added";
+        String MENU_CATEGORY_DELETED_MESSAGE = "The Menu Category was deleted";
     }
 }
