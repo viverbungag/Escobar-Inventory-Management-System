@@ -5,8 +5,8 @@
 package com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategory;
-import com.exe.EscobarIMS.MenuCategory.MessageDialogues;
-import com.exe.EscobarIMS.MenuCategory.Validations;
+import com.exe.EscobarIMS.Utilities.MessageDialogues;
+import com.exe.EscobarIMS.Utilities.Validations;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,10 +58,10 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         menuCategoryNameTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -160,6 +160,10 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         updateTableContents();
+    }//GEN-LAST:event_formWindowActivated
+
     private void menuCategoryTableMouseClicked(java.awt.event.MouseEvent evt) {
         String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
         menuCategoryNameTextField.setText(selectedMenuCategoryName);
@@ -213,7 +217,10 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
     private String getSelectedRowMenuCategoryName(){
         int selectedTableRow = menuCategoryTable.getSelectedRow();
-        String selectedMenuCategoryName = menuCategoryTable.getValueAt(selectedTableRow, MENU_CATEGORY_NAME_COLUMN_NUMBER).toString();
+        String selectedMenuCategoryName = menuCategoryTable
+                .getValueAt(selectedTableRow,
+                        MENU_CATEGORY_NAME_COLUMN_NUMBER)
+                .toString();
 
         return selectedMenuCategoryName;
     }
@@ -280,7 +287,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     }
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
-        updateTableContents();
+       
     }
 
     /**

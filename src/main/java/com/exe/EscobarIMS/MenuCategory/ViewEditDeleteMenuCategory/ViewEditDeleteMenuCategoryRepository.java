@@ -19,7 +19,7 @@ public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<Menu
 
     @Modifying
     @Query(value = "DELETE FROM #{#entityName} " +
-            "AS m WHERE m.menu_category_name IN :listOfMenuCategoryNames",
+            " WHERE menu_category_name IN :listOfMenuCategoryNames",
             nativeQuery = true)
     void deleteAllMenuCategoriesByName(@Param("listOfMenuCategoryNames") List<String> names);
 

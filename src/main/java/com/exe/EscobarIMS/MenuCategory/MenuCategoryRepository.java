@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Long> {
 
-    @Query(value = "SELECT * from #{#entityName} as m where m.menu_category_name = :menu_category_name", nativeQuery = true)
-    MenuCategory findByMenuCategoryName(@Param("menu_category_name") String name);
+    @Query(value = "SELECT * FROM #{#entityName} AS m WHERE m.menu_category_name = :menuCategoryName", nativeQuery = true)
+    MenuCategory findByMenuCategoryName(@Param("menuCategoryName") String name);
+
+    @Query(value = "SELECT * FROM #{#entityName} AS m WHERE m.menu_category_id = :menuCategoryId", nativeQuery = true)
+    MenuCategory findByMenuCategoryId(@Param("menuCategoryId") Long id);
 
 }

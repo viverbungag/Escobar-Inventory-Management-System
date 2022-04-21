@@ -1,4 +1,4 @@
-package com.exe.EscobarIMS.MenuCategory;
+package com.exe.EscobarIMS.Utilities;
 
 import org.springframework.stereotype.Component;
 

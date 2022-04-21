@@ -1,5 +1,6 @@
-package com.exe.EscobarIMS.MenuCategory;
+package com.exe.EscobarIMS.Utilities;
 
+import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
