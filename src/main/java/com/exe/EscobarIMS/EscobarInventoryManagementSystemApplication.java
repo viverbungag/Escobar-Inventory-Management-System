@@ -27,11 +27,6 @@ public class EscobarInventoryManagementSystemApplication {
 
 	private static void displayMainFrame(ConfigurableApplicationContext context){
 		SwingUtilities.invokeLater(()->{
-//			AddMenuCategoryForm menuCategoryForm = context.getBean(AddMenuCategoryForm.class);
-//			menuCategoryForm.setVisible(true);
-//			ViewEditDeleteMenuCategoryForm viewEditDeleteMenuCategoryForm = context.getBean(ViewEditDeleteMenuCategoryForm.class);
-//			viewEditDeleteMenuCategoryForm.setVisible(true);
-
 			MainMenuForm mainMenuForm = context.getBean(MainMenuForm.class);
 			mainMenuForm.setVisible(true);
 		});

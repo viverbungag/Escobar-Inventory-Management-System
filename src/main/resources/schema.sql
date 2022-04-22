@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS unit_of_measurement(
 );
 
 CREATE TABLE IF NOT EXISTS supply_category(
-    supply_category_id BIGINT,
+    supply_category_id BIGINT AUTO_INCREMENT,
     supply_category_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (supply_category_id)
 );

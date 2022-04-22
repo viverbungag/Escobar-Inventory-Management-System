@@ -15,6 +15,7 @@ public class MenuCategory {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "menu_category_id")
     private Long menuCategoryId;
 
     @Column(name = "menu_category_name")
