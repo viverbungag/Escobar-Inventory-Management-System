@@ -294,6 +294,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                 updateCurrentPageNumberTextField(1);
             }
             updateTableContents();
+            
             updateStateOfButtons();
         }else{
             updateCurrentPageNumberTextField(1);
