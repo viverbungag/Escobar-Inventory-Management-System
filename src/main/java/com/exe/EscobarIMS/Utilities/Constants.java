@@ -11,6 +11,7 @@ public interface Constants {
         String SELECT_ONE_OR_MORE_ROW_MESSAGE = "Please select one or more rows in the table";
         String SELECT_JUST_ONE_ROW_MESSAGE = "Please select just one row in the table";
         String FILL_OUT_ALL_TEXT_FIELD_MESSAGE = "Please fill out all text fields";
+        String NUMERIC_VALUES_ONLY_MESSAGE = "Please input numeric values only";
     }
 
     interface SuccessfulTitles{

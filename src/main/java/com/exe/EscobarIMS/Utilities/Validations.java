@@ -1,6 +1,7 @@
 package com.exe.EscobarIMS.Utilities;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +40,6 @@ public class Validations {
     }
 
     public boolean isTextFieldContainingOnlyNumericalValues(JTextField textField) {
-        return true;
+        return StringUtils.isNumeric(textField.getText());
     }
 }

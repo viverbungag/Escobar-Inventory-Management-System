@@ -60,4 +60,11 @@ public class MessageDialogues {
                 ERROR_TITLE,
                 ERROR_MESSAGE);
     }
+
+    public void showNumericValuesOnlyMessageDialogue(){
+        showMessageDialog(null,
+                NUMERIC_VALUES_ONLY_MESSAGE,
+                ERROR_TITLE,
+                ERROR_MESSAGE);
+    }
 }

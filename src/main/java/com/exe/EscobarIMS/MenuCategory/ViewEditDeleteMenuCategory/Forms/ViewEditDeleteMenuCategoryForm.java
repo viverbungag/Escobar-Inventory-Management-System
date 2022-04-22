@@ -261,6 +261,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     }
 
     private void contentLimitComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+        updateCurrentPageNumberTextField(1);
         updateTableContents();
         updateStateOfButtons();
     }
@@ -280,7 +281,28 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     }//GEN-LAST:event_currentPageNumberTextFieldKeyReleased
 
     private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_currentPageNumberTextFieldFocusLost
-        System.out.println(getCurrentPageNumber());
+        if (validations.isTextFieldContainingOnlyNumericalValues(currentPageNumberTextField)){
+
+            int currentPageNumber = getCurrentPageNumber();
+            int lastPage = getNumberOfPages();
+
+            if (currentPageNumber > lastPage){
+                updateCurrentPageNumberTextField(lastPage);
+            }
+
+            if (currentPageNumber < 1){
+                updateCurrentPageNumberTextField(1);
+            }
+            updateTableContents();
+            updateStateOfButtons();
+        }else{
+            updateCurrentPageNumberTextField(1);
+            messageDialogues.showNumericValuesOnlyMessageDialogue();
+        }
+
+
+
+
     }//GEN-LAST:event_currentPageNumberTextFieldFocusLost
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -436,8 +458,6 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                             newMenuCategoryName);
 
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
-            updateTableContents();
-            updateStateOfButtons();
         }
     }
 
@@ -449,8 +469,6 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                     .deleteAllMenuCategoriesByName(menuCategoryNames);
 
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
-            updateTableContents();
-            updateStateOfButtons();
         }
     }
 
