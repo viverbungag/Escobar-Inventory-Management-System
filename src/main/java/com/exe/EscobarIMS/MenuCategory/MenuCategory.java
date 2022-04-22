@@ -1,13 +1,12 @@
 package com.exe.EscobarIMS.MenuCategory;
 
-import lombok.*;
-
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.*;
-
+import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity(name = "menu_category")

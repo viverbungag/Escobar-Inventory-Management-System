@@ -5,13 +5,10 @@
 package com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategory;
+import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
-import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +50,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sortMethodGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         menuCategoryTable = new javax.swing.JTable();
         editMenuCategoryButton = new javax.swing.JButton();
@@ -67,6 +65,8 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -117,6 +117,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         });
 
         MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        MenuCategoryFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         MenuCategoryFormTitle.setText("Menu Categories");
 
         jLabel1.setText("Menu Category Name");
@@ -145,6 +146,16 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         currentPageNumberTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         currentPageNumberTextField.setText("1");
         currentPageNumberTextField.setToolTipText("");
+        currentPageNumberTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                currentPageNumberTextFieldFocusLost(evt);
+            }
+        });
+        currentPageNumberTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                currentPageNumberTextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Limit:");
 
@@ -155,18 +166,21 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Filtered by:");
+        jLabel4.setText("Sorted by:");
+
+        sortMethodGroup.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Ascending");
+
+        sortMethodGroup.add(jRadioButton2);
+        jRadioButton2.setText("Descending");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(MenuCategoryFormTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(deleteMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -180,11 +194,17 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(70, 70, 70)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -194,36 +214,40 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(currentPageNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nextButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(17, 17, 17))
+                                .addComponent(nextButton)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(MenuCategoryFormTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MenuCategoryFormTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
+                        .addGap(75, 75, 75)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(editMenuCategoryButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(MenuCategoryFormTitle)
-                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nextButton)
                             .addComponent(contentLimitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(previousButton)
                             .addComponent(currentPageNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(deleteMenuCategoryButton)
                 .addContainerGap())
         );
@@ -248,6 +272,16 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void currentPageNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_currentPageNumberTextFieldKeyReleased
+        if (validations.isEnterKeyPressed(evt)){
+            currentPageNumberTextField.transferFocus();
+        }
+    }//GEN-LAST:event_currentPageNumberTextFieldKeyReleased
+
+    private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_currentPageNumberTextFieldFocusLost
+        System.out.println(getCurrentPageNumber());
+    }//GEN-LAST:event_currentPageNumberTextFieldFocusLost
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int currentPageNumber = getCurrentPageNumber();
@@ -465,10 +499,13 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField menuCategoryNameTextField;
     private javax.swing.JTable menuCategoryTable;
     private javax.swing.JButton nextButton;
     private javax.swing.JButton previousButton;
+    private javax.swing.ButtonGroup sortMethodGroup;
     // End of variables declaration//GEN-END:variables
 }

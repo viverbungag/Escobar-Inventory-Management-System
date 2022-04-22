@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 
 @Component
 public class Validations {
@@ -31,5 +32,13 @@ public class Validations {
 
     public boolean isTextFieldEmpty(JTextField textField){
         return textField.getText().isBlank();
+    }
+
+    public boolean isEnterKeyPressed(KeyEvent evt){
+        return evt.getKeyCode() == KeyEvent.VK_ENTER;
+    }
+
+    public boolean isTextFieldContainingOnlyNumericalValues(JTextField textField) {
+        return true;
     }
 }
