@@ -1,6 +1,8 @@
 package com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
@@ -16,6 +18,11 @@ public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<Menu
     @Query(value = "SELECT * FROM #{#entityName}",
             nativeQuery = true)
     List<MenuCategory> getAllMenuCategories();
+
+    @Query(value = "SELECT * FROM #{#entityName}",
+            nativeQuery = true)
+    Page<MenuCategory> getAllMenuCategoriesWithPagination(Pageable pageable);
+
 
     @Modifying
     @Query(value = "DELETE FROM #{#entityName} " +

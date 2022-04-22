@@ -1,6 +1,27 @@
 INSERT INTO menu_category(menu_category_name) VALUES ('Pizza');
 INSERT INTO menu_category(menu_category_name) VALUES ('Beer');
 INSERT INTO menu_category(menu_category_name) VALUES ('Pasta');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza1');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer1');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta1');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza2');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer2');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta2');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza3');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer3');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta3');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza4');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer4');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta4');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza5');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer5');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta5');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza6');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer6');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta6');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pizza7');
+INSERT INTO menu_category(menu_category_name) VALUES ('Beer7');
+INSERT INTO menu_category(menu_category_name) VALUES ('Pasta7');
 
 INSERT INTO supply_category(supply_category_name) VALUES ('Drinks');
 INSERT INTO supply_category(supply_category_name) VALUES ('Vegetables');

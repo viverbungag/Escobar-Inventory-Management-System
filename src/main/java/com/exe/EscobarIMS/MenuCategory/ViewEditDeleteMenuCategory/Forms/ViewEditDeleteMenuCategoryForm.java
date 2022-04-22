@@ -9,6 +9,9 @@ import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.swing.table.DefaultTableModel;
@@ -57,11 +60,13 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         MenuCategoryFormTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         menuCategoryNameTextField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        nextButton = new javax.swing.JButton();
+        contentLimitComboBox = new javax.swing.JComboBox<>();
+        previousButton = new javax.swing.JButton();
+        currentPageNumberTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -116,23 +121,41 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
         jLabel1.setText("Menu Category Name");
 
-        jButton2.setText("Next");
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "15", "30", "50", "100" }));
+        contentLimitComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "15", "30", "50", "100" }));
+        contentLimitComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentLimitComboBoxActionPerformed(evt);
+            }
+        });
+
+        previousButton.setText("Prev");
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousButtonActionPerformed(evt);
+            }
+        });
+
+        currentPageNumberTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        currentPageNumberTextField.setText("1");
+        currentPageNumberTextField.setToolTipText("");
+
+        jLabel2.setText("Limit:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Menu Category Name" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Prev");
-
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("1");
-        jTextField1.setToolTipText("");
-        jTextField1.setEnabled(false);
-
-        jLabel2.setText("Limit:");
+        jLabel4.setText("Filtered by:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,17 +180,21 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(70, 70, 70)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contentLimitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)
+                                .addComponent(previousButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(currentPageNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(nextButton))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(17, 17, 17))
         );
@@ -187,11 +214,13 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                         .addComponent(MenuCategoryFormTitle)
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(nextButton)
+                            .addComponent(contentLimitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(previousButton)
+                            .addComponent(currentPageNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
@@ -202,19 +231,75 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-         updateTableContents();
-    }//GEN-LAST:event_formWindowActivated
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {
+        updateTableContents();
+        updateStateOfButtons();
+    }
+
+    private void contentLimitComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+        updateTableContents();
+        updateStateOfButtons();
+    }
+
+    private void updateCurrentPageNumberTextField(int pageNumber){
+        currentPageNumberTextField.setText(String.valueOf(pageNumber));
+    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        int currentPageNumber = getCurrentPageNumber();
+        updateCurrentPageNumberTextField(currentPageNumber - 1);
+        updateTableContents();
+        updateStateOfButtons();
+    }
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        int currentPageNumber = getCurrentPageNumber();
+        updateCurrentPageNumberTextField(currentPageNumber + 1);
+        updateTableContents();
+        updateStateOfButtons();
+    }
+
     private void menuCategoryTableMouseClicked(java.awt.event.MouseEvent evt) {
         String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
         menuCategoryNameTextField.setText(selectedMenuCategoryName);
     }
+    private int getCurrentSelectedPageLimit(){
+        return Integer.parseInt(contentLimitComboBox.getSelectedItem().toString());
+    }
+    
+    private int getCurrentPageNumber(){
+        return Integer.parseInt(currentPageNumberTextField.getText());
+    }
 
+    
+    private int getNumberOfPages(){
+        int selectedContentLimit = getCurrentSelectedPageLimit();
+        int numberOfPages = viewEditDeleteMenuCategoryController.getTotalNumberOfPages(selectedContentLimit);
+        return numberOfPages;
+    }
+    
+    private void enableButtons(){
+        previousButton.setEnabled(true);
+        nextButton.setEnabled(true);
+    }
+    
+     private void updateStateOfButtons(){
+        int numberOfPages = getNumberOfPages();
+        int currentPageNumber = getCurrentPageNumber();
+        enableButtons();
+        
+        if (currentPageNumber == 1){
+            previousButton.setEnabled(false);
+        }
+        
+        if (currentPageNumber == numberOfPages){
+            nextButton.setEnabled(false);
+        }
+     }
 
     private void addTableRow(MenuCategory menuCategory, DefaultTableModel tableModel){
         String[] itemsOfRow = new String[]{
@@ -230,8 +315,9 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
     private void generateTableContents(){
         DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
-        List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryController.getAllMenuCategories();
-
+        int currentPageNumber = getCurrentPageNumber();
+        int currentSelectedPageLimit = getCurrentSelectedPageLimit();
+        List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryController.getAllMenuCategoriesWithPagination(currentPageNumber, currentSelectedPageLimit);
         for (MenuCategory menuCategory:menuCategories){
             addTableRow(menuCategory, tableModel);
         }
@@ -317,6 +403,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             updateTableContents();
+            updateStateOfButtons();
         }
     }
 
@@ -329,11 +416,8 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             updateTableContents();
+            updateStateOfButtons();
         }
-    }
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
-       
     }
 
     /**
@@ -373,16 +457,18 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MenuCategoryFormTitle;
+    private javax.swing.JComboBox<String> contentLimitComboBox;
+    private javax.swing.JTextField currentPageNumberTextField;
     private javax.swing.JButton deleteMenuCategoryButton;
     private javax.swing.JButton editMenuCategoryButton;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField menuCategoryNameTextField;
     private javax.swing.JTable menuCategoryTable;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JButton previousButton;
     // End of variables declaration//GEN-END:variables
 }
