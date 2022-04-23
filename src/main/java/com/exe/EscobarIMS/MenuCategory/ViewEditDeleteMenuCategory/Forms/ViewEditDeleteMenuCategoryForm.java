@@ -282,80 +282,77 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuCategoryTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCategoryTableMousePressed
-        menuCategoryFormActions.menuCategoryTableMousePressed(menuCategoryTable, menuCategoryNameTextField);
-    }//GEN-LAST:event_menuCategoryTableMousePressed
+    private void setFormComponents(){
+        menuCategoryFormActions.setContentLimitComboBox(contentLimitComboBox);
+        menuCategoryFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
+        menuCategoryFormActions.setMenuCategoryNameTextField(menuCategoryNameTextField);
+        menuCategoryFormActions.setPreviousButton(previousButton);
+        menuCategoryFormActions.setNextButton(nextButton);
+        menuCategoryFormActions.setMenuCategoryTable(menuCategoryTable);
+        menuCategoryFormActions.setAscendingRadioButton(ascendingRadioButton);
+        menuCategoryFormActions.setDescendingRadioButton(descendingRadioButton);
+        menuCategoryFormActions.setSortingMethodComboBox(sortingMethodComboBox);
+    }
+
+
+    private void menuCategoryTableMousePressed(java.awt.event.MouseEvent evt) {
+        setFormComponents();
+        menuCategoryFormActions.menuCategoryTableMousePressed();
+    }
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        setFormComponents();
         menuCategoryFormActions.formWindowOpened(menuCategoryTable);
     }
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {
-        menuCategoryFormActions.formWindowActivated(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.formWindowActivated();
     }
 
     private void contentLimitComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.contentLimitComboBoxActionPerformed(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.contentLimitComboBoxActionPerformed();
     }
 
     private void sortingMethodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.sortingMethodComboBoxActionPerformed(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.sortingMethodComboBoxActionPerformed();
     }
 
     private void currentPageNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {
+        setFormComponents();
         menuCategoryFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
     }
 
     private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {
-        menuCategoryFormActions.currentPageNumberTextFieldFocusLost(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.currentPageNumberTextFieldFocusLost();
     }
 
     private void ascendingRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {
-        menuCategoryFormActions.ascendingRadioButtonItemStateChanged(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.ascendingRadioButtonItemStateChanged();
     }
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.previousButtonActionPerformed(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.previousButtonActionPerformed();
     }
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.nextButtonActionPerformed(
-                menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton,
-                previousButton, nextButton);
+        setFormComponents();
+        menuCategoryFormActions.nextButtonActionPerformed();
     }
 
     private void editMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.editMenuCategoryButtonActionPerformed(menuCategoryNameTextField, menuCategoryTable);
+        setFormComponents();
+        menuCategoryFormActions.editMenuCategoryButtonActionPerformed();
     }
 
     private void deleteMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.deleteMenuCategoryButtonActionPerformed(menuCategoryNameTextField, menuCategoryTable);
+        setFormComponents();
+        menuCategoryFormActions.deleteMenuCategoryButtonActionPerformed();
     }
 
     /**

@@ -34,61 +34,100 @@ public class MenuCategoryFormActions {
     @Autowired
     MenuCategoryValidations menuCategoryValidations;
 
-    private int getCurrentSelectedPageLimit(JComboBox contentLimitComboBox){
+    private JComboBox contentLimitComboBox;
+    private JTextField currentPageNumberTextField;
+    private JTextField menuCategoryNameTextField;
+    private JButton previousButton;
+    private JButton nextButton;
+    private JTable menuCategoryTable;
+    private JRadioButton ascendingRadioButton;
+    private JRadioButton descendingRadioButton;
+    private JComboBox sortingMethodComboBox;
+
+    public void setContentLimitComboBox(JComboBox contentLimitComboBox) {
+        this.contentLimitComboBox = contentLimitComboBox;
+    }
+
+    public void setCurrentPageNumberTextField(JTextField currentPageNumberTextField) {
+        this.currentPageNumberTextField = currentPageNumberTextField;
+    }
+
+    public void setMenuCategoryNameTextField(JTextField menuCategoryNameTextField) {
+        this.menuCategoryNameTextField = menuCategoryNameTextField;
+    }
+
+    public void setPreviousButton(JButton previousButton) {
+        this.previousButton = previousButton;
+    }
+
+    public void setNextButton(JButton nextButton) {
+        this.nextButton = nextButton;
+    }
+
+    public void setMenuCategoryTable(JTable menuCategoryTable) {
+        this.menuCategoryTable = menuCategoryTable;
+    }
+
+    public void setAscendingRadioButton(JRadioButton ascendingRadioButton) {
+        this.ascendingRadioButton = ascendingRadioButton;
+    }
+
+    public void setDescendingRadioButton(JRadioButton descendingRadioButton) {
+        this.descendingRadioButton = descendingRadioButton;
+    }
+
+    public void setSortingMethodComboBox(JComboBox sortingMethodComboBox) {
+        this.sortingMethodComboBox = sortingMethodComboBox;
+    }
+
+    private int getCurrentSelectedPageLimit(){
         return Integer.parseInt(contentLimitComboBox.getSelectedItem().toString());
     }
 
-    private int getCurrentPageNumber(JTextField currentPageNumberTextField){
+    private int getCurrentPageNumber(){
         return Integer.parseInt(currentPageNumberTextField.getText());
     }
 
-    private void clearTextField(JTextField menuCategoryNameTextField){
+    private void clearTextField(){
         menuCategoryNameTextField.setText("");
     }
 
-    private void updateCurrentPageNumberTextField(int pageNumber,
-                                                 JTextField currentPageNumberTextField){
+    private void updateCurrentPageNumberTextField(int pageNumber){
         currentPageNumberTextField.setText(String.valueOf(pageNumber));
     }
 
-    private void resetCurrentPageToDefault(JTextField currentPageNumberTextField){
-        updateCurrentPageNumberTextField(1, currentPageNumberTextField);
+    private void resetCurrentPageToDefault(){
+        updateCurrentPageNumberTextField(1);
     }
 
-    private int getNumberOfPages(JComboBox contentLimitComboBox){
-        int selectedContentLimit = getCurrentSelectedPageLimit(contentLimitComboBox);
+    private int getNumberOfPages(){
+        int selectedContentLimit = getCurrentSelectedPageLimit();
         int numberOfPages = viewEditDeleteMenuCategoryController.getTotalNumberOfPages(selectedContentLimit);
         return numberOfPages;
     }
 
-    private void enableButtons(JButton previousButton,
-                              JButton nextButton){
+    private void enableButtons(){
         previousButton.setEnabled(true);
         nextButton.setEnabled(true);
     }
 
-    private void handleCurrentPageNumberTextFieldWrongInputs(JTextField currentPageNumberTextField,
-                                                             JComboBox contentLimitComboBox){
-        int currentPageNumber = getCurrentPageNumber(currentPageNumberTextField);
-        int lastPage = getNumberOfPages(contentLimitComboBox);
+    private void handleCurrentPageNumberTextFieldWrongInputs(){
+        int currentPageNumber = getCurrentPageNumber();
+        int lastPage = getNumberOfPages();
 
         if (currentPageNumber > lastPage){
-            updateCurrentPageNumberTextField(lastPage, currentPageNumberTextField);
+            updateCurrentPageNumberTextField(lastPage);
         }
 
         if (currentPageNumber < 1){
-            updateCurrentPageNumberTextField(1, currentPageNumberTextField);
+            updateCurrentPageNumberTextField(1);
         }
     }
 
-    private void updateStateOfButtons(JButton previousButton,
-                                     JButton nextButton,
-                                     JTextField currentPageNumberTextField,
-                                     JComboBox contentLimitComboBox){
-
-        int numberOfPages = getNumberOfPages(contentLimitComboBox);
-        int currentPageNumber = getCurrentPageNumber(currentPageNumberTextField);
-        enableButtons(previousButton, nextButton);
+    private void updateStateOfButtons(){
+        int numberOfPages = getNumberOfPages();
+        int currentPageNumber = getCurrentPageNumber();
+        enableButtons();
 
         if (currentPageNumber == 1){
             previousButton.setEnabled(false);
@@ -101,54 +140,42 @@ public class MenuCategoryFormActions {
 
     private void addTableRow(MenuCategory menuCategory,
                              DefaultTableModel tableModel){
-
         String[] itemsOfRow = new String[]{
                 menuCategory.getMenuCategoryName()};
         tableModel.addRow(itemsOfRow);
     }
 
-    private void deleteExistingTableContents(JTable menuCategoryTable){
+    private void deleteExistingTableContents(){
         DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
         tableModel.setRowCount(0);
     }
 
-    private void disableSortRadioButtons(JRadioButton ascendingRadioButton,
-                                        JRadioButton descendingRadioButton){
-
+    private void disableSortRadioButtons(){
         ascendingRadioButton.setEnabled(false);
         descendingRadioButton.setEnabled(false);
     }
 
-    private void enableSortRadioButtons(JRadioButton ascendingRadioButton,
-                                       JRadioButton descendingRadioButton){
-
+    private void enableSortRadioButtons(){
         ascendingRadioButton.setEnabled(true);
         descendingRadioButton.setEnabled(true);
     }
 
-    private Sort getSortingComboBoxValue(JComboBox sortingMethodComboBox,
-                                        JRadioButton ascendingRadioButton,
-                                        JRadioButton descendingRadioButton){
-
+    private Sort getSortingComboBoxValue(){
         String sortingMethodName = sortingMethodComboBox.getSelectedItem().toString();
-        enableSortRadioButtons(ascendingRadioButton, descendingRadioButton);
+        enableSortRadioButtons();
 
         switch(sortingMethodName){
             case "Menu Category Name":
                 return Sort.by("menu_category_name");
 
             default:
-                disableSortRadioButtons(ascendingRadioButton, descendingRadioButton);
+                disableSortRadioButtons();
                 return Sort.unsorted();
         }
     }
 
-    private Sort getSortingMethod(JComboBox sortingMethodComboBox,
-                                 JRadioButton ascendingRadioButton,
-                                 JRadioButton descendingRadioButton){
-
-        Sort sortingComboBoxValue = getSortingComboBoxValue(sortingMethodComboBox, ascendingRadioButton, descendingRadioButton);
-
+    private Sort getSortingMethod(){
+        Sort sortingComboBoxValue = getSortingComboBoxValue();
         if (ascendingRadioButton.isSelected()){
             return sortingComboBoxValue.ascending();
         }
@@ -156,17 +183,11 @@ public class MenuCategoryFormActions {
         return sortingComboBoxValue.descending();
     }
 
-    private void generateTableContents(JTable menuCategoryTable,
-                                       JTextField currentPageNumberTextField,
-                                       JComboBox contentLimitComboBox,
-                                       JComboBox sortingMethodComboBox,
-                                       JRadioButton ascendingRadioButton,
-                                       JRadioButton descendingRadioButton){
-
+    private void generateTableContents(){
         DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
-        int currentPageNumber = getCurrentPageNumber(currentPageNumberTextField);
-        int currentSelectedPageLimit = getCurrentSelectedPageLimit(contentLimitComboBox);
-        Sort sort = getSortingMethod(sortingMethodComboBox, ascendingRadioButton, descendingRadioButton);
+        int currentPageNumber = getCurrentPageNumber();
+        int currentSelectedPageLimit = getCurrentSelectedPageLimit();
+        Sort sort = getSortingMethod();
 
         List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryController
                 .getAllPagedMenuCategories(currentPageNumber, currentSelectedPageLimit, sort);
@@ -187,27 +208,18 @@ public class MenuCategoryFormActions {
 
             menuCategoryNames.add(selectedMenuCategoryName);
         }
-
         return menuCategoryNames;
     }
 
-    private void updateTableContents(JTable menuCategoryTable,
-                                     JTextField currentPageNumberTextField,
-                                     JComboBox contentLimitComboBox,
-                                     JComboBox sortingMethodComboBox,
-                                     JRadioButton ascendingRadioButton,
-                                     JRadioButton descendingRadioButton){
+    private void updateTableContents(){
 
         if(validations.hasExistingTableContents(menuCategoryTable)){
-            deleteExistingTableContents(menuCategoryTable);
+            deleteExistingTableContents();
         }
-
-        generateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
+        generateTableContents();
     }
 
-    private String getSelectedRowMenuCategoryName(JTable menuCategoryTable){
+    private String getSelectedRowMenuCategoryName(){
         int selectedTableRow = menuCategoryTable.getSelectedRow();
         String selectedMenuCategoryName = menuCategoryTable
                 .getValueAt(selectedTableRow,
@@ -217,15 +229,15 @@ public class MenuCategoryFormActions {
         return selectedMenuCategoryName;
     }
 
-    private boolean isValidToEditMenuCategory(JTextField menuCategoryNameTextField, JTable menuCategoryTable){
+    private boolean isValidToEditMenuCategory(){
         return menuCategoryValidations.isValidToEditMenuCategory(menuCategoryNameTextField, menuCategoryTable);
     }
 
-    private boolean isValidToDeleteMenuCategory(JTable menuCategoryTable){
+    private boolean isValidToDeleteMenuCategory(){
         return menuCategoryValidations.isValidToDeleteMenuCategory(menuCategoryTable);
     }
 
-    private boolean isValidToAddMenuCategory(JTextField menuCategoryNameTextField){
+    private boolean isValidToAddMenuCategory(){
         return menuCategoryValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
     }
 
@@ -236,190 +248,101 @@ public class MenuCategoryFormActions {
         }
     }
 
-
-    public void formWindowActivated(JTable menuCategoryTable,
-                                    JTextField currentPageNumberTextField,
-                                    JComboBox contentLimitComboBox,
-                                    JComboBox sortingMethodComboBox,
-                                    JRadioButton ascendingRadioButton,
-                                    JRadioButton descendingRadioButton,
-                                    JButton previousButton,
-                                    JButton nextButton){
-
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+    public void formWindowActivated(){
+        updateTableContents();
+        updateStateOfButtons();
     }
 
     public void formWindowOpened(JTable menuCategoryTable){
         menuCategoryTable.setDefaultEditor(Object.class, null);
     }
 
-    public void contentLimitComboBoxActionPerformed(JTable menuCategoryTable,
-                                                    JTextField currentPageNumberTextField,
-                                                    JComboBox contentLimitComboBox,
-                                                    JComboBox sortingMethodComboBox,
-                                                    JRadioButton ascendingRadioButton,
-                                                    JRadioButton descendingRadioButton,
-                                                    JButton previousButton,
-                                                    JButton nextButton){
-
-        updateCurrentPageNumberTextField(1, currentPageNumberTextField);
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+    public void contentLimitComboBoxActionPerformed(){
+        updateCurrentPageNumberTextField(1);
+        updateTableContents();
+        updateStateOfButtons();
     }
 
-    public void sortingMethodComboBoxActionPerformed(JTable menuCategoryTable,
-                                                     JTextField currentPageNumberTextField,
-                                                     JComboBox contentLimitComboBox,
-                                                     JComboBox sortingMethodComboBox,
-                                                     JRadioButton ascendingRadioButton,
-                                                     JRadioButton descendingRadioButton,
-                                                     JButton previousButton,
-                                                     JButton nextButton){
-
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+    public void sortingMethodComboBoxActionPerformed(){
+        updateTableContents();
+        updateStateOfButtons();
     }
 
-    public void ascendingRadioButtonItemStateChanged(JTable menuCategoryTable,
-                                    JTextField currentPageNumberTextField,
-                                    JComboBox contentLimitComboBox,
-                                    JComboBox sortingMethodComboBox,
-                                    JRadioButton ascendingRadioButton,
-                                    JRadioButton descendingRadioButton,
-                                    JButton previousButton,
-                                    JButton nextButton){
-
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+    public void ascendingRadioButtonItemStateChanged(){
+        updateTableContents();
+        updateStateOfButtons();
     }
 
-    public void currentPageNumberTextFieldFocusLost(JTable menuCategoryTable,
-                                                    JTextField currentPageNumberTextField,
-                                                    JComboBox contentLimitComboBox,
-                                                    JComboBox sortingMethodComboBox,
-                                                    JRadioButton ascendingRadioButton,
-                                                    JRadioButton descendingRadioButton,
-                                                    JButton previousButton,
-                                                    JButton nextButton) {
+    public void currentPageNumberTextFieldFocusLost() {
 
         if (validations.isTextFieldContainingOnlyNumericalValues(currentPageNumberTextField)){
-            handleCurrentPageNumberTextFieldWrongInputs(currentPageNumberTextField, contentLimitComboBox);
-
-            updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                    contentLimitComboBox, sortingMethodComboBox,
-                    ascendingRadioButton, descendingRadioButton);
-
-            updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
-
+            handleCurrentPageNumberTextFieldWrongInputs();
+            updateTableContents();
+            updateStateOfButtons();
         }else{
-            resetCurrentPageToDefault(currentPageNumberTextField);
+            resetCurrentPageToDefault();
             messageDialogues.showNumericValuesOnlyMessageDialogue();
         }
     }
 
-    public void previousButtonActionPerformed(JTable menuCategoryTable,
-                                               JTextField currentPageNumberTextField,
-                                               JComboBox contentLimitComboBox,
-                                               JComboBox sortingMethodComboBox,
-                                               JRadioButton ascendingRadioButton,
-                                               JRadioButton descendingRadioButton,
-                                               JButton previousButton,
-                                               JButton nextButton) {
+    public void previousButtonActionPerformed() {
 
-        int currentPageNumber = getCurrentPageNumber(currentPageNumberTextField);
-        updateCurrentPageNumberTextField(currentPageNumber - 1, currentPageNumberTextField);
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+        int currentPageNumber = getCurrentPageNumber();
+        updateCurrentPageNumberTextField(currentPageNumber - 1);
+        updateTableContents();
+        updateStateOfButtons();
     }
 
-    public void nextButtonActionPerformed(JTable menuCategoryTable,
-                                              JTextField currentPageNumberTextField,
-                                              JComboBox contentLimitComboBox,
-                                              JComboBox sortingMethodComboBox,
-                                              JRadioButton ascendingRadioButton,
-                                              JRadioButton descendingRadioButton,
-                                              JButton previousButton,
-                                              JButton nextButton) {
+    public void nextButtonActionPerformed() {
 
-        int currentPageNumber = getCurrentPageNumber(currentPageNumberTextField);
-        updateCurrentPageNumberTextField(currentPageNumber + 1, currentPageNumberTextField);
-
-        updateTableContents(menuCategoryTable, currentPageNumberTextField,
-                contentLimitComboBox, sortingMethodComboBox,
-                ascendingRadioButton, descendingRadioButton);
-
-        updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
+        int currentPageNumber = getCurrentPageNumber();
+        updateCurrentPageNumberTextField(currentPageNumber + 1);
+        updateTableContents();
+        updateStateOfButtons();
     }
 
-    public void menuCategoryTableMousePressed(JTable menuCategoryTable,
-                                              JTextField menuCategoryNameTextField){
-
-        String selectedMenuCategoryName = getSelectedRowMenuCategoryName(menuCategoryTable);
+    public void menuCategoryTableMousePressed(){
+        String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
         menuCategoryNameTextField.setText(selectedMenuCategoryName);
     }
 
-    public void editMenuCategoryButtonActionPerformed(JTextField menuCategoryNameTextField,
-                                                      JTable menuCategoryTable) {
-
+    public void editMenuCategoryButtonActionPerformed() {
         String newMenuCategoryName = menuCategoryNameTextField.getText();
-        if (isValidToEditMenuCategory(menuCategoryNameTextField, menuCategoryTable)){
-            String selectedMenuCategoryName = getSelectedRowMenuCategoryName(menuCategoryTable);
+        if (isValidToEditMenuCategory()){
+            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
             Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
                     .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
-
 
             viewEditDeleteMenuCategoryController
                     .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
                             newMenuCategoryName);
 
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
-            clearTextField(menuCategoryNameTextField);
+            clearTextField();
 
         }
     }
 
-    public void deleteMenuCategoryButtonActionPerformed(JTextField menuCategoryNameTextField,
-                                                        JTable menuCategoryTable) {
+    public void deleteMenuCategoryButtonActionPerformed() {
 
-        if (isValidToDeleteMenuCategory(menuCategoryTable)){
+        if (isValidToDeleteMenuCategory()){
             List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
 
             viewEditDeleteMenuCategoryController
                     .deleteAllMenuCategoriesByName(menuCategoryNames);
 
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
-            clearTextField(menuCategoryNameTextField);
+            clearTextField();
         }
     }
 
-    public void addMenuCategoryButtonActionPerformed(JTextField menuCategoryNameTextField) {
-        if (isValidToAddMenuCategory(menuCategoryNameTextField)){
+    public void addMenuCategoryButtonActionPerformed() {
+        if (isValidToAddMenuCategory()){
             String newMenuCategoryName = menuCategoryNameTextField.getText();
             menuCategoryController.addNewMenuCategory(newMenuCategoryName);
             messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
         }
-        clearTextField(menuCategoryNameTextField);
+        clearTextField();
     }
 
 

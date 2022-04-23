@@ -91,8 +91,13 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setFormComponents(){
+        menuCategoryFormActions.setMenuCategoryNameTextField(menuCategoryNameTextField);
+    }
+
     private void addMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        menuCategoryFormActions.addMenuCategoryButtonActionPerformed(menuCategoryNameTextField);
+        setFormComponents();
+        menuCategoryFormActions.addMenuCategoryButtonActionPerformed();
     }
 
     /**
