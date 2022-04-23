@@ -5,6 +5,7 @@
 package com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategory;
+import com.exe.EscobarIMS.MenuCategory.MenuCategoryValidations;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -36,6 +37,9 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
 
     @Autowired
     Validations validations;
+
+    @Autowired
+    MenuCategoryValidations menuCategoryValidations;
 
     
     public ViewEditDeleteMenuCategoryForm() {
@@ -326,19 +330,19 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         }
     }
 
-    private void sortingMethodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortingMethodComboBoxActionPerformed
+    private void sortingMethodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
         updateTableContents();
         updateStateOfButtons();
-    }//GEN-LAST:event_sortingMethodComboBoxActionPerformed
+    }
 
-    private void currentPageNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_currentPageNumberTextFieldKeyReleased
+    private void currentPageNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {
         if (validations.isEnterKeyPressed(evt)){
             paginationAndSortPanel.requestFocusInWindow();
             
         }
-    }//GEN-LAST:event_currentPageNumberTextFieldKeyReleased
+    }
 
-    private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_currentPageNumberTextFieldFocusLost
+    private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {
         if (validations.isTextFieldContainingOnlyNumericalValues(currentPageNumberTextField)){
             handleTextFieldWrongInputs();
             updateTableContents();
@@ -348,12 +352,12 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             resetCurrentPageToDefault();
             messageDialogues.showNumericValuesOnlyMessageDialogue();
         }
-    }//GEN-LAST:event_currentPageNumberTextFieldFocusLost
+    }
 
-    private void ascendingRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ascendingRadioButtonItemStateChanged
+    private void ascendingRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {
         updateTableContents();
         updateStateOfButtons();
-    }//GEN-LAST:event_ascendingRadioButtonItemStateChanged
+    }
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int currentPageNumber = getCurrentPageNumber();
@@ -502,34 +506,11 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     }
 
     private boolean isValidToEditMenuCategory(){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
-        System.out.println(menuCategoryTable.getSelectedRowCount());
-
-        if (validations.isNotSelectingOneTableRow(menuCategoryTable)){
-            messageDialogues.showSelectJustOneRowMessageDialogue();
-            return false;
-        }
-
-        if(validations.isTextFieldEmpty(menuCategoryNameTextField)) {
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
-        }
-
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
-        }
-
-        return true;
+        return menuCategoryValidations.isValidToEditMenuCategory(menuCategoryNameTextField, menuCategoryTable);
     }
 
     private boolean isValidToDeleteMenuCategory(){
-        if (validations.isNotSelectingATableRow(menuCategoryTable)){
-            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
-            return false;
-        }
-
-        return true;
+        return menuCategoryValidations.isValidToDeleteMenuCategory(menuCategoryTable);
     }
 
 

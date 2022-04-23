@@ -4,8 +4,8 @@
  */
 package com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms;
 
-import com.exe.EscobarIMS.MainMenu.MainMenuForm;
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
+import com.exe.EscobarIMS.MenuCategory.MenuCategoryValidations;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,9 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
 
     @Autowired
     MessageDialogues messageDialogues;
+
+    @Autowired
+    MenuCategoryValidations menuCategoryValidations;
     
     public AddMenuCategoryForm() {
         initComponents();
@@ -109,19 +112,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private boolean isValidToAddMenuCategory(){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
-
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
-        }
-        
-        if (validations.isTextFieldEmpty(menuCategoryNameTextField)){
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
-        }
-
-        return true;
+        return menuCategoryValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
     }
     
     private void clearTextField(){

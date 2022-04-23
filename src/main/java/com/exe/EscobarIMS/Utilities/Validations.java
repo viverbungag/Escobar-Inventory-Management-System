@@ -14,6 +14,9 @@ public class Validations {
     @Autowired
     private MenuCategoryRepository menuCategoryRepository;
 
+    @Autowired
+    private MessageDialogues messageDialogues;
+
 
     public boolean isMenuCategoryExisting(String menuCategoryName){
         return menuCategoryRepository.findByMenuCategoryName(menuCategoryName) != null;
