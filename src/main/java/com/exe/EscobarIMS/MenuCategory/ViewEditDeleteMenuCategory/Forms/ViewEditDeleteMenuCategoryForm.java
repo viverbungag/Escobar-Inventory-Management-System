@@ -61,6 +61,9 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         menuCategoryTable.setAutoCreateRowSorter(true);
@@ -84,8 +87,8 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         menuCategoryTable.setRowHeight(25);
         menuCategoryTable.setRowMargin(5);
         menuCategoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuCategoryTableMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuCategoryTableMousePressed(evt);
             }
         });
         tableScrollPanel.setViewportView(menuCategoryTable);
@@ -279,6 +282,14 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void menuCategoryTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCategoryTableMousePressed
+        menuCategoryFormActions.menuCategoryTableMousePressed(menuCategoryTable, menuCategoryNameTextField);
+    }//GEN-LAST:event_menuCategoryTableMousePressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+        menuCategoryFormActions.formWindowOpened(menuCategoryTable);
+    }
+
     private void formWindowActivated(java.awt.event.WindowEvent evt) {
         menuCategoryFormActions.formWindowActivated(
                 menuCategoryTable, currentPageNumberTextField,
@@ -337,10 +348,6 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                 contentLimitComboBox, sortingMethodComboBox,
                 ascendingRadioButton, descendingRadioButton,
                 previousButton, nextButton);
-    }
-
-    private void menuCategoryTableMouseClicked(java.awt.event.MouseEvent evt) {
-        menuCategoryFormActions.menuCategoryTableMouseClicked(menuCategoryTable, menuCategoryNameTextField);
     }
 
     private void editMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {

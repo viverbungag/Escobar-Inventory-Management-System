@@ -11,7 +11,7 @@ import javax.swing.*;
 public class MenuCategoryValidations {
 
     @Autowired
-    private MessageDialogues messageDialogues;
+    MessageDialogues messageDialogues;
 
     @Autowired
     Validations validations;

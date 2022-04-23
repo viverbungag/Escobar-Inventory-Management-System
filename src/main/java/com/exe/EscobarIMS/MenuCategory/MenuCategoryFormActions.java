@@ -254,6 +254,10 @@ public class MenuCategoryFormActions {
         updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
     }
 
+    public void formWindowOpened(JTable menuCategoryTable){
+        menuCategoryTable.setDefaultEditor(Object.class, null);
+    }
+
     public void contentLimitComboBoxActionPerformed(JTable menuCategoryTable,
                                                     JTextField currentPageNumberTextField,
                                                     JComboBox contentLimitComboBox,
@@ -368,7 +372,7 @@ public class MenuCategoryFormActions {
         updateStateOfButtons(previousButton, nextButton, currentPageNumberTextField, contentLimitComboBox);
     }
 
-    public void menuCategoryTableMouseClicked(JTable menuCategoryTable,
+    public void menuCategoryTableMousePressed(JTable menuCategoryTable,
                                               JTextField menuCategoryNameTextField){
 
         String selectedMenuCategoryName = getSelectedRowMenuCategoryName(menuCategoryTable);
