@@ -4,12 +4,12 @@ import com.exe.EscobarIMS.MenuCategory.MenuCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<MenuCategory, Long> {
@@ -21,7 +21,7 @@ public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<Menu
 
     @Query(value = "SELECT * FROM #{#entityName}",
             nativeQuery = true)
-    Page<MenuCategory> getAllMenuCategoriesWithPagination(Pageable pageable);
+    Page<MenuCategory> getAllPagedMenuCategories(Pageable pageable);
 
 
     @Modifying

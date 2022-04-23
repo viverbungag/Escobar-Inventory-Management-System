@@ -3,7 +3,6 @@ package com.exe.EscobarIMS.MenuCategory;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,24 +85,48 @@ public class MenuCategoryRepositoryTest {
     }
 
     @Test
-    void getAllMenuCategoriesWithPagination_when_page_is_0_and_there_are_15_per_page(){
+    void getAllPagedMenuCategories_when_page_is_0_and_there_are_15_per_page(){
         Pageable pageable = PageRequest.of(0, 15);
-        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllMenuCategoriesWithPagination(pageable);
+        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable);
         assertEquals(15, pagedMenuCategories.getContent().size());
     }
 
     @Test
-    void getAllMenuCategoriesWithPagination_when_page_is_1_and_the_size_is_15(){
+    void getAllPagedMenuCategories_when_page_is_1_and_the_size_is_15(){
         Pageable pageable = PageRequest.of(1, 15);
-        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllMenuCategoriesWithPagination(pageable);
+        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable);
         assertEquals(9, pagedMenuCategories.getContent().size());
     }
 
     @Test
-    void getAllMenuCategoriesWithPagination_when_getting_the_total_pages_and_the_size_is_15(){
+    void getAllPagedMenuCategories_when_getting_the_total_pages_and_the_size_is_15(){
         Pageable pageable = PageRequest.ofSize(15);
-        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllMenuCategoriesWithPagination(pageable);
+        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable);
         assertEquals(2, pagedMenuCategories.getTotalPages());
+    }
+
+    @Test
+    void getAllPagedMenuCategories_when_sorted_by_category_name_ascending(){
+        Sort sort = Sort.by("menu_category_name").ascending();
+        Pageable pageable = PageRequest.of(0, 100, sort);
+        List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable).getContent();
+        assertEquals("Zebra", menuCategories.get(menuCategories.size()-1).getMenuCategoryName());
+    }
+
+    @Test
+    void getAllPagedMenuCategories_when_sorted_by_category_name_descending(){
+        Sort sort = Sort.by("menu_category_name").descending();
+        Pageable pageable = PageRequest.of(0, 100, sort);
+        List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable).getContent();
+        assertEquals("Zebra", menuCategories.get(0).getMenuCategoryName());
+    }
+
+    @Test
+    void getAllPagedMenuCategories_when_not_sorted(){
+        Sort sort = Sort.unsorted();
+        Pageable pageable = PageRequest.of(0, 100, sort);
+        List<MenuCategory> menuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable).getContent();
+        assertEquals("Pizza", menuCategories.get(0).getMenuCategoryName());
     }
 
 }

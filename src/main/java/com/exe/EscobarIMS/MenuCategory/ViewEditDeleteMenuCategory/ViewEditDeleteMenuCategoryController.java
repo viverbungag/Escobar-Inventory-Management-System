@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,14 +21,9 @@ public class ViewEditDeleteMenuCategoryController {
     @Autowired
     MenuCategoryRepository menuCategoryRepository;
 
-
-    public List<MenuCategory> getAllMenuCategories(){
-        return viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
-    }
-
-    public List<MenuCategory> getAllMenuCategoriesWithPagination(int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<MenuCategory> pagedMenuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategoriesWithPagination(pageable);
+    public List<MenuCategory> getAllPagedMenuCategories(int pageNo, int pageSize, Sort sort){
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        Page<MenuCategory> pagedMenuCategories = viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable);
         return pagedMenuCategories.getContent();
     }
 
@@ -49,7 +45,7 @@ public class ViewEditDeleteMenuCategoryController {
 
     public int getTotalNumberOfPages(int pageSize){
         Pageable pageable = PageRequest.ofSize(pageSize);
-        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllMenuCategoriesWithPagination(pageable);
+        Page<MenuCategory> pagedMenuCategories =  viewEditDeleteMenuCategoryRepository.getAllPagedMenuCategories(pageable);
         return pagedMenuCategories.getTotalPages();
     }
 

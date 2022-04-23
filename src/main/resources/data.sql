@@ -1,7 +1,7 @@
 INSERT INTO menu_category(menu_category_name) VALUES ('Pizza');
 INSERT INTO menu_category(menu_category_name) VALUES ('Beer');
 INSERT INTO menu_category(menu_category_name) VALUES ('Pasta');
-INSERT INTO menu_category(menu_category_name) VALUES ('Pizza1');
+INSERT INTO menu_category(menu_category_name) VALUES ('Zebra');
 INSERT INTO menu_category(menu_category_name) VALUES ('Beer1');
 INSERT INTO menu_category(menu_category_name) VALUES ('Pasta1');
 INSERT INTO menu_category(menu_category_name) VALUES ('Pizza2');
