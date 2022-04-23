@@ -4,10 +4,7 @@
  */
 package com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms;
 
-import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
-import com.exe.EscobarIMS.MenuCategory.MenuCategoryValidations;
-import com.exe.EscobarIMS.Utilities.MessageDialogues;
-import com.exe.EscobarIMS.Utilities.Validations;
+import com.exe.EscobarIMS.MenuCategory.MenuCategoryFormActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,17 +18,9 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
     /**
      * Creates new form AddMenuCategoryForm
      */
-    @Autowired
-    AddMenuCategoryController menuCategoryController;
 
     @Autowired
-    Validations validations;
-
-    @Autowired
-    MessageDialogues messageDialogues;
-
-    @Autowired
-    MenuCategoryValidations menuCategoryValidations;
+    MenuCategoryFormActions menuCategoryFormActions;
     
     public AddMenuCategoryForm() {
         initComponents();
@@ -52,11 +41,6 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         addMenuCategoryButton.setText("Add Menu Category");
         addMenuCategoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,25 +91,8 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    }//GEN-LAST:event_formWindowClosed
-
-    private boolean isValidToAddMenuCategory(){
-        return menuCategoryValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
-    }
-    
-    private void clearTextField(){
-        menuCategoryNameTextField.setText("");
-    }
-
     private void addMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (isValidToAddMenuCategory()){
-            String newMenuCategoryName = menuCategoryNameTextField.getText();
-            menuCategoryController.addNewMenuCategory(newMenuCategoryName);
-            messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
-        }
-        clearTextField();
+        menuCategoryFormActions.addMenuCategoryButtonActionPerformed(menuCategoryNameTextField);
     }
 
     /**
