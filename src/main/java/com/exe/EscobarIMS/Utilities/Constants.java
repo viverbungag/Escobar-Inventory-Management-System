@@ -19,12 +19,18 @@ public interface Constants {
     }
 
     interface SuccessMessages{
+
         String MENU_CATEGORY_ADDED_MESSAGE = "The Menu Category was added";
         String MENU_CATEGORY_DELETED_MESSAGE = "The Menu Category was deleted";
         String MENU_CATEGORY_UPDATED_MESSAGE = "The Menu Category was updated";
+
+        String SUPPLY_CATEGORY_ADDED_MESSAGE = "The Supply Category was added";
+        String SUPPLY_CATEGORY_DELETED_MESSAGE = "The Supply Category was deleted";
+        String SUPPLY_CATEGORY_UPDATED_MESSAGE = "The Supply Category was updated";
     }
 
     interface TableColumnNumbers{
         int MENU_CATEGORY_NAME_COLUMN_NUMBER = 0;
+        int SUPPLY_CATEGORY_NAME_COLUMN_NUMBER = 0;
     }
 }

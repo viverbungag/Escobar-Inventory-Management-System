@@ -23,7 +23,6 @@ public interface ViewEditDeleteMenuCategoryRepository extends JpaRepository<Menu
             nativeQuery = true)
     Page<MenuCategory> getAllPagedMenuCategories(Pageable pageable);
 
-
     @Modifying
     @Query(value = "DELETE FROM #{#entityName} " +
             " WHERE menu_category_name IN :listOfMenuCategoryNames",

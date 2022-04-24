@@ -1,4 +1,4 @@
-package com.exe.EscobarIMS.MenuCategory;
+package com.exe.EscobarIMS.SupplyCategory;
 
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 
 @Component
-public class MenuCategoryValidations {
+public class SupplyCategoryValidations {
 
     @Autowired
     MessageDialogues messageDialogues;
@@ -16,20 +16,20 @@ public class MenuCategoryValidations {
     @Autowired
     Validations validations;
 
-    public boolean isValidToEditMenuCategory(JTextField menuCategoryNameTextField, JTable menuCategoryTable){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
+    public boolean isValidToEditSupplyCategory(JTextField supplyCategoryNameTextField, JTable supplyCategoryTable){
+        String newSupplyCategoryName = supplyCategoryNameTextField.getText();
 
-        if (validations.isNotSelectingOneTableRow(menuCategoryTable)){
+        if (validations.isNotSelectingOneTableRow(supplyCategoryTable)){
             messageDialogues.showSelectJustOneRowMessageDialogue();
             return false;
         }
 
-        if(validations.isTextFieldEmpty(menuCategoryNameTextField)) {
+        if(validations.isTextFieldEmpty(supplyCategoryNameTextField)) {
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
             return false;
         }
 
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+        if (validations.isSupplyCategoryExisting(newSupplyCategoryName)){
             messageDialogues.showNameAlreadyExistsMessageDialogue();
             return false;
         }
@@ -37,8 +37,8 @@ public class MenuCategoryValidations {
         return true;
     }
 
-    public boolean isValidToDeleteMenuCategory(JTable menuCategoryTable){
-        if (validations.isNotSelectingATableRow(menuCategoryTable)){
+    public boolean isValidToDeleteSupplyCategory(JTable supplyCategoryTable){
+        if (validations.isNotSelectingATableRow(supplyCategoryTable)){
             messageDialogues.showSelectOneOrMoreRowMessageDialogue();
             return false;
         }
@@ -46,15 +46,15 @@ public class MenuCategoryValidations {
         return true;
     }
 
-    public boolean isValidToAddMenuCategory(JTextField menuCategoryNameTextField){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
+    public boolean isValidToAddSupplyCategory(JTextField supplyCategoryNameTextField){
+        String newSupplyCategoryName = supplyCategoryNameTextField.getText();
 
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+        if (validations.isSupplyCategoryExisting(newSupplyCategoryName)){
             messageDialogues.showNameAlreadyExistsMessageDialogue();
             return false;
         }
 
-        if (validations.isTextFieldEmpty(menuCategoryNameTextField)){
+        if (validations.isTextFieldEmpty(supplyCategoryNameTextField)){
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
             return false;
         }

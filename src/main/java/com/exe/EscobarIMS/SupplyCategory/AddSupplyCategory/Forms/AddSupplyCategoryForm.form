@@ -23,21 +23,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="SupplyCategoryFormTitle" alignment="1" pref="362" max="32767" attributes="0"/>
+          <Component id="supplyCategoryNameLabel" alignment="1" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Component id="MenuCategoryFormTitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="59" max="32767" attributes="0"/>
-          </Group>
-          <Component id="menuCategoryNameLabel" alignment="1" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="menuCategoryNameTextField" min="-2" pref="201" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                      <Component id="addSupplyCategoryButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Component id="supplyCategoryNameTextField" min="-2" pref="201" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="addMenuCategoryButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,41 +44,42 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="MenuCategoryFormTitle" min="-2" max="-2" attributes="0"/>
+              <Component id="SupplyCategoryFormTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Component id="menuCategoryNameLabel" min="-2" max="-2" attributes="0"/>
+              <Component id="supplyCategoryNameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="menuCategoryNameTextField" max="32767" attributes="0"/>
+              <Component id="supplyCategoryNameTextField" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="addMenuCategoryButton" min="-2" max="-2" attributes="0"/>
+              <Component id="addSupplyCategoryButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="57" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="addMenuCategoryButton">
+    <Component class="javax.swing.JButton" name="addSupplyCategoryButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add Menu Category"/>
+        <Property name="text" type="java.lang.String" value="Add Supply Category"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMenuCategoryButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSupplyCategoryButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="menuCategoryNameTextField">
+    <Component class="javax.swing.JTextField" name="supplyCategoryNameTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="MenuCategoryFormTitle">
+    <Component class="javax.swing.JLabel" name="SupplyCategoryFormTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Add Menu Category Form"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Add Supply Category Form"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="menuCategoryNameLabel">
+    <Component class="javax.swing.JLabel" name="supplyCategoryNameLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Menu Category Name"/>
+        <Property name="text" type="java.lang.String" value="Supply Category Name"/>
       </Properties>
     </Component>
   </SubComponents>

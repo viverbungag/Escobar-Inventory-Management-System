@@ -8,6 +8,8 @@ import com.exe.EscobarIMS.MenuCategory.MenuCategoryFormActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author Viver
@@ -38,7 +40,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         addMenuCategoryButton = new javax.swing.JButton();
         menuCategoryNameTextField = new javax.swing.JTextField();
         MenuCategoryFormTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        menuCategoryNameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,27 +54,26 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         MenuCategoryFormTitle.setText("Add Menu Category Form");
 
-        jLabel1.setText("Menu Category Name");
+        menuCategoryNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuCategoryNameLabel.setText("Menu Category Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(MenuCategoryFormTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(addMenuCategoryButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel1)))
+                .addGap(49, 49, 49)
+                .addComponent(MenuCategoryFormTitle)
                 .addContainerGap(59, Short.MAX_VALUE))
+            .addComponent(menuCategoryNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addMenuCategoryButton)
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +81,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(MenuCategoryFormTitle)
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(menuCategoryNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuCategoryNameTextField)
                 .addGap(18, 18, 18)
@@ -95,7 +96,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
         menuCategoryFormActions.setMenuCategoryNameTextField(menuCategoryNameTextField);
     }
 
-    private void addMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void addMenuCategoryButtonActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.addMenuCategoryButtonActionPerformed();
     }
@@ -139,7 +140,7 @@ public class AddMenuCategoryForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MenuCategoryFormTitle;
     private javax.swing.JButton addMenuCategoryButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel menuCategoryNameLabel;
     private javax.swing.JTextField menuCategoryNameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package com.exe.EscobarIMS.Utilities;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
+import com.exe.EscobarIMS.SupplyCategory.SupplyCategoryRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,11 +16,18 @@ public class Validations {
     private MenuCategoryRepository menuCategoryRepository;
 
     @Autowired
+    private SupplyCategoryRepository supplyCategoryRepository;
+
+    @Autowired
     private MessageDialogues messageDialogues;
 
 
     public boolean isMenuCategoryExisting(String menuCategoryName){
         return menuCategoryRepository.findByMenuCategoryName(menuCategoryName) != null;
+    }
+
+    public boolean isSupplyCategoryExisting(String supplyCategoryName){
+        return supplyCategoryRepository.findBySupplyCategoryName(supplyCategoryName) != null;
     }
 
     public boolean hasExistingTableContents(JTable table){

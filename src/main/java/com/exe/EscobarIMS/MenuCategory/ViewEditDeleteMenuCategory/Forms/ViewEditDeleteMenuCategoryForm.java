@@ -8,6 +8,8 @@ import com.exe.EscobarIMS.MenuCategory.MenuCategoryFormActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.event.*;
+
 /**
  *
  * @author Viver
@@ -43,14 +45,14 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
         MenuCategoryFormTitle = new javax.swing.JLabel();
         paginationAndSortPanel = new javax.swing.JPanel();
         editMenuCategoryButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        menuCategoryNameLabel = new javax.swing.JLabel();
         menuCategoryNameTextField = new javax.swing.JTextField();
         editingPanel = new javax.swing.JPanel();
         previousButton = new javax.swing.JButton();
         currentPageNumberTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        limitLabel = new javax.swing.JLabel();
         sortingMethodComboBox = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
+        sortLabel = new javax.swing.JLabel();
         ascendingRadioButton = new javax.swing.JRadioButton();
         descendingRadioButton = new javax.swing.JRadioButton();
         nextButton = new javax.swing.JButton();
@@ -111,15 +113,15 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Menu Category Name");
+        menuCategoryNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuCategoryNameLabel.setText("Menu Category Name");
 
         javax.swing.GroupLayout paginationAndSortPanelLayout = new javax.swing.GroupLayout(paginationAndSortPanel);
         paginationAndSortPanel.setLayout(paginationAndSortPanelLayout);
         paginationAndSortPanelLayout.setHorizontalGroup(
             paginationAndSortPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuCategoryNameTextField)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(menuCategoryNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(paginationAndSortPanelLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +131,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             paginationAndSortPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paginationAndSortPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(menuCategoryNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -158,7 +160,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Limit:");
+        limitLabel.setText("Limit:");
 
         sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Menu Category Name" }));
         sortingMethodComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +169,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Sorted by:");
+        sortLabel.setText("Sorted by:");
 
         sortMethodGroup.add(ascendingRadioButton);
         ascendingRadioButton.setSelected(true);
@@ -203,7 +205,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(editingPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(sortLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sortingMethodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(editingPanelLayout.createSequentialGroup()
@@ -211,7 +213,7 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(descendingRadioButton)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(limitLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentLimitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -228,14 +230,14 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sortingMethodComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(sortLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nextButton)
                     .addComponent(contentLimitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(previousButton)
                     .addComponent(currentPageNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(limitLabel)
                     .addComponent(ascendingRadioButton)
                     .addComponent(descendingRadioButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -295,62 +297,62 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     }
 
 
-    private void menuCategoryTableMousePressed(java.awt.event.MouseEvent evt) {
+    private void menuCategoryTableMousePressed(MouseEvent evt) {
         setFormComponents();
         menuCategoryFormActions.menuCategoryTableMousePressed();
     }
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {
+    private void formWindowOpened(WindowEvent evt) {
         setFormComponents();
         menuCategoryFormActions.formWindowOpened(menuCategoryTable);
     }
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {
+    private void formWindowActivated(WindowEvent evt) {
         setFormComponents();
         menuCategoryFormActions.formWindowActivated();
     }
 
-    private void contentLimitComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+    private void contentLimitComboBoxActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.contentLimitComboBoxActionPerformed();
     }
 
-    private void sortingMethodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+    private void sortingMethodComboBoxActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.sortingMethodComboBoxActionPerformed();
     }
 
-    private void currentPageNumberTextFieldKeyReleased(java.awt.event.KeyEvent evt) {
+    private void currentPageNumberTextFieldKeyReleased(KeyEvent evt) {
         setFormComponents();
         menuCategoryFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
     }
 
-    private void currentPageNumberTextFieldFocusLost(java.awt.event.FocusEvent evt) {
+    private void currentPageNumberTextFieldFocusLost(FocusEvent evt) {
         setFormComponents();
         menuCategoryFormActions.currentPageNumberTextFieldFocusLost();
     }
 
-    private void ascendingRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {
+    private void ascendingRadioButtonItemStateChanged(ItemEvent evt) {
         setFormComponents();
         menuCategoryFormActions.ascendingRadioButtonItemStateChanged();
     }
 
-    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void previousButtonActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.previousButtonActionPerformed();
     }
 
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void nextButtonActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.nextButtonActionPerformed();
     }
 
-    private void editMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void editMenuCategoryButtonActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.editMenuCategoryButtonActionPerformed();
     }
 
-    private void deleteMenuCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void deleteMenuCategoryButtonActionPerformed(ActionEvent evt) {
         setFormComponents();
         menuCategoryFormActions.deleteMenuCategoryButtonActionPerformed();
     }
@@ -399,14 +401,14 @@ public class ViewEditDeleteMenuCategoryForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton descendingRadioButton;
     private javax.swing.JButton editMenuCategoryButton;
     private javax.swing.JPanel editingPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel limitLabel;
+    private javax.swing.JLabel menuCategoryNameLabel;
     private javax.swing.JTextField menuCategoryNameTextField;
     private javax.swing.JTable menuCategoryTable;
     private javax.swing.JButton nextButton;
     private javax.swing.JPanel paginationAndSortPanel;
     private javax.swing.JButton previousButton;
+    private javax.swing.JLabel sortLabel;
     private javax.swing.ButtonGroup sortMethodGroup;
     private javax.swing.JComboBox<String> sortingMethodComboBox;
     private javax.swing.JScrollPane tableScrollPanel;

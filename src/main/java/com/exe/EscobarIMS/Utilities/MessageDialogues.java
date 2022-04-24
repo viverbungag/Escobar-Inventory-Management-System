@@ -26,6 +26,13 @@ public class MessageDialogues {
                 INFORMATION_MESSAGE);
     }
 
+    public void showSuccessfullyAddedSupplyCategoryMessageDialogue(){
+        showMessageDialog(null,
+                SUPPLY_CATEGORY_ADDED_MESSAGE,
+                SUCCESSFUL_TITLE,
+                INFORMATION_MESSAGE);
+    }
+
     public void showSuccessfullyDeletedMenuCategoryMessageDialogue(){
         showMessageDialog(null,
                 MENU_CATEGORY_DELETED_MESSAGE,
@@ -33,9 +40,23 @@ public class MessageDialogues {
                 INFORMATION_MESSAGE);
     }
 
+    public void showSuccessfullyDeletedSupplyCategoryMessageDialogue(){
+        showMessageDialog(null,
+                SUPPLY_CATEGORY_DELETED_MESSAGE,
+                SUCCESSFUL_TITLE,
+                INFORMATION_MESSAGE);
+    }
+
     public void showSuccessfullyEditedMenuCategoryMessageDialogue(){
         showMessageDialog(null,
                 MENU_CATEGORY_UPDATED_MESSAGE,
+                SUCCESSFUL_TITLE,
+                INFORMATION_MESSAGE);
+    }
+
+    public void showSuccessfullyEditedSupplyCategoryMessageDialogue(){
+        showMessageDialog(null,
+                SUPPLY_CATEGORY_UPDATED_MESSAGE,
                 SUCCESSFUL_TITLE,
                 INFORMATION_MESSAGE);
     }

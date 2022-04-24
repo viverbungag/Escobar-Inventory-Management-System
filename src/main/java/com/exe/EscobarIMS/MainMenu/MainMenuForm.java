@@ -4,15 +4,11 @@
  */
 package com.exe.EscobarIMS.MainMenu;
 
-import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms.AddMenuCategoryForm;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms.ViewEditDeleteMenuCategoryForm;
-import com.exe.EscobarIMS.Utilities.MessageDialogues;
-import com.exe.EscobarIMS.Utilities.Validations;
+import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.Forms.AddSupplyCategoryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.awt.CardLayout;
 
 /**
  *
@@ -31,6 +27,9 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     @Autowired
     ViewEditDeleteMenuCategoryForm viewEditDeleteMenuCategoryForm;
+
+    @Autowired
+    AddSupplyCategoryForm addSupplyCategoryForm;
 
     public MainMenuForm() {
         initComponents();
@@ -64,7 +63,7 @@ public class MainMenuForm extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         viewEditDeleteMenuCategoryNavigationButton = new javax.swing.JButton();
         addMenuCategoryNavigationButton = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        addSupplyCategoryNavigationButton = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -197,11 +196,11 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        jButton15.setText("Add Supply Category");
-        jButton15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        addSupplyCategoryNavigationButton.setText("Add Supply Category");
+        addSupplyCategoryNavigationButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        addSupplyCategoryNavigationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                addSupplyCategoryNavigationButtonActionPerformed(evt);
             }
         });
 
@@ -235,7 +234,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,7 +301,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
@@ -368,8 +367,8 @@ public class MainMenuForm extends javax.swing.JFrame {
         addMenuCategoryForm.setVisible(true);
     }
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    private void addSupplyCategoryNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        addSupplyCategoryForm.setVisible(true);
     }
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -417,11 +416,11 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMenuCategoryNavigationButton;
+    private javax.swing.JButton addSupplyCategoryNavigationButton;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
