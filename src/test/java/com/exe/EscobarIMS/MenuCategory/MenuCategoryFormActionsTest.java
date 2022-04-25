@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Disabled
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
