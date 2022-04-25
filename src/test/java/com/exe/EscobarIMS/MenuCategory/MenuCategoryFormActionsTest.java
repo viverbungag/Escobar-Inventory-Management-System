@@ -75,7 +75,7 @@ class MenuCategoryFormActionsTest {
     }
 
     @BeforeAll
-    public void beforeAllSetUp(){
+    public void beforeAllSetUp() throws Exception{
         System.setProperty("java.awt.headless", "false");
         initComponents();
         setActionFormComponents();
@@ -84,7 +84,7 @@ class MenuCategoryFormActionsTest {
 
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception{
         MenuCategory menuCategory = new MenuCategory("Pizza");
         MenuCategory menuCategory2 = new MenuCategory("Beer");
         MenuCategory menuCategory3 = new MenuCategory("Pasta");
@@ -92,7 +92,7 @@ class MenuCategoryFormActionsTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws Exception{
         viewEditDeleteMenuCategoryRepository.deleteAll();
     }
 

@@ -14,7 +14,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 class EscobarInventoryManagementSystemApplicationTests {
 
 	@BeforeAll
-	void beforeAllSetUp(){
+	void beforeAllSetUp() throws Exception{
 		System.setProperty("java.awt.headless", "false");
 	}
 
