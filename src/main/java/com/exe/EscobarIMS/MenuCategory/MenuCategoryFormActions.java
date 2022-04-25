@@ -166,6 +166,19 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
         return false;
     }
 
+    public boolean isDeleteMenuCategorySuccessful(){
+        if (isValidToDeleteMenuCategory()){
+            List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
+
+            viewEditDeleteMenuCategoryController
+                    .deleteAllMenuCategoriesByName(menuCategoryNames);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void formWindowActivated(){
         updateTableContents();
         updateStateOfButtons();
@@ -190,12 +203,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
 
     public void deleteMenuCategoryButtonActionPerformed() {
 
-        if (isValidToDeleteMenuCategory()){
-            List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
-
-            viewEditDeleteMenuCategoryController
-                    .deleteAllMenuCategoriesByName(menuCategoryNames);
-
+        if (isDeleteMenuCategorySuccessful()){
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             clearTextField();
         }

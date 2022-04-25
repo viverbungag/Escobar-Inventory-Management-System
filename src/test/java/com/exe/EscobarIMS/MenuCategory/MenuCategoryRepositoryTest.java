@@ -1,6 +1,5 @@
 package com.exe.EscobarIMS.MenuCategory;
 
-import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryRepository;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 public class MenuCategoryRepositoryTest {
 
-    @Autowired AddMenuCategoryRepository addMenuCategoryRepository;
     @Autowired ViewEditDeleteMenuCategoryRepository viewEditDeleteMenuCategoryRepository;
     @Autowired MenuCategoryRepository menuCategoryRepository;
 

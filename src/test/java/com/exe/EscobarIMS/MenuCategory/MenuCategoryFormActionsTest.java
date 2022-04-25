@@ -107,10 +107,13 @@ class MenuCategoryFormActionsTest {
     @Test
     void adding_menu_category_name_when_successful(){
         menuCategoryNameTextField.setText("Wine");
-        assertTrue(menuCategoryFormActions.isAddMenuCategorySuccessful());
+        assertTrue(menuCategoryFormActions.isAddMenuCategorySuccessful(), "Check if the adding of menu category was successful");
 
         MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Wine");
-        assertNotNull(acquiredMenuCategory);
+        assertNotNull(acquiredMenuCategory, "Check if the menu category added is existing");
+
+        List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
+        assertEquals(4, menuCategories.size(),"Check if the number of menu categories increased");
     }
 
     @Test
@@ -131,8 +134,8 @@ class MenuCategoryFormActionsTest {
 
         MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Wine");
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
-        assertNotNull(acquiredMenuCategory);
-        assertEquals(3, menuCategories.size());
+        assertNotNull(acquiredMenuCategory, "Check if the editing of menu category was successful");
+        assertEquals(3, menuCategories.size(), "Check if there are still 3 menu categories");
     }
 
     @Test
@@ -152,6 +155,33 @@ class MenuCategoryFormActionsTest {
         menuCategoryNameTextField.setText("Pizza");
         menuCategoryTable.setRowSelectionInterval(0,0);
         assertFalse(menuCategoryFormActions.isEditMenuCategorySuccessful(), "When the inputted name already exist");
+    }
+
+    @Test
+    void deleting_menu_category_name_when_successful(){
+        menuCategoryFormActions.generateTableContents();
+        menuCategoryTable.setRowSelectionInterval(0,0);
+        assertTrue(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "Deleting one menu category");
+
+
+        List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
+        assertEquals(2, menuCategories.size(), "Check if there are 2 menu categories after deleting one");
+
+        menuCategoryFormActions.generateTableContents();
+        menuCategoryTable.setRowSelectionInterval(0,2);
+        assertTrue(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "Deleting two menu category");
+
+        menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
+        assertEquals(0, menuCategories.size(), "Check if there are 0 menu categories after deleting two");
+    }
+
+    @Test
+    void deleting_menu_category_name_when_not_successful(){
+        menuCategoryFormActions.generateTableContents();
+        assertFalse(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "When there are no row selected");
+
+        List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
+        assertEquals(3, menuCategories.size(), "Check if there are no menu categories that were deleted");
     }
 
 
