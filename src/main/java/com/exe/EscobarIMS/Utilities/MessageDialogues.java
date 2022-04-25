@@ -11,81 +11,87 @@ import static javax.swing.JOptionPane.*;
 @Component
 public class MessageDialogues {
 
+    private boolean shouldShowMessageDialog = true;
+
+    public void setShouldShowMessageDialog(boolean shouldShowMessageDialog) {
+        this.shouldShowMessageDialog = shouldShowMessageDialog;
+    }
+
     public void showNameAlreadyExistsMessageDialogue(){
-        showMessageDialog(
-                null,
-                NAME_ALREADY_EXISTS_MESSAGE,
-                ERROR_TITLE,
-                ERROR_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(
+                                            null,
+                                            NAME_ALREADY_EXISTS_MESSAGE,
+                                            ERROR_TITLE,
+                                            ERROR_MESSAGE);
     }
 
     public void showSuccessfullyAddedMenuCategoryMessageDialogue(){
-        showMessageDialog(null,
-                MENU_CATEGORY_ADDED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            MENU_CATEGORY_ADDED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSuccessfullyAddedSupplyCategoryMessageDialogue(){
-        showMessageDialog(null,
-                SUPPLY_CATEGORY_ADDED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            SUPPLY_CATEGORY_ADDED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSuccessfullyDeletedMenuCategoryMessageDialogue(){
-        showMessageDialog(null,
-                MENU_CATEGORY_DELETED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            MENU_CATEGORY_DELETED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSuccessfullyDeletedSupplyCategoryMessageDialogue(){
-        showMessageDialog(null,
-                SUPPLY_CATEGORY_DELETED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            SUPPLY_CATEGORY_DELETED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSuccessfullyEditedMenuCategoryMessageDialogue(){
-        showMessageDialog(null,
-                MENU_CATEGORY_UPDATED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            MENU_CATEGORY_UPDATED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSuccessfullyEditedSupplyCategoryMessageDialogue(){
-        showMessageDialog(null,
-                SUPPLY_CATEGORY_UPDATED_MESSAGE,
-                SUCCESSFUL_TITLE,
-                INFORMATION_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            SUPPLY_CATEGORY_UPDATED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
     }
 
     public void showSelectOneOrMoreRowMessageDialogue(){
-        showMessageDialog(null,
-                SELECT_ONE_OR_MORE_ROW_MESSAGE,
-                ERROR_TITLE,
-                ERROR_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            SELECT_ONE_OR_MORE_ROW_MESSAGE,
+                                            ERROR_TITLE,
+                                            ERROR_MESSAGE);
     }
 
     public void showSelectJustOneRowMessageDialogue(){
-        showMessageDialog(null,
-                SELECT_JUST_ONE_ROW_MESSAGE,
-                ERROR_TITLE,
-                ERROR_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            SELECT_JUST_ONE_ROW_MESSAGE,
+                                            ERROR_TITLE,
+                                            ERROR_MESSAGE);
     }
 
     public void showFillOutAllTextFieldsMessageDialogue(){
-        showMessageDialog(null,
-                FILL_OUT_ALL_TEXT_FIELD_MESSAGE,
-                ERROR_TITLE,
-                ERROR_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            FILL_OUT_ALL_TEXT_FIELD_MESSAGE,
+                                            ERROR_TITLE,
+                                            ERROR_MESSAGE);
     }
 
     public void showNumericValuesOnlyMessageDialogue(){
-        showMessageDialog(null,
-                NUMERIC_VALUES_ONLY_MESSAGE,
-                ERROR_TITLE,
-                ERROR_MESSAGE);
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            NUMERIC_VALUES_ONLY_MESSAGE,
+                                            ERROR_TITLE,
+                                            ERROR_MESSAGE);
     }
 }

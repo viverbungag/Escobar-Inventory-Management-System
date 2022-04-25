@@ -51,7 +51,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jButton16" max="32767" attributes="0"/>
+                              <Component id="viewEditDeleteSupplyCategoryNavigationButton" max="32767" attributes="0"/>
                               <Component id="addSupplyCategoryNavigationButton" max="32767" attributes="0"/>
                               <Component id="jLabel6" max="32767" attributes="0"/>
                               <Component id="jButton10" alignment="0" pref="235" max="32767" attributes="0"/>
@@ -135,7 +135,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="addSupplyCategoryNavigationButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton16" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="viewEditDeleteSupplyCategoryNavigationButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -337,13 +337,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSupplyCategoryNavigationButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton16">
+        <Component class="javax.swing.JButton" name="viewEditDeleteSupplyCategoryNavigationButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Update Supply Categories"/>
+            <Property name="text" type="java.lang.String" value="View/Delete/Edit Supply Categories"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewEditDeleteSupplyCategoryNavigationButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton13">

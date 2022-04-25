@@ -83,7 +83,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
         }
     }
 
-    private void generateTableContents(){
+    public void generateTableContents(){
         DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
         int currentPageNumber = getCurrentPageNumber();
         int currentSelectedPageLimit = getCurrentSelectedPageLimit();
@@ -142,6 +142,30 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
         return menuCategoryValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
     }
 
+    public boolean isAddMenuCategorySuccessful(){
+        if (isValidToAddMenuCategory()) {
+            String newMenuCategoryName = menuCategoryNameTextField.getText();
+            addMenuCategoryController.addNewMenuCategory(newMenuCategoryName);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEditMenuCategorySuccessful(){
+        String newMenuCategoryName = menuCategoryNameTextField.getText();
+        if (isValidToEditMenuCategory()){
+            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
+            Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
+                    .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
+
+            viewEditDeleteMenuCategoryController
+                    .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
+                            newMenuCategoryName);
+            return true;
+        }
+        return false;
+    }
+
     public void formWindowActivated(){
         updateTableContents();
         updateStateOfButtons();
@@ -157,16 +181,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
     }
 
     public void editMenuCategoryButtonActionPerformed() {
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
-        if (isValidToEditMenuCategory()){
-            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
-            Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
-                    .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
-
-            viewEditDeleteMenuCategoryController
-                    .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
-                            newMenuCategoryName);
-
+        if (isEditMenuCategorySuccessful()){
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             clearTextField();
 
@@ -187,9 +202,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
     }
 
     public void addMenuCategoryButtonActionPerformed() {
-        if (isValidToAddMenuCategory()){
-            String newMenuCategoryName = menuCategoryNameTextField.getText();
-            addMenuCategoryController.addNewMenuCategory(newMenuCategoryName);
+        if (isAddMenuCategorySuccessful()){
             messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
         }
         clearTextField();

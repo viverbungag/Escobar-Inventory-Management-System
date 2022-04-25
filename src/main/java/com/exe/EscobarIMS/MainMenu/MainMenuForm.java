@@ -7,8 +7,11 @@ package com.exe.EscobarIMS.MainMenu;
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms.AddMenuCategoryForm;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms.ViewEditDeleteMenuCategoryForm;
 import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.Forms.AddSupplyCategoryForm;
+import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.Forms.ViewEditDeleteSupplyCategoryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -30,6 +33,9 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     @Autowired
     AddSupplyCategoryForm addSupplyCategoryForm;
+    
+    @Autowired
+    ViewEditDeleteSupplyCategoryForm viewEditDeleteSupplyCategoryForm;
 
     public MainMenuForm() {
         initComponents();
@@ -64,7 +70,7 @@ public class MainMenuForm extends javax.swing.JFrame {
         viewEditDeleteMenuCategoryNavigationButton = new javax.swing.JButton();
         addMenuCategoryNavigationButton = new javax.swing.JButton();
         addSupplyCategoryNavigationButton = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        viewEditDeleteSupplyCategoryNavigationButton = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
@@ -204,11 +210,11 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        jButton16.setText("Update Supply Categories");
-        jButton16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        viewEditDeleteSupplyCategoryNavigationButton.setText("View/Delete/Edit Supply Categories");
+        viewEditDeleteSupplyCategoryNavigationButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        viewEditDeleteSupplyCategoryNavigationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                viewEditDeleteSupplyCategoryNavigationButtonActionPerformed(evt);
             }
         });
 
@@ -233,7 +239,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                     .addGroup(navigationPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viewEditDeleteSupplyCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
@@ -303,7 +309,7 @@ public class MainMenuForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewEditDeleteSupplyCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
 
@@ -359,21 +365,21 @@ public class MainMenuForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void viewEditDeleteMenuCategoryNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void viewEditDeleteMenuCategoryNavigationButtonActionPerformed(ActionEvent evt) {
         viewEditDeleteMenuCategoryForm.setVisible(true);
     }
 
-    private void addMenuCategoryNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void addMenuCategoryNavigationButtonActionPerformed(ActionEvent evt) {
         addMenuCategoryForm.setVisible(true);
     }
 
-    private void addSupplyCategoryNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void addSupplyCategoryNavigationButtonActionPerformed(ActionEvent evt) {
         addSupplyCategoryForm.setVisible(true);
     }
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void viewEditDeleteSupplyCategoryNavigationButtonActionPerformed(ActionEvent evt) {
+        viewEditDeleteSupplyCategoryForm.setVisible(true);
+    }
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
@@ -421,7 +427,6 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -438,5 +443,6 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel navigationPanel;
     private javax.swing.JButton viewEditDeleteMenuCategoryNavigationButton;
+    private javax.swing.JButton viewEditDeleteSupplyCategoryNavigationButton;
     // End of variables declaration//GEN-END:variables
 }

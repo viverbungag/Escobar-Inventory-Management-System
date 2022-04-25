@@ -91,12 +91,12 @@ public class AddSupplyCategoryForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setFormComponents(){
+    private void setActionFormComponents(){
         supplyCategoryFormActions.setSupplyCategoryNameTextField(supplyCategoryNameTextField);
     }
 
     private void addSupplyCategoryButtonActionPerformed(ActionEvent evt) {
-        setFormComponents();
+        setActionFormComponents();
         supplyCategoryFormActions.addSupplyCategoryButtonActionPerformed();
     }
 
