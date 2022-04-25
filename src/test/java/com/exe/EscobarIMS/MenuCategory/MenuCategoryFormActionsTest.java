@@ -76,6 +76,7 @@ class MenuCategoryFormActionsTest {
 
     @BeforeAll
     public void beforeAllSetUp(){
+        System.setProperty("java.awt.headless", "false");
         initComponents();
         setActionFormComponents();
         messageDialogues.setShouldShowMessageDialog(false);
