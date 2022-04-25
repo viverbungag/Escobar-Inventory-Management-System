@@ -181,7 +181,7 @@ class MenuCategoryFormActionsTest {
         assertFalse(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "When there are no row selected");
 
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
-        assertEquals(3, menuCategories.size(), "Check if there are no menu categories that were deleted");
+        assertEquals(2, menuCategories.size(), "Check if there are no menu categories that were deleted");
     }
 
 
