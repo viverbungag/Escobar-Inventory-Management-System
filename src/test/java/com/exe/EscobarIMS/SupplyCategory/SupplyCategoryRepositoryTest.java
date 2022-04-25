@@ -1,14 +1,16 @@
 package com.exe.EscobarIMS.SupplyCategory;
 
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.ViewEditDeleteSupplyCategoryRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(SpringExtension.class)
@@ -27,6 +29,7 @@ class SupplyCategoryRepositoryTest {
         assertNotNull(supplyCategoryRepository);
     }
 
+    @Disabled
     @Test
     void getAllSupplyCategories_when_there_are_3_existing_supply_categories(){
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
