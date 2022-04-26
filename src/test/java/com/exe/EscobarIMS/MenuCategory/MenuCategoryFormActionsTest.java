@@ -6,17 +6,14 @@ import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.swing.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-@SpringBootTest
+
+@SpringBootTest(properties="spring.main.lazy-initialization=true")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MenuCategoryFormActionsTest {
 
@@ -75,8 +72,7 @@ class MenuCategoryFormActionsTest {
     }
 
     @BeforeAll
-    public void beforeAllSetUp() throws Exception{
-        System.setProperty("java.awt.headless", "false");
+    public void beforeAllSetUp(){
         initComponents();
         setActionFormComponents();
         messageDialogues.setShouldShowMessageDialog(false);
@@ -84,7 +80,7 @@ class MenuCategoryFormActionsTest {
 
 
     @BeforeEach
-    public void setUp() throws Exception{
+    public void setUp(){
         MenuCategory menuCategory = new MenuCategory("Pizza");
         MenuCategory menuCategory2 = new MenuCategory("Beer");
         MenuCategory menuCategory3 = new MenuCategory("Pasta");
@@ -92,7 +88,7 @@ class MenuCategoryFormActionsTest {
     }
 
     @AfterEach
-    void tearDown() throws Exception{
+    void tearDown(){
         viewEditDeleteMenuCategoryRepository.deleteAll();
     }
 
@@ -184,14 +180,4 @@ class MenuCategoryFormActionsTest {
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
         assertEquals(3, menuCategories.size(), "Check if there are no menu categories that were deleted");
     }
-
-
-
-
-
-
-
-
-
-
 }
