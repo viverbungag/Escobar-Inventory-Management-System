@@ -299,7 +299,7 @@ public class ViewEditDeleteSupplyCategoryForm extends javax.swing.JFrame {
 
     private void supplyCategoryTableMousePressed(MouseEvent evt) {
         setActionFormComponents();
-        supplyCategoryFormActions.menuCategoryTableMousePressed();
+        supplyCategoryFormActions.supplyCategoryTableMousePressed();
     }
 
     private void formWindowOpened(WindowEvent evt) {

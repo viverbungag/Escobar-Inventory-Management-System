@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
+
 @SpringBootTest(properties = "spring.main.lazy-initialization=true")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MenuCategoryFormActionsTest {
@@ -33,13 +33,13 @@ class MenuCategoryFormActionsTest {
 
 
     public void initComponents() {
-        menuCategoryTable = new javax.swing.JTable();
-        menuCategoryNameTextField = new javax.swing.JTextField();
-        currentPageNumberTextField = new javax.swing.JTextField();
-        sortingMethodComboBox = new javax.swing.JComboBox<>();
-        ascendingRadioButton = new javax.swing.JRadioButton();
-        descendingRadioButton = new javax.swing.JRadioButton();
-        contentLimitComboBox = new javax.swing.JComboBox<>();
+        menuCategoryTable = new JTable();
+        menuCategoryNameTextField = new JTextField();
+        currentPageNumberTextField = new JTextField();
+        sortingMethodComboBox = new JComboBox<>();
+        ascendingRadioButton = new JRadioButton();
+        descendingRadioButton = new JRadioButton();
+        contentLimitComboBox = new JComboBox<>();
 
         menuCategoryTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
@@ -81,10 +81,10 @@ class MenuCategoryFormActionsTest {
 
     @BeforeEach
     public void setUp(){
-        MenuCategory menuCategory = new MenuCategory("Pizza");
-        MenuCategory menuCategory2 = new MenuCategory("Beer");
-        MenuCategory menuCategory3 = new MenuCategory("Pasta");
-        addMenuCategoryRepository.saveAll(List.of(menuCategory, menuCategory2, menuCategory3));
+        MenuCategory menuCategory1 = new MenuCategory("Menu Category 1");
+        MenuCategory menuCategory2 = new MenuCategory("Menu Category 2");
+        MenuCategory menuCategory3 = new MenuCategory("Menu Category 3");
+        addMenuCategoryRepository.saveAll(List.of(menuCategory1, menuCategory2, menuCategory3));
     }
 
     @AfterEach
@@ -103,10 +103,10 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void adding_menu_category_name_when_successful(){
-        menuCategoryNameTextField.setText("Wine");
+        menuCategoryNameTextField.setText("Menu Category 4");
         assertTrue(menuCategoryFormActions.isAddMenuCategorySuccessful(), "Check if the adding of menu category was successful");
 
-        MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Wine");
+        MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Menu Category 4");
         assertNotNull(acquiredMenuCategory, "Check if the menu category added is existing");
 
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
@@ -115,7 +115,7 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void adding_menu_category_name_when_not_successful(){
-        menuCategoryNameTextField.setText("Pizza");
+        menuCategoryNameTextField.setText("Menu Category 1");
         assertFalse(menuCategoryFormActions.isAddMenuCategorySuccessful(), "When the name inputted is existing");
 
         menuCategoryNameTextField.setText("");
@@ -126,10 +126,10 @@ class MenuCategoryFormActionsTest {
     void editing_menu_category_name_when_successful(){
         menuCategoryFormActions.generateTableContents();
         menuCategoryTable.setRowSelectionInterval(0,0);
-        menuCategoryNameTextField.setText("Wine");
+        menuCategoryNameTextField.setText("Updated Menu Category 1");
         assertTrue(menuCategoryFormActions.isEditMenuCategorySuccessful());
 
-        MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Wine");
+        MenuCategory acquiredMenuCategory = menuCategoryRepository.findByMenuCategoryName("Updated Menu Category 1");
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
         assertNotNull(acquiredMenuCategory, "Check if the editing of menu category was successful");
         assertEquals(3, menuCategories.size(), "Check if there are still 3 menu categories");
@@ -138,18 +138,19 @@ class MenuCategoryFormActionsTest {
     @Test
     void editing_menu_category_name_when_not_successful(){
         menuCategoryFormActions.generateTableContents();
-        menuCategoryNameTextField.setText("Wine");
+        menuCategoryTable.clearSelection();
+        menuCategoryNameTextField.setText("Updated Menu Category 1");
         assertFalse(menuCategoryFormActions.isEditMenuCategorySuccessful(), "When there are no rows selected");
 
         menuCategoryNameTextField.setText("");
         menuCategoryTable.setRowSelectionInterval(0,0);
         assertFalse(menuCategoryFormActions.isEditMenuCategorySuccessful(), "When the text field is blank");
 
-        menuCategoryNameTextField.setText("Wine");
+        menuCategoryNameTextField.setText("Updated Menu Category 1");
         menuCategoryTable.setRowSelectionInterval(0,2);
         assertFalse(menuCategoryFormActions.isEditMenuCategorySuccessful(), "When there are multiple rows selected");
 
-        menuCategoryNameTextField.setText("Pizza");
+        menuCategoryNameTextField.setText("Menu Category 1");
         menuCategoryTable.setRowSelectionInterval(0,0);
         assertFalse(menuCategoryFormActions.isEditMenuCategorySuccessful(), "When the inputted name already exist");
     }
@@ -168,13 +169,14 @@ class MenuCategoryFormActionsTest {
         menuCategoryTable.setRowSelectionInterval(0,2);
         assertTrue(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "Deleting two menu category");
 
-        menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
-        assertEquals(0, menuCategories.size(), "Check if there are 0 menu categories after deleting two");
+        List<MenuCategory> menuCategories2 = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
+        assertEquals(0, menuCategories2.size(), "Check if there are 0 menu categories after deleting two");
     }
 
     @Test
     void deleting_menu_category_name_when_not_successful(){
         menuCategoryFormActions.generateTableContents();
+        menuCategoryTable.clearSelection();
         assertFalse(menuCategoryFormActions.isDeleteMenuCategorySuccessful(), "When there are no row selected");
 
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();

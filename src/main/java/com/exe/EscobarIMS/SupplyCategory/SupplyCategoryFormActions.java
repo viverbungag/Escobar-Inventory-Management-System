@@ -84,7 +84,7 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
         }
     }
 
-    private void generateTableContents(){
+    public void generateTableContents(){
         DefaultTableModel tableModel = (DefaultTableModel) supplyCategoryTable.getModel();
         int currentPageNumber = getCurrentPageNumber();
         int currentSelectedPageLimit = getCurrentSelectedPageLimit();
@@ -143,6 +143,41 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
         return supplyCategoryValidations.isValidToAddSupplyCategory(supplyCategoryNameTextField);
     }
 
+    public boolean isAddSupplyCategorySuccessful(){
+        if (isValidToAddSupplyCategory()){
+            String newSupplyCategoryName = supplyCategoryNameTextField.getText();
+            addSupplyCategoryController.addNewSupplyCategory(newSupplyCategoryName);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEditSupplyCategorySuccessful(){
+        if (isValidToEditSupplyCategory()){
+            String newSupplyCategoryName = supplyCategoryNameTextField.getText();
+            String selectedSupplyCategoryName = getSelectedRowSupplyCategoryName();
+            Long selectedSupplyCategoryId = viewEditDeleteSupplyCategoryController
+                    .findSupplyCategoryIdBySupplyCategoryName(selectedSupplyCategoryName);
+
+            viewEditDeleteSupplyCategoryController
+                    .editSupplyCategoryNameBySupplyCategoryId(selectedSupplyCategoryId,
+                            newSupplyCategoryName);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isDeleteSupplyCategorySuccessful(){
+        if (isValidToDeleteSupplyCategory()){
+            List<String> supplyCategoryNames = generateToBeDeletedList(supplyCategoryTable);
+
+            viewEditDeleteSupplyCategoryController
+                    .deleteAllSupplyCategoriesByName(supplyCategoryNames);
+            return true;
+        }
+        return false;
+    }
+
     public void formWindowActivated(){
         updateTableContents();
         updateStateOfButtons();
@@ -152,44 +187,27 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
         supplyCategoryTable.setDefaultEditor(Object.class, null);
     }
 
-    public void menuCategoryTableMousePressed(){
+    public void supplyCategoryTableMousePressed(){
         String selectedSupplyCategoryName = getSelectedRowSupplyCategoryName();
         supplyCategoryNameTextField.setText(selectedSupplyCategoryName);
     }
 
     public void editSupplyCategoryButtonActionPerformed() {
-        String newSupplyCategoryName = supplyCategoryNameTextField.getText();
-        if (isValidToEditSupplyCategory()){
-            String selectedSupplyCategoryName = getSelectedRowSupplyCategoryName();
-            Long selectedSupplyCategoryId = viewEditDeleteSupplyCategoryController
-                    .findSupplyCategoryIdBySupplyCategoryName(selectedSupplyCategoryName);
-
-            viewEditDeleteSupplyCategoryController
-                    .editSupplyCategoryNameBySupplyCategoryId(selectedSupplyCategoryId,
-                            newSupplyCategoryName);
-
+        if (isEditSupplyCategorySuccessful()){
             messageDialogues.showSuccessfullyEditedSupplyCategoryMessageDialogue();
             clearTextField();
         }
     }
 
     public void deleteSupplyCategoryButtonActionPerformed() {
-
-        if (isValidToDeleteSupplyCategory()){
-            List<String> supplyCategoryNames = generateToBeDeletedList(supplyCategoryTable);
-
-            viewEditDeleteSupplyCategoryController
-                    .deleteAllSupplyCategoriesByName(supplyCategoryNames);
-
+        if (isDeleteSupplyCategorySuccessful()){
             messageDialogues.showSuccessfullyDeletedSupplyCategoryMessageDialogue();
             clearTextField();
         }
     }
 
     public void addSupplyCategoryButtonActionPerformed() {
-        if (isValidToAddSupplyCategory()){
-            String newSupplyCategoryName = supplyCategoryNameTextField.getText();
-            addSupplyCategoryController.addNewSupplyCategory(newSupplyCategoryName);
+        if (isAddSupplyCategorySuccessful()){
             messageDialogues.showSuccessfullyAddedSupplyCategoryMessageDialogue();
         }
         clearTextField();
