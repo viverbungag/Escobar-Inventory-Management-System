@@ -4,16 +4,18 @@ import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryRepository
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryRepository;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.swing.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-@SpringBootTest(properties="spring.main.lazy-initialization=true")
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(properties = "spring.main.lazy-initialization=true")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MenuCategoryFormActionsTest {
 

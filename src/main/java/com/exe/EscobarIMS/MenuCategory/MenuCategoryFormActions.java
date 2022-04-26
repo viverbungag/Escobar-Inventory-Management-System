@@ -202,7 +202,6 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
     }
 
     public void deleteMenuCategoryButtonActionPerformed() {
-
         if (isDeleteMenuCategorySuccessful()){
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             clearTextField();
