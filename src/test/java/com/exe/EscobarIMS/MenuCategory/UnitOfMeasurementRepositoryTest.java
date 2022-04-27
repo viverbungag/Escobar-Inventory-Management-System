@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class MenuCategoryRepositoryTest {
+public class UnitOfMeasurementRepositoryTest {
 
     @Autowired AddMenuCategoryRepository addMenuCategoryRepository;
     @Autowired ViewEditDeleteMenuCategoryRepository viewEditDeleteMenuCategoryRepository;

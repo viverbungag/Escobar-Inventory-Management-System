@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = "spring.main.lazy-initialization=true")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SupplyCategoryFormActionsTest {
+class UnitOfMeasurementFormActionsTest {
 
     @Autowired SupplyCategoryRepository supplyCategoryRepository;
     @Autowired AddSupplyCategoryRepository addSupplyCategoryRepository;
