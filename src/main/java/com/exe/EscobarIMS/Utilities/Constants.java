@@ -27,11 +27,16 @@ public interface Constants {
         String SUPPLY_CATEGORY_ADDED_MESSAGE = "The Supply Category was added";
         String SUPPLY_CATEGORY_DELETED_MESSAGE = "The Supply Category was deleted";
         String SUPPLY_CATEGORY_UPDATED_MESSAGE = "The Supply Category was updated";
+
+        String UNIT_OF_MEASUREMENT_ADDED_MESSAGE = "The Unit of Measurement was added";
+        String UNIT_OF_MEASUREMENT_DELETED_MESSAGE = "The Unit of Measurement was deleted";
+        String UNIT_OF_MEASUREMENT_UPDATED_MESSAGE = "The Unit of Measurement was updated";
     }
 
     interface TableColumnNumbers{
         int MENU_CATEGORY_NAME_COLUMN_NUMBER = 0;
         int SUPPLY_CATEGORY_NAME_COLUMN_NUMBER = 0;
         int UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER = 0;
+        int UNIT_OF_MEASUREMENT_ABBREVIATION_COLUMN_NUMBER = 1;
     }
 }

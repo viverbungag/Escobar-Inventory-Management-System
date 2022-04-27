@@ -22,7 +22,7 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
      */
 
     @Autowired
-    UnitOfMeasurementFormActions menuCategoryFormActions;
+    UnitOfMeasurementFormActions unitOfMeasurementFormActions;
 
     
     public ViewEditDeleteUnitOfMeasurementForm() {
@@ -40,13 +40,15 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
 
         sortMethodGroup = new javax.swing.ButtonGroup();
         tableScrollPanel = new javax.swing.JScrollPane();
-        menuCategoryTable = new javax.swing.JTable();
-        deleteMenuCategoryButton = new javax.swing.JButton();
-        MenuCategoryFormTitle = new javax.swing.JLabel();
+        unitOfMeasurementTable = new javax.swing.JTable();
+        deleteUnitOfMeasurementButton = new javax.swing.JButton();
+        unitOfMeasurementFormTitle = new javax.swing.JLabel();
         editingPanel = new javax.swing.JPanel();
-        editMenuCategoryButton = new javax.swing.JButton();
-        menuCategoryNameLabel = new javax.swing.JLabel();
-        menuCategoryNameTextField = new javax.swing.JTextField();
+        editUnitOfMeasurementButton = new javax.swing.JButton();
+        unitOfMeasurementNameLabel = new javax.swing.JLabel();
+        unitOfMeasurementNameTextField = new javax.swing.JTextField();
+        unitOfMeasurementAbbreviationLabel = new javax.swing.JLabel();
+        unitOfMeasurementAbbreviationTextField = new javax.swing.JTextField();
         paginationAndSortPanel = new javax.swing.JPanel();
         previousButton = new javax.swing.JButton();
         currentPageNumberTextField = new javax.swing.JTextField();
@@ -68,74 +70,83 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
             }
         });
 
-        menuCategoryTable.setAutoCreateRowSorter(true);
-        menuCategoryTable.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        menuCategoryTable.setModel(new javax.swing.table.DefaultTableModel(
+        unitOfMeasurementTable.setAutoCreateRowSorter(true);
+        unitOfMeasurementTable.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        unitOfMeasurementTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Menu Category Name"
+                "Unit of Measurement Name", "Abbreviation"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        menuCategoryTable.setRowHeight(25);
-        menuCategoryTable.setRowMargin(5);
-        menuCategoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        unitOfMeasurementTable.setRowHeight(25);
+        unitOfMeasurementTable.setRowMargin(5);
+        unitOfMeasurementTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuCategoryTableMousePressed(evt);
+                unitOfMeasurementTableMousePressed(evt);
             }
         });
-        tableScrollPanel.setViewportView(menuCategoryTable);
+        tableScrollPanel.setViewportView(unitOfMeasurementTable);
 
-        deleteMenuCategoryButton.setText("Delete");
-        deleteMenuCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteUnitOfMeasurementButton.setText("Delete");
+        deleteUnitOfMeasurementButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMenuCategoryButtonActionPerformed(evt);
+                deleteUnitOfMeasurementButtonActionPerformed(evt);
             }
         });
 
-        MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        MenuCategoryFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        MenuCategoryFormTitle.setText("Menu Categories");
+        unitOfMeasurementFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        unitOfMeasurementFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unitOfMeasurementFormTitle.setText("Unit of Measurement");
 
-        editMenuCategoryButton.setText("Edit");
-        editMenuCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+        editUnitOfMeasurementButton.setText("Edit");
+        editUnitOfMeasurementButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editMenuCategoryButtonActionPerformed(evt);
+                editUnitOfMeasurementButtonActionPerformed(evt);
             }
         });
 
-        menuCategoryNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        menuCategoryNameLabel.setText("Menu Category Name");
+        unitOfMeasurementNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unitOfMeasurementNameLabel.setText("Unit of Measurement Name");
+
+        unitOfMeasurementAbbreviationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unitOfMeasurementAbbreviationLabel.setText("Abbreviation");
 
         javax.swing.GroupLayout editingPanelLayout = new javax.swing.GroupLayout(editingPanel);
         editingPanel.setLayout(editingPanelLayout);
         editingPanelLayout.setHorizontalGroup(
             editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuCategoryNameTextField)
-            .addComponent(menuCategoryNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(unitOfMeasurementNameTextField)
+            .addComponent(unitOfMeasurementNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(editingPanelLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(editMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editUnitOfMeasurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(58, Short.MAX_VALUE))
+            .addComponent(unitOfMeasurementAbbreviationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         editingPanelLayout.setVerticalGroup(
             editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editingPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(menuCategoryNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(unitOfMeasurementNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(unitOfMeasurementNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(editMenuCategoryButton)
+                .addComponent(unitOfMeasurementAbbreviationLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(editUnitOfMeasurementButton)
                 .addContainerGap())
         );
 
@@ -162,7 +173,7 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
 
         limitLabel.setText("Limit:");
 
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Menu Category Name" }));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Unit of Measurement Name", "Abbreviation" }));
         sortingMethodComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortingMethodComboBoxActionPerformed(evt);
@@ -247,18 +258,18 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MenuCategoryFormTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(unitOfMeasurementFormTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(deleteMenuCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deleteUnitOfMeasurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, Short.MAX_VALUE)
                             .addComponent(tableScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -266,7 +277,7 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MenuCategoryFormTitle)
+                .addComponent(unitOfMeasurementFormTitle)
                 .addGap(18, 18, 18)
                 .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +288,7 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteMenuCategoryButton)
+                .addComponent(deleteUnitOfMeasurementButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -285,76 +296,77 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActionFormComponents(){
-        menuCategoryFormActions.setContentLimitComboBox(contentLimitComboBox);
-        menuCategoryFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
-        menuCategoryFormActions.setUnitOfMeasurementNameTextField(menuCategoryNameTextField);
-        menuCategoryFormActions.setPreviousButton(previousButton);
-        menuCategoryFormActions.setNextButton(nextButton);
-        menuCategoryFormActions.setUnitOfMeasurementTable(menuCategoryTable);
-        menuCategoryFormActions.setAscendingRadioButton(ascendingRadioButton);
-        menuCategoryFormActions.setDescendingRadioButton(descendingRadioButton);
-        menuCategoryFormActions.setSortingMethodComboBox(sortingMethodComboBox);
+        unitOfMeasurementFormActions.setContentLimitComboBox(contentLimitComboBox);
+        unitOfMeasurementFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
+        unitOfMeasurementFormActions.setUnitOfMeasurementNameTextField(unitOfMeasurementNameTextField);
+        unitOfMeasurementFormActions.setUnitOfMeasurementAbbreviationTextField(unitOfMeasurementAbbreviationTextField);
+        unitOfMeasurementFormActions.setPreviousButton(previousButton);
+        unitOfMeasurementFormActions.setNextButton(nextButton);
+        unitOfMeasurementFormActions.setUnitOfMeasurementTable(unitOfMeasurementTable);
+        unitOfMeasurementFormActions.setAscendingRadioButton(ascendingRadioButton);
+        unitOfMeasurementFormActions.setDescendingRadioButton(descendingRadioButton);
+        unitOfMeasurementFormActions.setSortingMethodComboBox(sortingMethodComboBox);
     }
 
 
-    private void menuCategoryTableMousePressed(MouseEvent evt) {
+    private void unitOfMeasurementTableMousePressed(MouseEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.menuCategoryTableMousePressed();
+        unitOfMeasurementFormActions.menuCategoryTableMousePressed();
     }
 
     private void formWindowOpened(WindowEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.formWindowOpened(menuCategoryTable);
+        unitOfMeasurementFormActions.formWindowOpened(unitOfMeasurementTable);
     }
 
     private void formWindowActivated(WindowEvent evt) {
         setActionFormComponents();
-        menuCategoryFormActions.formWindowActivated();
+        unitOfMeasurementFormActions.formWindowActivated();
     }
 
     private void contentLimitComboBoxActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.contentLimitComboBoxActionPerformed();
+        unitOfMeasurementFormActions.contentLimitComboBoxActionPerformed();
     }
 
     private void sortingMethodComboBoxActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.sortingMethodComboBoxActionPerformed();
+        unitOfMeasurementFormActions.sortingMethodComboBoxActionPerformed();
     }
 
     private void currentPageNumberTextFieldKeyReleased(KeyEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
+        unitOfMeasurementFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
     }
 
     private void currentPageNumberTextFieldFocusLost(FocusEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.currentPageNumberTextFieldFocusLost();
+        unitOfMeasurementFormActions.currentPageNumberTextFieldFocusLost();
     }
 
     private void ascendingRadioButtonItemStateChanged(ItemEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.ascendingRadioButtonItemStateChanged();
+        unitOfMeasurementFormActions.ascendingRadioButtonItemStateChanged();
     }
 
     private void previousButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.previousButtonActionPerformed();
+        unitOfMeasurementFormActions.previousButtonActionPerformed();
     }
 
     private void nextButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.nextButtonActionPerformed();
+        unitOfMeasurementFormActions.nextButtonActionPerformed();
     }
 
-    private void editMenuCategoryButtonActionPerformed(ActionEvent evt) {
+    private void editUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.editUnitOfMeasurementButtonActionPerformed();
+        unitOfMeasurementFormActions.editUnitOfMeasurementButtonActionPerformed();
     }
 
-    private void deleteMenuCategoryButtonActionPerformed(ActionEvent evt) {
+    private void deleteUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.deleteUnitOfMeasurementButtonActionPerformed();
+        unitOfMeasurementFormActions.deleteUnitOfMeasurementButtonActionPerformed();
     }
 
     /**
@@ -394,18 +406,14 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MenuCategoryFormTitle;
     private javax.swing.JRadioButton ascendingRadioButton;
     private javax.swing.JComboBox<String> contentLimitComboBox;
     private javax.swing.JTextField currentPageNumberTextField;
-    private javax.swing.JButton deleteMenuCategoryButton;
+    private javax.swing.JButton deleteUnitOfMeasurementButton;
     private javax.swing.JRadioButton descendingRadioButton;
-    private javax.swing.JButton editMenuCategoryButton;
+    private javax.swing.JButton editUnitOfMeasurementButton;
     private javax.swing.JPanel editingPanel;
     private javax.swing.JLabel limitLabel;
-    private javax.swing.JLabel menuCategoryNameLabel;
-    private javax.swing.JTextField menuCategoryNameTextField;
-    private javax.swing.JTable menuCategoryTable;
     private javax.swing.JButton nextButton;
     private javax.swing.JPanel paginationAndSortPanel;
     private javax.swing.JButton previousButton;
@@ -413,5 +421,11 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup sortMethodGroup;
     private javax.swing.JComboBox<String> sortingMethodComboBox;
     private javax.swing.JScrollPane tableScrollPanel;
+    private javax.swing.JLabel unitOfMeasurementAbbreviationLabel;
+    private javax.swing.JTextField unitOfMeasurementAbbreviationTextField;
+    private javax.swing.JLabel unitOfMeasurementFormTitle;
+    private javax.swing.JLabel unitOfMeasurementNameLabel;
+    private javax.swing.JTextField unitOfMeasurementNameTextField;
+    private javax.swing.JTable unitOfMeasurementTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,8 @@ import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.Forms.AddMenuCategoryForm
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms.ViewEditDeleteMenuCategoryForm;
 import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.Forms.AddSupplyCategoryForm;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.Forms.ViewEditDeleteSupplyCategoryForm;
+import com.exe.EscobarIMS.UnitOfMeasurement.AddUnitOfMeasurement.Forms.AddUnitOfMeasurementForm;
+import com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.Forms.ViewEditDeleteUnitOfMeasurementForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +39,13 @@ public class MainMenuForm extends javax.swing.JFrame {
     @Autowired
     ViewEditDeleteSupplyCategoryForm viewEditDeleteSupplyCategoryForm;
 
+    @Autowired
+    AddUnitOfMeasurementForm addUnitOfMeasurementForm;
+
+    @Autowired
+    ViewEditDeleteUnitOfMeasurementForm viewEditDeleteUnitOfMeasurementForm;
+    
+
     public MainMenuForm() {
         initComponents();
     }
@@ -52,21 +61,21 @@ public class MainMenuForm extends javax.swing.JFrame {
 
         navigationPanel = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        transactionsLabel = new javax.swing.JLabel();
+        supplyLabel = new javax.swing.JLabel();
+        menuLabel = new javax.swing.JLabel();
+        supplierLabel = new javax.swing.JLabel();
+        unitOfMeasurementLabel = new javax.swing.JLabel();
+        supplyCategoryLabel = new javax.swing.JLabel();
+        menuCategoryLabel = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        addUnitOfMeasurementNavigationButton = new javax.swing.JButton();
+        viewEditDeleteUnitOfMeasurementNavigationButton = new javax.swing.JButton();
         viewEditDeleteMenuCategoryNavigationButton = new javax.swing.JButton();
         addMenuCategoryNavigationButton = new javax.swing.JButton();
         addSupplyCategoryNavigationButton = new javax.swing.JButton();
@@ -87,40 +96,40 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Transactions");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        transactionsLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        transactionsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        transactionsLabel.setText("Transactions");
+        transactionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Supply");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        supplyLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        supplyLabel.setForeground(new java.awt.Color(255, 255, 255));
+        supplyLabel.setText("Supply");
+        supplyLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Menu");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        menuLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        menuLabel.setForeground(new java.awt.Color(255, 255, 255));
+        menuLabel.setText("Menu");
+        menuLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Supplier");
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        supplierLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        supplierLabel.setForeground(new java.awt.Color(255, 255, 255));
+        supplierLabel.setText("Supplier");
+        supplierLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Unit of Measurement");
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        unitOfMeasurementLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        unitOfMeasurementLabel.setForeground(new java.awt.Color(255, 255, 255));
+        unitOfMeasurementLabel.setText("Unit of Measurement");
+        unitOfMeasurementLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Supply Category");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        supplyCategoryLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        supplyCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        supplyCategoryLabel.setText("Supply Category");
+        supplyCategoryLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Menu Category");
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        menuCategoryLabel.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        menuCategoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        menuCategoryLabel.setText("Menu Category");
+        menuCategoryLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jButton5.setText("Add Supply");
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -170,19 +179,19 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setText("Add Unit of Measurement");
-        jButton11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        addUnitOfMeasurementNavigationButton.setText("Add Unit of Measurement");
+        addUnitOfMeasurementNavigationButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        addUnitOfMeasurementNavigationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                addUnitOfMeasurementNavigationButtonActionPerformed(evt);
             }
         });
 
-        jButton12.setText("View/Delete/Edit Unit of Measurement");
-        jButton12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        viewEditDeleteUnitOfMeasurementNavigationButton.setText("View/Edit/Delete Unit of Measurement");
+        viewEditDeleteUnitOfMeasurementNavigationButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        viewEditDeleteUnitOfMeasurementNavigationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                viewEditDeleteUnitOfMeasurementNavigationButtonActionPerformed(evt);
             }
         });
 
@@ -210,7 +219,7 @@ public class MainMenuForm extends javax.swing.JFrame {
             }
         });
 
-        viewEditDeleteSupplyCategoryNavigationButton.setText("View/Delete/Edit Supply Categories");
+        viewEditDeleteSupplyCategoryNavigationButton.setText("View/Edit/Delete Supply Categories");
         viewEditDeleteSupplyCategoryNavigationButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         viewEditDeleteSupplyCategoryNavigationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,27 +250,27 @@ public class MainMenuForm extends javax.swing.JFrame {
                         .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(viewEditDeleteSupplyCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(supplyCategoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(supplierLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(transactionsLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38)
                         .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(unitOfMeasurementLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addUnitOfMeasurementNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viewEditDeleteUnitOfMeasurementNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(supplyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38)
                         .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menuCategoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addMenuCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(viewEditDeleteMenuCategoryNavigationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
                     .addGroup(navigationPanelLayout.createSequentialGroup()
@@ -276,9 +285,9 @@ public class MainMenuForm extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(transactionsLabel)
+                    .addComponent(supplyLabel)
+                    .addComponent(menuLabel))
                 .addGap(18, 18, 18)
                 .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,21 +300,21 @@ public class MainMenuForm extends javax.swing.JFrame {
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7))
+                    .addComponent(supplierLabel)
+                    .addComponent(unitOfMeasurementLabel)
+                    .addComponent(menuCategoryLabel))
                 .addGap(18, 18, 18)
                 .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addUnitOfMeasurementNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addMenuCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewEditDeleteUnitOfMeasurementNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewEditDeleteMenuCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(jLabel6)
+                .addComponent(supplyCategoryLabel)
                 .addGap(18, 18, 18)
                 .addComponent(addSupplyCategoryNavigationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -357,13 +366,13 @@ public class MainMenuForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    private void addUnitOfMeasurementNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        addUnitOfMeasurementForm.setVisible(true);
+    }
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    private void viewEditDeleteUnitOfMeasurementNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        viewEditDeleteUnitOfMeasurementForm.setVisible(true);
+    }
 
     private void viewEditDeleteMenuCategoryNavigationButtonActionPerformed(ActionEvent evt) {
         viewEditDeleteMenuCategoryForm.setVisible(true);
@@ -423,9 +432,8 @@ public class MainMenuForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMenuCategoryNavigationButton;
     private javax.swing.JButton addSupplyCategoryNavigationButton;
+    private javax.swing.JButton addUnitOfMeasurementNavigationButton;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -433,16 +441,17 @@ public class MainMenuForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel menuCategoryLabel;
+    private javax.swing.JLabel menuLabel;
     private javax.swing.JPanel navigationPanel;
+    private javax.swing.JLabel supplierLabel;
+    private javax.swing.JLabel supplyCategoryLabel;
+    private javax.swing.JLabel supplyLabel;
+    private javax.swing.JLabel transactionsLabel;
+    private javax.swing.JLabel unitOfMeasurementLabel;
     private javax.swing.JButton viewEditDeleteMenuCategoryNavigationButton;
     private javax.swing.JButton viewEditDeleteSupplyCategoryNavigationButton;
+    private javax.swing.JButton viewEditDeleteUnitOfMeasurementNavigationButton;
     // End of variables declaration//GEN-END:variables
 }

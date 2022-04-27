@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER;
+
 @Component
 public class UnitOfMeasurementValidations {
 
@@ -16,7 +18,7 @@ public class UnitOfMeasurementValidations {
     @Autowired
     Validations validations;
 
-    public boolean isValidToEditMenuCategory(JTextField unitOfMeasurementNameTextField, JTextField unitOfMeasurementAbbreviationTextField, JTable unitOfMeasurementTable){
+    public boolean isValidToEditUnitOfMeasurement(JTextField unitOfMeasurementNameTextField, JTextField unitOfMeasurementAbbreviationTextField, JTable unitOfMeasurementTable){
         String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
 
         if (validations.isNotSelectingOneTableRow(unitOfMeasurementTable)){
@@ -32,6 +34,11 @@ public class UnitOfMeasurementValidations {
         if(validations.isTextFieldEmpty(unitOfMeasurementAbbreviationTextField)) {
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
             return false;
+        }
+
+        if (validations.isTextFieldEqualsToSelectedTableValue(unitOfMeasurementNameTextField,
+                unitOfMeasurementTable, UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER)){
+            return true;
         }
 
         if (validations.isUnitOfMeasurementExisting(newUnitOfMeasurementName)){

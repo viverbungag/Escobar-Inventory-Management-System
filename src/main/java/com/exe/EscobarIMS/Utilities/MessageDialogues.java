@@ -39,6 +39,14 @@ public class MessageDialogues {
                                             INFORMATION_MESSAGE);
     }
 
+    public void showSuccessfullyAddedUnitOfMeasurementMessageDialogue(){
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            UNIT_OF_MEASUREMENT_ADDED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
+    }
+
+
     public void showSuccessfullyDeletedMenuCategoryMessageDialogue(){
         if (shouldShowMessageDialog) showMessageDialog(null,
                                             MENU_CATEGORY_DELETED_MESSAGE,
@@ -53,6 +61,13 @@ public class MessageDialogues {
                                             INFORMATION_MESSAGE);
     }
 
+    public void showSuccessfullyDeletedUnitOfMeasurementMessageDialogue(){
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            UNIT_OF_MEASUREMENT_DELETED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
+    }
+
     public void showSuccessfullyEditedMenuCategoryMessageDialogue(){
         if (shouldShowMessageDialog) showMessageDialog(null,
                                             MENU_CATEGORY_UPDATED_MESSAGE,
@@ -63,6 +78,13 @@ public class MessageDialogues {
     public void showSuccessfullyEditedSupplyCategoryMessageDialogue(){
         if (shouldShowMessageDialog) showMessageDialog(null,
                                             SUPPLY_CATEGORY_UPDATED_MESSAGE,
+                                            SUCCESSFUL_TITLE,
+                                            INFORMATION_MESSAGE);
+    }
+
+    public void showSuccessfullyEditedUnitOfMeasurementMessageDialogue(){
+        if (shouldShowMessageDialog) showMessageDialog(null,
+                                            UNIT_OF_MEASUREMENT_UPDATED_MESSAGE,
                                             SUCCESSFUL_TITLE,
                                             INFORMATION_MESSAGE);
     }

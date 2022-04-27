@@ -61,4 +61,8 @@ public class Validations {
     public boolean isTextFieldContainingOnlyNumericalValues(JTextField textField) {
         return StringUtils.isNumeric(textField.getText());
     }
+
+    public boolean isTextFieldEqualsToSelectedTableValue(JTextField textField, JTable table, int columnNumber){
+        return textField.getText().equals(table.getValueAt(table.getSelectedRow(), columnNumber).toString());
+    }
 }

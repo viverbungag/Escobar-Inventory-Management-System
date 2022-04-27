@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_MEASUREMENT_ABBREVIATION_COLUMN_NUMBER;
 import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER;
 
 @Component
@@ -52,6 +53,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     private void clearTextField(){
         unitOfMeasurementNameTextField.setText("");
+        unitOfMeasurementAbbreviationTextField.setText("");
     }
 
     @Override
@@ -136,9 +138,19 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
         return selectedUnitOfMeasurementName;
     }
+    private String getSelectedRowUnitOfMeasurementAbbreviation(){
+        int selectedTableRow = unitOfMeasurementTable.getSelectedRow();
+        String selectedUnitOfMeasurementAbbreviation = unitOfMeasurementTable
+                .getValueAt(selectedTableRow,
+                        UNIT_OF_MEASUREMENT_ABBREVIATION_COLUMN_NUMBER)
+                .toString();
+
+        return selectedUnitOfMeasurementAbbreviation;
+    }
+
 
     private boolean isValidToEditUnitOfMeasurement(){
-        return unitOfMeasurementValidations.isValidToEditMenuCategory(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField, unitOfMeasurementTable);
+        return unitOfMeasurementValidations.isValidToEditUnitOfMeasurement(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField, unitOfMeasurementTable);
     }
 
     private boolean isValidToDeleteUnitOfMeasurement(){
@@ -199,12 +211,15 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void menuCategoryTableMousePressed(){
         String selectedMenuCategoryName = getSelectedRowUnitOfMeasurementName();
+        String selectedMenuCategoryAbbreviation = getSelectedRowUnitOfMeasurementAbbreviation();
+
         unitOfMeasurementNameTextField.setText(selectedMenuCategoryName);
+        unitOfMeasurementAbbreviationTextField.setText(selectedMenuCategoryAbbreviation);
     }
 
     public void editUnitOfMeasurementButtonActionPerformed() {
         if (isEditUnitOfMeasurementSuccessful()){
-            messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
+            messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
 
         }
@@ -212,14 +227,14 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void deleteUnitOfMeasurementButtonActionPerformed() {
         if (isDeleteUnitOfMeasurementSuccessful()){
-            messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
+            messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }
     }
 
     public void addUnitOfMeasurementButtonActionPerformed() {
         if (isAddUnitOfMeasurementSuccessful()){
-            messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
+            messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
         }
         clearTextField();
     }

@@ -53,29 +53,29 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="viewEditDeleteSupplyCategoryNavigationButton" max="32767" attributes="0"/>
                               <Component id="addSupplyCategoryNavigationButton" max="32767" attributes="0"/>
-                              <Component id="jLabel6" max="32767" attributes="0"/>
+                              <Component id="supplyCategoryLabel" max="32767" attributes="0"/>
                               <Component id="jButton10" alignment="0" pref="235" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="supplierLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton13" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton9" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="transactionsLabel" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButton11" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButton12" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="unitOfMeasurementLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="addUnitOfMeasurementNavigationButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="viewEditDeleteUnitOfMeasurementNavigationButton" alignment="0" max="32767" attributes="0"/>
+                              <Component id="supplyLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel3" max="32767" attributes="0"/>
+                              <Component id="menuLabel" max="32767" attributes="0"/>
                               <Component id="jButton7" alignment="0" max="32767" attributes="0"/>
                               <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                              <Component id="menuCategoryLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="addMenuCategoryNavigationButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="viewEditDeleteMenuCategoryNavigationButton" alignment="0" pref="234" max="32767" attributes="0"/>
                           </Group>
@@ -96,9 +96,9 @@
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="89" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="transactionsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="supplyLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="menuLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -114,24 +114,24 @@
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="supplierLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="unitOfMeasurementLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="menuCategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton9" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton11" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="addUnitOfMeasurementNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="addMenuCategoryNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton10" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton12" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="viewEditDeleteUnitOfMeasurementNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="viewEditDeleteMenuCategoryNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="supplyCategoryLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="addSupplyCategoryNavigationButton" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -154,7 +154,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="transactionsLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -166,7 +166,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="supplyLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -178,7 +178,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="menuLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -190,7 +190,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="supplierLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -202,7 +202,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="unitOfMeasurementLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -214,7 +214,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="supplyCategoryLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -226,7 +226,7 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="menuCategoryLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Montserrat SemiBold" size="18" style="0"/>
@@ -292,22 +292,22 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton11">
+        <Component class="javax.swing.JButton" name="addUnitOfMeasurementNavigationButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Unit of Measurement"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addUnitOfMeasurementNavigationButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton12">
+        <Component class="javax.swing.JButton" name="viewEditDeleteUnitOfMeasurementNavigationButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View/Delete/Edit Unit of Measurement"/>
+            <Property name="text" type="java.lang.String" value="View/Edit/Delete Unit of Measurement"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewEditDeleteUnitOfMeasurementNavigationButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="viewEditDeleteMenuCategoryNavigationButton">
@@ -339,7 +339,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="viewEditDeleteSupplyCategoryNavigationButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View/Delete/Edit Supply Categories"/>
+            <Property name="text" type="java.lang.String" value="View/Edit/Delete Supply Categories"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>

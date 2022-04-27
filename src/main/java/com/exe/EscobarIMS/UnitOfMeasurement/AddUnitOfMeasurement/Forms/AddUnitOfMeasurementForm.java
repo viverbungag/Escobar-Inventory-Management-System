@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -22,7 +23,7 @@ public class AddUnitOfMeasurementForm extends javax.swing.JFrame {
      */
 
     @Autowired
-    UnitOfMeasurementFormActions menuCategoryFormActions;
+    UnitOfMeasurementFormActions unitOfMeasurementFormActions;
     
     public AddUnitOfMeasurementForm() {
         initComponents();
@@ -37,68 +38,90 @@ public class AddUnitOfMeasurementForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addMenuCategoryButton = new javax.swing.JButton();
-        menuCategoryNameTextField = new javax.swing.JTextField();
-        MenuCategoryFormTitle = new javax.swing.JLabel();
-        menuCategoryNameLabel = new javax.swing.JLabel();
+        addUnitOfMeasurementButton = new javax.swing.JButton();
+        unitOfMeasurementNameTextField = new javax.swing.JTextField();
+        UnitOfMeasurementFormTitle = new javax.swing.JLabel();
+        unitOfMeasurementNameLabel = new javax.swing.JLabel();
+        unitOfMeasurementAbbreviationTextField = new javax.swing.JTextField();
+        unitOfMeasurementNameLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        addMenuCategoryButton.setText("Add Menu Category");
-        addMenuCategoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMenuCategoryButtonActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
-        MenuCategoryFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        MenuCategoryFormTitle.setText("Add Menu Category Form");
+        addUnitOfMeasurementButton.setText("Add Unit of Measurement");
+        addUnitOfMeasurementButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUnitOfMeasurementButtonActionPerformed(evt);
+            }
+        });
 
-        menuCategoryNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        menuCategoryNameLabel.setText("Menu Category Name");
+        UnitOfMeasurementFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        UnitOfMeasurementFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        UnitOfMeasurementFormTitle.setText("Add Unit of Measurement Form");
+
+        unitOfMeasurementNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unitOfMeasurementNameLabel.setText("Unit of Measurement Name");
+
+        unitOfMeasurementNameLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unitOfMeasurementNameLabel1.setText("Unit of Measurement Abbreviation");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(MenuCategoryFormTitle)
-                .addContainerGap(59, Short.MAX_VALUE))
-            .addComponent(menuCategoryNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(menuCategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+            .addComponent(unitOfMeasurementNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(UnitOfMeasurementFormTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(unitOfMeasurementNameLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addMenuCategoryButton)
-                .addGap(110, 110, 110))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(unitOfMeasurementNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(addUnitOfMeasurementButton)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MenuCategoryFormTitle)
+                .addComponent(UnitOfMeasurementFormTitle)
                 .addGap(24, 24, 24)
-                .addComponent(menuCategoryNameLabel)
+                .addComponent(unitOfMeasurementNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menuCategoryNameTextField)
+                .addComponent(unitOfMeasurementNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(addMenuCategoryButton)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(unitOfMeasurementNameLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(addUnitOfMeasurementButton)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setActionFormComponents(){
-        menuCategoryFormActions.setUnitOfMeasurementNameTextField(menuCategoryNameTextField);
+    private void formWindowActivated(WindowEvent evt) {
+        setActionFormComponents();
     }
 
-    private void addMenuCategoryButtonActionPerformed(ActionEvent evt) {
-        setActionFormComponents();
-        menuCategoryFormActions.addUnitOfMeasurementButtonActionPerformed();
+    private void setActionFormComponents(){
+        unitOfMeasurementFormActions.setUnitOfMeasurementNameTextField(unitOfMeasurementNameTextField);
+        unitOfMeasurementFormActions.setUnitOfMeasurementAbbreviationTextField(unitOfMeasurementAbbreviationTextField);
+    }
+
+    private void addUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
+        unitOfMeasurementFormActions.addUnitOfMeasurementButtonActionPerformed();
     }
 
     /**
@@ -140,9 +163,11 @@ public class AddUnitOfMeasurementForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MenuCategoryFormTitle;
-    private javax.swing.JButton addMenuCategoryButton;
-    private javax.swing.JLabel menuCategoryNameLabel;
-    private javax.swing.JTextField menuCategoryNameTextField;
+    private javax.swing.JLabel UnitOfMeasurementFormTitle;
+    private javax.swing.JButton addUnitOfMeasurementButton;
+    private javax.swing.JTextField unitOfMeasurementAbbreviationTextField;
+    private javax.swing.JLabel unitOfMeasurementNameLabel;
+    private javax.swing.JLabel unitOfMeasurementNameLabel1;
+    private javax.swing.JTextField unitOfMeasurementNameTextField;
     // End of variables declaration//GEN-END:variables
 }

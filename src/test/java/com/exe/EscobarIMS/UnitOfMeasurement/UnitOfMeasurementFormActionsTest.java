@@ -148,6 +148,14 @@ class UnitOfMeasurementFormActionsTest {
         assertNotNull(acquiredUnitOfMeasurement, "Check if the editing of unit of measurement was successful");
         assertEquals(acquiredUnitOfMeasurement.getUnitOfMeasurementAbbreviation(), "Updated UOM 1", "Check if the abbreviation is updated");
         assertEquals(3, unitOfMeasurements.size(), "Check if there are still 3 unit of measurements");
+
+        unitOfMeasurementFormActions.generateTableContents();
+        unitOfMeasurementTable.setRowSelectionInterval(1,1);
+        unitOfMeasurementNameTextField.setText("Unit of Measurement 1");
+        unitOfMeasurementAbbreviationTextField.setText("Updated again UOM 1");
+        assertTrue(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "Checks if it can update just the abbreviation");
+        UnitOfMeasurement acquiredUnitOfMeasurement2 = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 1");
+        assertEquals(acquiredUnitOfMeasurement2.getUnitOfMeasurementAbbreviation(), "Updated again UOM 1", "Check if the abbreviation is updated");
     }
 
     @Test
@@ -172,7 +180,7 @@ class UnitOfMeasurementFormActionsTest {
         unitOfMeasurementTable.setRowSelectionInterval(0,2);
         assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When there are multiple rows selected");
 
-        unitOfMeasurementNameTextField.setText("Unit of Measurement 1");
+        unitOfMeasurementNameTextField.setText("Unit of Measurement 2");
         unitOfMeasurementAbbreviationTextField.setText("Updated UOM 1");
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
         assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the inputted name already exist");
