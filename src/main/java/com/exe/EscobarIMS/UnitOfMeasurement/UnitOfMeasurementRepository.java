@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UnitOfMeasurementRepository extends JpaRepository<UnitOfMeasurement, Long> {
 
-    @Query(value = "SELECT * FROM #{#entityName} AS m WHERE m.menu_category_name = :menuCategoryName",
+    @Query(value = "SELECT * FROM #{#entityName} WHERE unit_of_measurement_name = :unitOfMeasurementName",
             nativeQuery = true)
-    UnitOfMeasurement findByMenuCategoryName(@Param("menuCategoryName") String name);
+    UnitOfMeasurement findByUnitOfMeasurementName(@Param("unitOfMeasurementName") String name);
 
-    @Query(value = "SELECT * FROM #{#entityName} AS m WHERE m.menu_category_id = :menuCategoryId",
+    @Query(value = "SELECT * FROM #{#entityName} WHERE unit_of_measurement_id = :unitOfMeasurementId",
             nativeQuery = true)
-    UnitOfMeasurement findByMenuCategoryId(@Param("menuCategoryId") Long id);
+    UnitOfMeasurement findByUnitOfMeasurementId(@Param("unitOfMeasurementId") Long id);
 
 }

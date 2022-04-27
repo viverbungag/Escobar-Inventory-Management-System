@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.MENU_CATEGORY_NAME_COLUMN_NUMBER;
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER;
 
 @Component
 public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
@@ -34,19 +34,24 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     @Autowired
     UnitOfMeasurementValidations unitOfMeasurementValidations;
 
-    private JTextField menuCategoryNameTextField;
-    private JTable menuCategoryTable;
+    private JTextField unitOfMeasurementNameTextField;
+    private JTable unitOfMeasurementTable;
+    private JTextField unitOfMeasurementAbbreviationTextField;
 
-    public void setMenuCategoryNameTextField(JTextField menuCategoryNameTextField) {
-        this.menuCategoryNameTextField = menuCategoryNameTextField;
+    public void setUnitOfMeasurementNameTextField(JTextField unitOfMeasurementNameTextField) {
+        this.unitOfMeasurementNameTextField = unitOfMeasurementNameTextField;
     }
 
-    public void setMenuCategoryTable(JTable menuCategoryTable) {
-        this.menuCategoryTable = menuCategoryTable;
+    public void setUnitOfMeasurementTable(JTable unitOfMeasurementTable) {
+        this.unitOfMeasurementTable = unitOfMeasurementTable;
+    }
+
+    public void setUnitOfMeasurementAbbreviationTextField(JTextField unitOfMeasurementAbbreviationTextField) {
+        this.unitOfMeasurementAbbreviationTextField = unitOfMeasurementAbbreviationTextField;
     }
 
     private void clearTextField(){
-        menuCategoryNameTextField.setText("");
+        unitOfMeasurementNameTextField.setText("");
     }
 
     @Override
@@ -59,12 +64,13 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     private void addTableRow(UnitOfMeasurement unitOfMeasurement,
                              DefaultTableModel tableModel){
         String[] itemsOfRow = new String[]{
-                unitOfMeasurement.getUnitOfMeasurementName()};
+                unitOfMeasurement.getUnitOfMeasurementName(),
+                unitOfMeasurement.getUnitOfMeasurementAbbreviation()};
         tableModel.addRow(itemsOfRow);
     }
 
     private void deleteExistingTableContents(){
-        DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) unitOfMeasurementTable.getModel();
         tableModel.setRowCount(0);
     }
 
@@ -74,9 +80,10 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
         enableSortRadioButtons();
 
         switch(sortingMethodName){
-            case "Menu Category Name":
-                return Sort.by("menu_category_name");
-
+            case "Unit of Measurement Name":
+                return Sort.by("unit_of_measurement_name");
+            case "Abbreviation":
+                return Sort.by("unit_of_measurement_abbreviation");
             default:
                 disableSortRadioButtons();
                 return Sort.unsorted();
@@ -84,94 +91,96 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     }
 
     public void generateTableContents(){
-        DefaultTableModel tableModel = (DefaultTableModel) menuCategoryTable.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) unitOfMeasurementTable.getModel();
         int currentPageNumber = getCurrentPageNumber();
         int currentSelectedPageLimit = getCurrentSelectedPageLimit();
         Sort sort = getSortingMethod();
 
-        List<UnitOfMeasurement> menuCategories =  viewEditDeleteUnitOfMeasurementController
-                .getAllPagedMenuCategories(currentPageNumber, currentSelectedPageLimit, sort);
+        List<UnitOfMeasurement> unitOfMeasurements =  viewEditDeleteUnitOfMeasurementController
+                .getAllPagedUnitOfMeasurement(currentPageNumber, currentSelectedPageLimit, sort);
 
-        for (UnitOfMeasurement unitOfMeasurement :menuCategories){
+        for (UnitOfMeasurement unitOfMeasurement :unitOfMeasurements){
             addTableRow(unitOfMeasurement, tableModel);
         }
     }
 
-    private List<String> generateToBeDeletedList(JTable menuCategoryTable){
-        List<String> menuCategoryNames = new ArrayList<String>();
-        int[] selectedTableRows = menuCategoryTable.getSelectedRows();
+    private List<String> generateToBeDeletedList(JTable unitOfMeasurementTable){
+        List<String> unitOfMeasurementNames = new ArrayList<String>();
+        int[] selectedTableRows = unitOfMeasurementTable.getSelectedRows();
         for (int selectedTableRow:selectedTableRows){
 
-            String selectedMenuCategoryName =  menuCategoryTable
+            String selectedUnitOfMeasurementName =  unitOfMeasurementTable
                     .getValueAt(selectedTableRow,
-                            MENU_CATEGORY_NAME_COLUMN_NUMBER).toString();
+                            UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER).toString();
 
-            menuCategoryNames.add(selectedMenuCategoryName);
+            unitOfMeasurementNames.add(selectedUnitOfMeasurementName);
         }
-        return menuCategoryNames;
+        return unitOfMeasurementNames;
     }
 
     @Override
     public void updateTableContents(){
 
-        if(validations.hasExistingTableContents(menuCategoryTable)){
+        if(validations.hasExistingTableContents(unitOfMeasurementTable)){
             deleteExistingTableContents();
         }
         generateTableContents();
     }
 
-    private String getSelectedRowMenuCategoryName(){
-        int selectedTableRow = menuCategoryTable.getSelectedRow();
-        String selectedMenuCategoryName = menuCategoryTable
+    private String getSelectedRowUnitOfMeasurementName(){
+        int selectedTableRow = unitOfMeasurementTable.getSelectedRow();
+        String selectedUnitOfMeasurementName = unitOfMeasurementTable
                 .getValueAt(selectedTableRow,
-                        MENU_CATEGORY_NAME_COLUMN_NUMBER)
+                        UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER)
                 .toString();
 
-        return selectedMenuCategoryName;
+        return selectedUnitOfMeasurementName;
     }
 
-    private boolean isValidToEditMenuCategory(){
-        return unitOfMeasurementValidations.isValidToEditMenuCategory(menuCategoryNameTextField, menuCategoryTable);
+    private boolean isValidToEditUnitOfMeasurement(){
+        return unitOfMeasurementValidations.isValidToEditMenuCategory(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField, unitOfMeasurementTable);
     }
 
-    private boolean isValidToDeleteMenuCategory(){
-        return unitOfMeasurementValidations.isValidToDeleteMenuCategory(menuCategoryTable);
+    private boolean isValidToDeleteUnitOfMeasurement(){
+        return unitOfMeasurementValidations.isValidToDeleteUnitOfMeasurement(unitOfMeasurementTable);
     }
 
-    private boolean isValidToAddMenuCategory(){
-        return unitOfMeasurementValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
+    private boolean isValidToAddUnitOfMeasurement(){
+        return unitOfMeasurementValidations.isValidToAddUnitOfMeasurement(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField);
     }
 
-    public boolean isAddMenuCategorySuccessful(){
-        if (isValidToAddMenuCategory()) {
-            String newMenuCategoryName = menuCategoryNameTextField.getText();
-            addUnitOfMeasurementController.addNewMenuCategory(newMenuCategoryName);
+    public boolean isAddUnitOfMeasurementSuccessful(){
+        if (isValidToAddUnitOfMeasurement()) {
+            String newMenuCategoryName = unitOfMeasurementNameTextField.getText();
+            String newUAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
+            addUnitOfMeasurementController.addNewMenuCategory(newMenuCategoryName, newUAbbreviation);
             return true;
         }
         return false;
     }
 
-    public boolean isEditMenuCategorySuccessful(){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
-        if (isValidToEditMenuCategory()){
-            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
-            Long selectedMenuCategoryId = viewEditDeleteUnitOfMeasurementController
-                    .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
+    public boolean isEditUnitOfMeasurementSuccessful(){
+        String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
+        String newAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
+        if (isValidToEditUnitOfMeasurement()){
+            String selectedUnitOfMeasurementName = getSelectedRowUnitOfMeasurementName();
+            Long selectedUnitOfMeasurementId = viewEditDeleteUnitOfMeasurementController
+                    .findUnitOfMeasurementIdByName(selectedUnitOfMeasurementName);
 
             viewEditDeleteUnitOfMeasurementController
-                    .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
-                            newMenuCategoryName);
+                    .editUnitOfMeasurementNameById(selectedUnitOfMeasurementId,
+                            newUnitOfMeasurementName, newAbbreviation);
             return true;
         }
         return false;
     }
 
-    public boolean isDeleteMenuCategorySuccessful(){
-        if (isValidToDeleteMenuCategory()){
-            List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
+    public boolean isDeleteUnitOfMeasurementSuccessful(){
+        if (isValidToDeleteUnitOfMeasurement()){
+            List<String> unitOfMeasurementNames = generateToBeDeletedList(unitOfMeasurementTable);
 
             viewEditDeleteUnitOfMeasurementController
-                    .deleteAllMenuCategoriesByName(menuCategoryNames);
+                    .deleteAllUnitOfMeasurementByName(unitOfMeasurementNames);
 
             return true;
         }
@@ -189,27 +198,27 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     }
 
     public void menuCategoryTableMousePressed(){
-        String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
-        menuCategoryNameTextField.setText(selectedMenuCategoryName);
+        String selectedMenuCategoryName = getSelectedRowUnitOfMeasurementName();
+        unitOfMeasurementNameTextField.setText(selectedMenuCategoryName);
     }
 
-    public void editMenuCategoryButtonActionPerformed() {
-        if (isEditMenuCategorySuccessful()){
+    public void editUnitOfMeasurementButtonActionPerformed() {
+        if (isEditUnitOfMeasurementSuccessful()){
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             clearTextField();
 
         }
     }
 
-    public void deleteMenuCategoryButtonActionPerformed() {
-        if (isDeleteMenuCategorySuccessful()){
+    public void deleteUnitOfMeasurementButtonActionPerformed() {
+        if (isDeleteUnitOfMeasurementSuccessful()){
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             clearTextField();
         }
     }
 
-    public void addMenuCategoryButtonActionPerformed() {
-        if (isAddMenuCategorySuccessful()){
+    public void addUnitOfMeasurementButtonActionPerformed() {
+        if (isAddUnitOfMeasurementSuccessful()){
             messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
         }
         clearTextField();

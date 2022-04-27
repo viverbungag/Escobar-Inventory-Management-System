@@ -17,11 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class SupplyCategoryRepositoryTest {
 
-    @Autowired
-    ViewEditDeleteSupplyCategoryRepository viewEditDeleteSupplyCategoryRepository;
-
-    @Autowired
-    SupplyCategoryRepository supplyCategoryRepository;
+    @Autowired ViewEditDeleteSupplyCategoryRepository viewEditDeleteSupplyCategoryRepository;
+    @Autowired SupplyCategoryRepository supplyCategoryRepository;
 
     @Test
     void Injected_Components_are_not_null(){

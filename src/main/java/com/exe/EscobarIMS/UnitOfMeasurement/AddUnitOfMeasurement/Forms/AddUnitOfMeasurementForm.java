@@ -93,12 +93,12 @@ public class AddUnitOfMeasurementForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActionFormComponents(){
-        menuCategoryFormActions.setMenuCategoryNameTextField(menuCategoryNameTextField);
+        menuCategoryFormActions.setUnitOfMeasurementNameTextField(menuCategoryNameTextField);
     }
 
     private void addMenuCategoryButtonActionPerformed(ActionEvent evt) {
         setActionFormComponents();
-        menuCategoryFormActions.addMenuCategoryButtonActionPerformed();
+        menuCategoryFormActions.addUnitOfMeasurementButtonActionPerformed();
     }
 
     /**

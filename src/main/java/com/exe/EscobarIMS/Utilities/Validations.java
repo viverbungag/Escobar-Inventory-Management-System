@@ -2,6 +2,7 @@ package com.exe.EscobarIMS.Utilities;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
 import com.exe.EscobarIMS.SupplyCategory.SupplyCategoryRepository;
+import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurementRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,9 @@ public class Validations {
     private SupplyCategoryRepository supplyCategoryRepository;
 
     @Autowired
+    private UnitOfMeasurementRepository unitOfMeasurementRepository;
+
+    @Autowired
     private MessageDialogues messageDialogues;
 
 
@@ -28,6 +32,10 @@ public class Validations {
 
     public boolean isSupplyCategoryExisting(String supplyCategoryName){
         return supplyCategoryRepository.findBySupplyCategoryName(supplyCategoryName) != null;
+    }
+
+    public boolean isUnitOfMeasurementExisting(String unitOfMeasurementName){
+        return unitOfMeasurementRepository.findByUnitOfMeasurementName(unitOfMeasurementName) != null;
     }
 
     public boolean hasExistingTableContents(JTable table){

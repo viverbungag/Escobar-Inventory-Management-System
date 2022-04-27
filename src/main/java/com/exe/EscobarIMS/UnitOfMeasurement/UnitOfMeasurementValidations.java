@@ -16,20 +16,25 @@ public class UnitOfMeasurementValidations {
     @Autowired
     Validations validations;
 
-    public boolean isValidToEditMenuCategory(JTextField menuCategoryNameTextField, JTable menuCategoryTable){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
+    public boolean isValidToEditMenuCategory(JTextField unitOfMeasurementNameTextField, JTextField unitOfMeasurementAbbreviationTextField, JTable unitOfMeasurementTable){
+        String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
 
-        if (validations.isNotSelectingOneTableRow(menuCategoryTable)){
+        if (validations.isNotSelectingOneTableRow(unitOfMeasurementTable)){
             messageDialogues.showSelectJustOneRowMessageDialogue();
             return false;
         }
 
-        if(validations.isTextFieldEmpty(menuCategoryNameTextField)) {
+        if(validations.isTextFieldEmpty(unitOfMeasurementNameTextField)) {
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
             return false;
         }
 
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+        if(validations.isTextFieldEmpty(unitOfMeasurementAbbreviationTextField)) {
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+            return false;
+        }
+
+        if (validations.isUnitOfMeasurementExisting(newUnitOfMeasurementName)){
             messageDialogues.showNameAlreadyExistsMessageDialogue();
             return false;
         }
@@ -37,8 +42,8 @@ public class UnitOfMeasurementValidations {
         return true;
     }
 
-    public boolean isValidToDeleteMenuCategory(JTable menuCategoryTable){
-        if (validations.isNotSelectingATableRow(menuCategoryTable)){
+    public boolean isValidToDeleteUnitOfMeasurement(JTable unitOfMeasurementTable){
+        if (validations.isNotSelectingATableRow(unitOfMeasurementTable)){
             messageDialogues.showSelectOneOrMoreRowMessageDialogue();
             return false;
         }
@@ -46,15 +51,20 @@ public class UnitOfMeasurementValidations {
         return true;
     }
 
-    public boolean isValidToAddMenuCategory(JTextField menuCategoryNameTextField){
-        String newMenuCategoryName = menuCategoryNameTextField.getText();
+    public boolean isValidToAddUnitOfMeasurement(JTextField menuCategoryNameTextField, JTextField unitOfMeasurementAbbreviationTextField){
+        String newUnitOfMeasurementName = menuCategoryNameTextField.getText();
 
-        if (validations.isMenuCategoryExisting(newMenuCategoryName)){
+        if (validations.isUnitOfMeasurementExisting(newUnitOfMeasurementName)){
             messageDialogues.showNameAlreadyExistsMessageDialogue();
             return false;
         }
 
         if (validations.isTextFieldEmpty(menuCategoryNameTextField)){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+            return false;
+        }
+
+        if (validations.isTextFieldEmpty(unitOfMeasurementAbbreviationTextField)){
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
             return false;
         }

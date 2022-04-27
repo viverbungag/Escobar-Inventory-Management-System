@@ -287,10 +287,10 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
     private void setActionFormComponents(){
         menuCategoryFormActions.setContentLimitComboBox(contentLimitComboBox);
         menuCategoryFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
-        menuCategoryFormActions.setMenuCategoryNameTextField(menuCategoryNameTextField);
+        menuCategoryFormActions.setUnitOfMeasurementNameTextField(menuCategoryNameTextField);
         menuCategoryFormActions.setPreviousButton(previousButton);
         menuCategoryFormActions.setNextButton(nextButton);
-        menuCategoryFormActions.setMenuCategoryTable(menuCategoryTable);
+        menuCategoryFormActions.setUnitOfMeasurementTable(menuCategoryTable);
         menuCategoryFormActions.setAscendingRadioButton(ascendingRadioButton);
         menuCategoryFormActions.setDescendingRadioButton(descendingRadioButton);
         menuCategoryFormActions.setSortingMethodComboBox(sortingMethodComboBox);
@@ -349,12 +349,12 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
 
     private void editMenuCategoryButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.editMenuCategoryButtonActionPerformed();
+        menuCategoryFormActions.editUnitOfMeasurementButtonActionPerformed();
     }
 
     private void deleteMenuCategoryButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        menuCategoryFormActions.deleteMenuCategoryButtonActionPerformed();
+        menuCategoryFormActions.deleteUnitOfMeasurementButtonActionPerformed();
     }
 
     /**

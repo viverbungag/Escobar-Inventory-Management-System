@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -20,11 +21,16 @@ public class UnitOfMeasurement {
     @Column(name = "unit_of_measurement_name")
     private String unitOfMeasurementName;
 
+    @Column(name = "unit_of_measurement_abbreviation")
+    private String unitOfMeasurementAbbreviation;
+
+
     public UnitOfMeasurement() {
     }
 
-    public UnitOfMeasurement(String unitOfMeasurementName) {
+    public UnitOfMeasurement(String unitOfMeasurementName, String unitOfMeasurementAbbreviation) {
         this.unitOfMeasurementName = unitOfMeasurementName;
+        this.unitOfMeasurementAbbreviation = unitOfMeasurementAbbreviation;
     }
 
     public Long getUnitOfMeasurementId() {
@@ -36,17 +42,21 @@ public class UnitOfMeasurement {
         return unitOfMeasurementName;
     }
 
+    public String getUnitOfMeasurementAbbreviation() {
+        return unitOfMeasurementAbbreviation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UnitOfMeasurement that = (UnitOfMeasurement) o;
-        return Objects.equals(unitOfMeasurementId, that.unitOfMeasurementId) && unitOfMeasurementName.equals(that.unitOfMeasurementName);
+        return Objects.equals(unitOfMeasurementId, that.unitOfMeasurementId) && Objects.equals(unitOfMeasurementName, that.unitOfMeasurementName) && Objects.equals(unitOfMeasurementAbbreviation, that.unitOfMeasurementAbbreviation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(unitOfMeasurementId, unitOfMeasurementName);
+        return Objects.hash(unitOfMeasurementId, unitOfMeasurementName, unitOfMeasurementAbbreviation);
     }
 
     @Override
@@ -54,6 +64,7 @@ public class UnitOfMeasurement {
         return "UnitOfMeasurement{" +
                 "unitOfMeasurementId=" + unitOfMeasurementId +
                 ", unitOfMeasurementName='" + unitOfMeasurementName + '\'' +
+                ", unitOfMeasurementAbbreviation='" + unitOfMeasurementAbbreviation + '\'' +
                 '}';
     }
 }

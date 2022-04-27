@@ -10,8 +10,8 @@ public class AddUnitOfMeasurementController {
     @Autowired
     private AddUnitOfMeasurementRepository addUnitOfMeasurementRepository;
 
-    public void addNewMenuCategory(String menuCategoryName){
-        UnitOfMeasurement newUnitOfMeasurement = new UnitOfMeasurement(menuCategoryName);
+    public void addNewMenuCategory(String unitOfMeasurementName, String unitOfMeasurementAbbreviation){
+        UnitOfMeasurement newUnitOfMeasurement = new UnitOfMeasurement(unitOfMeasurementName, unitOfMeasurementAbbreviation);
         addUnitOfMeasurementRepository.save(newUnitOfMeasurement);
     }
 }

@@ -32,5 +32,6 @@ public interface Constants {
     interface TableColumnNumbers{
         int MENU_CATEGORY_NAME_COLUMN_NUMBER = 0;
         int SUPPLY_CATEGORY_NAME_COLUMN_NUMBER = 0;
+        int UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER = 0;
     }
 }

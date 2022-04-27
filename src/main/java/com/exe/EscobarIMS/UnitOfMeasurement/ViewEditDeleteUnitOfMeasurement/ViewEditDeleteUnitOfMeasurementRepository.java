@@ -17,23 +17,24 @@ public interface ViewEditDeleteUnitOfMeasurementRepository extends JpaRepository
 
     @Query(value = "SELECT * FROM #{#entityName}",
             nativeQuery = true)
-    List<UnitOfMeasurement> getAllMenuCategories();
+    List<UnitOfMeasurement> getAllUnitOfMeasurements();
 
     @Query(value = "SELECT * FROM #{#entityName}",
             nativeQuery = true)
-    Page<UnitOfMeasurement> getAllPagedMenuCategories(Pageable pageable);
+    Page<UnitOfMeasurement> getAllPagedUnitOfMeasurement(Pageable pageable);
 
     @Modifying
     @Query(value = "DELETE FROM #{#entityName} " +
-            " WHERE menu_category_name IN :listOfMenuCategoryNames",
+            " WHERE unit_of_measurement_name IN :listOfUnitOfMeasurementNames",
             nativeQuery = true)
-    void deleteAllMenuCategoriesByName(@Param("listOfMenuCategoryNames") List<String> names);
+    void deleteAllUnitOfMeasurementByName(@Param("listOfUnitOfMeasurementNames") List<String> names);
 
     @Modifying
     @Query(value = "UPDATE #{#entityName} " +
-            "AS m SET m.menu_category_name = :newMenuCategoryName " +
-            "WHERE m.menu_category_id = :menuCategoryId",
+            "SET unit_of_measurement_name = :newUnitOfMeasurementName, unit_of_measurement_abbreviation = :newAbbreviation " +
+            "WHERE unit_of_measurement_id = :unitOfMeasurementId",
             nativeQuery = true)
-    void updateMenuCategoryNameById(@Param("menuCategoryId") Long id,
-                                    @Param("newMenuCategoryName") String name);
+    void updateUnitOfMeasurementNameById(@Param("unitOfMeasurementId") Long id,
+                                         @Param("newUnitOfMeasurementName") String name,
+                                         @Param("newAbbreviation") String abbreviation);
 }

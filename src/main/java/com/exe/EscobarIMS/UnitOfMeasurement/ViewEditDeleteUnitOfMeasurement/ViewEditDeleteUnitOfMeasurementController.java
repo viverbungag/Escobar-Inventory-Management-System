@@ -21,32 +21,32 @@ public class ViewEditDeleteUnitOfMeasurementController {
     @Autowired
     UnitOfMeasurementRepository unitOfMeasurementRepository;
 
-    public List<UnitOfMeasurement> getAllPagedMenuCategories(int pageNo, int pageSize, Sort sort){
+    public List<UnitOfMeasurement> getAllPagedUnitOfMeasurement(int pageNo, int pageSize, Sort sort){
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        Page<UnitOfMeasurement> pagedMenuCategories = viewEditDeleteUnitOfMeasurementRepository.getAllPagedMenuCategories(pageable);
-        return pagedMenuCategories.getContent();
+        Page<UnitOfMeasurement> pagedUnitOfMeasurement = viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable);
+        return pagedUnitOfMeasurement.getContent();
     }
 
-    public Long findMenuCategoryIdByMenuCategoryName(String menuCategoryName){
-        UnitOfMeasurement currentUnitOfMeasurement = unitOfMeasurementRepository.findByMenuCategoryName(menuCategoryName);
-        Long currentMenuCategoryId = currentUnitOfMeasurement.getUnitOfMeasurementId();
-        return currentMenuCategoryId;
-    }
-
-    @Transactional
-    public void deleteAllMenuCategoriesByName(List<String> menuCategoryNames){
-        viewEditDeleteUnitOfMeasurementRepository.deleteAllMenuCategoriesByName(menuCategoryNames);
+    public Long findUnitOfMeasurementIdByName(String unitOfMeasurementName){
+        UnitOfMeasurement currentUnitOfMeasurement = unitOfMeasurementRepository.findByUnitOfMeasurementName(unitOfMeasurementName);
+        Long currentUnitOfMeasurementId = currentUnitOfMeasurement.getUnitOfMeasurementId();
+        return currentUnitOfMeasurementId;
     }
 
     @Transactional
-    public void editMenuCategoryNameByMenuCategoryId(Long Id, String newMenuCategoryName){
-        viewEditDeleteUnitOfMeasurementRepository.updateMenuCategoryNameById(Id, newMenuCategoryName);
+    public void deleteAllUnitOfMeasurementByName(List<String> unitOfMeasurementNames){
+        viewEditDeleteUnitOfMeasurementRepository.deleteAllUnitOfMeasurementByName(unitOfMeasurementNames);
+    }
+
+    @Transactional
+    public void editUnitOfMeasurementNameById(Long Id, String newMenuCategoryName, String newAbbreviation){
+        viewEditDeleteUnitOfMeasurementRepository.updateUnitOfMeasurementNameById(Id, newMenuCategoryName, newAbbreviation);
     }
 
     public int getTotalNumberOfPages(int pageSize){
         Pageable pageable = PageRequest.ofSize(pageSize);
-        Page<UnitOfMeasurement> pagedMenuCategories =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedMenuCategories(pageable);
-        return pagedMenuCategories.getTotalPages();
+        Page<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable);
+        return pagedUnitOfMeasurement.getTotalPages();
     }
 
 
