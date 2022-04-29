@@ -2,6 +2,10 @@ package com.exe.EscobarIMS.MenuCategory;
 
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryController;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryController;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -130,53 +134,42 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
         return selectedMenuCategoryName;
     }
 
-    private boolean isValidToEditMenuCategory(){
-        return menuCategoryValidations.isValidToEditMenuCategory(menuCategoryNameTextField, menuCategoryTable);
+    private void validateIfEditingIsAllowed(){
+        menuCategoryValidations.validateIfEditingIsAllowed(menuCategoryNameTextField, menuCategoryTable);
     }
 
-    private boolean isValidToDeleteMenuCategory(){
-        return menuCategoryValidations.isValidToDeleteMenuCategory(menuCategoryTable);
+    private void validateIfDeletingIsAllowed(){
+        menuCategoryValidations.validateIfDeletingIsAllowed(menuCategoryTable);
     }
 
-    private boolean isValidToAddMenuCategory(){
-        return menuCategoryValidations.isValidToAddMenuCategory(menuCategoryNameTextField);
+    private void validateIfAddingIsAllowed(){
+        menuCategoryValidations.validateIfAddingIsAllowed(menuCategoryNameTextField);
     }
 
-    public boolean isAddMenuCategorySuccessful(){
-        if (isValidToAddMenuCategory()) {
-            String newMenuCategoryName = menuCategoryNameTextField.getText();
-            addMenuCategoryController.addNewMenuCategory(newMenuCategoryName);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isEditMenuCategorySuccessful(){
+    public void validateIfAddingOfMenuCategoryIsSuccessful(){
+        validateIfAddingIsAllowed();
         String newMenuCategoryName = menuCategoryNameTextField.getText();
-        if (isValidToEditMenuCategory()){
-            String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
-            Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
-                    .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
-
-            viewEditDeleteMenuCategoryController
-                    .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
-                            newMenuCategoryName);
-            return true;
-        }
-        return false;
+        addMenuCategoryController.addNewMenuCategory(newMenuCategoryName);
     }
 
-    public boolean isDeleteMenuCategorySuccessful(){
-        if (isValidToDeleteMenuCategory()){
-            List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
+    public void validateIfEditingOfMenuCategoryIsSuccessful(){
+        validateIfEditingIsAllowed();
+        String newMenuCategoryName = menuCategoryNameTextField.getText();
+        String selectedMenuCategoryName = getSelectedRowMenuCategoryName();
+        Long selectedMenuCategoryId = viewEditDeleteMenuCategoryController
+                .findMenuCategoryIdByMenuCategoryName(selectedMenuCategoryName);
 
-            viewEditDeleteMenuCategoryController
-                    .deleteAllMenuCategoriesByName(menuCategoryNames);
+        viewEditDeleteMenuCategoryController
+                .editMenuCategoryNameByMenuCategoryId(selectedMenuCategoryId,
+                        newMenuCategoryName);
+    }
 
-            return true;
-        }
+    public void validateIfDeletingOfMenuCategoryIsSuccessful(){
+        validateIfDeletingIsAllowed();
+        List<String> menuCategoryNames = generateToBeDeletedList(menuCategoryTable);
 
-        return false;
+        viewEditDeleteMenuCategoryController
+                .deleteAllMenuCategoriesByName(menuCategoryNames);
     }
 
     public void formWindowActivated(){
@@ -194,23 +187,37 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
     }
 
     public void editMenuCategoryButtonActionPerformed() {
-        if (isEditMenuCategorySuccessful()){
+        try{
+            validateIfEditingOfMenuCategoryIsSuccessful();
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             clearTextField();
-
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+        }catch(SelectJustOneRowException e){
+            messageDialogues.showSelectJustOneRowMessageDialogue();
         }
     }
 
     public void deleteMenuCategoryButtonActionPerformed() {
-        if (isDeleteMenuCategorySuccessful()){
+        try{
+            validateIfDeletingOfMenuCategoryIsSuccessful();
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             clearTextField();
+        }catch(SelectOneOrMoreRowException e){
+            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
     }
 
     public void addMenuCategoryButtonActionPerformed() {
-        if (isAddMenuCategorySuccessful()){
+        try{
+            validateIfAddingOfMenuCategoryIsSuccessful();
             messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
         clearTextField();
     }
