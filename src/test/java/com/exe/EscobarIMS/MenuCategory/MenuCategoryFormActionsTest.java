@@ -13,7 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest(properties = "spring.main.lazy-initialization=true")
+
+@SpringBootTest(properties = {"spring.main.lazy-initialization=true"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MenuCategoryFormActionsTest {
 
@@ -81,6 +82,7 @@ class MenuCategoryFormActionsTest {
 
     @BeforeEach
     public void setUp(){
+        viewEditDeleteMenuCategoryRepository.deleteAll();
         MenuCategory menuCategory1 = new MenuCategory("Menu Category 1");
         MenuCategory menuCategory2 = new MenuCategory("Menu Category 2");
         MenuCategory menuCategory3 = new MenuCategory("Menu Category 3");
@@ -89,7 +91,7 @@ class MenuCategoryFormActionsTest {
 
     @AfterEach
     void tearDown(){
-        viewEditDeleteMenuCategoryRepository.deleteAll();
+
     }
 
     @Test

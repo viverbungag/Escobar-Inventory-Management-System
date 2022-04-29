@@ -12,7 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(properties = "spring.main.lazy-initialization=true")
+
+@SpringBootTest(properties = {"spring.main.lazy-initialization=true"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UnitOfMeasurementFormActionsTest {
 
@@ -88,6 +89,7 @@ class UnitOfMeasurementFormActionsTest {
 
     @BeforeEach
     public void setUp(){
+        viewEditDeleteUnitOfMeasurementRepository.deleteAll();
         UnitOfMeasurement unitOfMeasurement1 = new UnitOfMeasurement("Unit of Measurement 1", "UOM 1");
         UnitOfMeasurement unitOfMeasurement2 = new UnitOfMeasurement("Unit of Measurement 2", "UOM 2");
         UnitOfMeasurement unitOfMeasurement3 = new UnitOfMeasurement("Unit of Measurement 3", "UOM 3");
@@ -96,7 +98,7 @@ class UnitOfMeasurementFormActionsTest {
 
     @AfterEach
     void tearDown(){
-        viewEditDeleteUnitOfMeasurementRepository.deleteAll();
+
     }
 
     @Test

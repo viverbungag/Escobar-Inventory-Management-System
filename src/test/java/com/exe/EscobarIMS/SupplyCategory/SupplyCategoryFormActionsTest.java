@@ -13,7 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest(properties = "spring.main.lazy-initialization=true")
+
+@SpringBootTest(properties = {"spring.main.lazy-initialization=true"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SupplyCategoryFormActionsTest {
 
@@ -81,6 +82,7 @@ class SupplyCategoryFormActionsTest {
 
     @BeforeEach
     public void setUp(){
+        viewEditDeleteSupplyCategoryRepository.deleteAll();
         SupplyCategory supplyCategory1 = new SupplyCategory("Supply Category 1");
         SupplyCategory supplyCategory2 = new SupplyCategory("Supply Category 2");
         SupplyCategory supplyCategory3 = new SupplyCategory("Supply Category 3");
@@ -89,7 +91,7 @@ class SupplyCategoryFormActionsTest {
 
     @AfterEach
     void tearDown(){
-        viewEditDeleteSupplyCategoryRepository.deleteAll();
+
     }
 
     @Test
