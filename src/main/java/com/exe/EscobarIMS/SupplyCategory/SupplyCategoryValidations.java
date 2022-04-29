@@ -1,5 +1,9 @@
 package com.exe.EscobarIMS.SupplyCategory;
 
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,49 +20,37 @@ public class SupplyCategoryValidations {
     @Autowired
     Validations validations;
 
-    public boolean isValidToEditSupplyCategory(JTextField supplyCategoryNameTextField, JTable supplyCategoryTable){
+    public void validateIfEditingIsAllowed(JTextField supplyCategoryNameTextField, JTable supplyCategoryTable){
         String newSupplyCategoryName = supplyCategoryNameTextField.getText();
 
         if (validations.isNotSelectingOneTableRow(supplyCategoryTable)){
-            messageDialogues.showSelectJustOneRowMessageDialogue();
-            return false;
+            throw new SelectJustOneRowException("Number of rows: " + supplyCategoryTable.getSelectedRowCount() + ", Should be not equals to 1");
         }
 
         if(validations.isTextFieldEmpty(supplyCategoryNameTextField)) {
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Supply Category Name Text Field is empty");
         }
 
         if (validations.isSupplyCategoryExisting(newSupplyCategoryName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
+            throw new NameAlreadyExistsException("The Supply Category: " + newSupplyCategoryName + " - is already existing");
         }
-
-        return true;
     }
 
-    public boolean isValidToDeleteSupplyCategory(JTable supplyCategoryTable){
+    public void validateIfDeletingIsAllowed(JTable supplyCategoryTable){
         if (validations.isNotSelectingATableRow(supplyCategoryTable)){
-            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
-            return false;
+            throw new SelectOneOrMoreRowException("Number of rows: " + supplyCategoryTable.getSelectedRowCount() + ", Should be greater than 0");
         }
-
-        return true;
     }
 
-    public boolean isValidToAddSupplyCategory(JTextField supplyCategoryNameTextField){
+    public void validateIfAddingIsAllowed(JTextField supplyCategoryNameTextField){
         String newSupplyCategoryName = supplyCategoryNameTextField.getText();
 
         if (validations.isSupplyCategoryExisting(newSupplyCategoryName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
+            throw new NameAlreadyExistsException("The Supply Category: " + newSupplyCategoryName + " - is already existing");
         }
 
         if (validations.isTextFieldEmpty(supplyCategoryNameTextField)){
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Supply Category Name Text Field is empty");
         }
-
-        return true;
     }
 }

@@ -2,6 +2,10 @@ package com.exe.EscobarIMS.SupplyCategory;
 
 import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.AddSupplyCategoryRepository;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.ViewEditDeleteSupplyCategoryRepository;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +110,7 @@ class SupplyCategoryFormActionsTest {
     @Test
     void adding_supply_category_name_when_successful(){
         supplyCategoryNameTextField.setText("Supply Category 4");
-        assertTrue(supplyCategoryFormActions.isAddSupplyCategorySuccessful(), "Check if the adding of supply category was successful");
+        assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfAddingOfSupplyCategoryIsSuccessful());
 
         SupplyCategory acquiredSupplyCategory = supplyCategoryRepository.findBySupplyCategoryName("Supply Category 4");
         assertNotNull(acquiredSupplyCategory, "Check if the supply category added is existing");
@@ -118,10 +122,10 @@ class SupplyCategoryFormActionsTest {
     @Test
     void adding_supply_category_name_when_not_successful(){
         supplyCategoryNameTextField.setText("Supply Category 1");
-        assertFalse(supplyCategoryFormActions.isAddSupplyCategorySuccessful(), "When the name inputted is existing");
+        assertThrows(NameAlreadyExistsException.class, () -> supplyCategoryFormActions.validateIfAddingOfSupplyCategoryIsSuccessful());
 
         supplyCategoryNameTextField.setText("");
-        assertFalse(supplyCategoryFormActions.isAddSupplyCategorySuccessful(), "When the text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class,() -> supplyCategoryFormActions.validateIfAddingOfSupplyCategoryIsSuccessful());
     }
 
     @Test
@@ -129,7 +133,7 @@ class SupplyCategoryFormActionsTest {
         supplyCategoryFormActions.generateTableContents();
         supplyCategoryTable.setRowSelectionInterval(0,0);
         supplyCategoryNameTextField.setText("Supply Category 4");
-        assertTrue(supplyCategoryFormActions.isEditSupplyCategorySuccessful());
+        assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
 
         SupplyCategory acquiredSupplyCategory = supplyCategoryRepository.findBySupplyCategoryName("Supply Category 4");
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
@@ -142,26 +146,26 @@ class SupplyCategoryFormActionsTest {
         supplyCategoryFormActions.generateTableContents();
         supplyCategoryTable.clearSelection();
         supplyCategoryNameTextField.setText("Supply Category 4");
-        assertFalse(supplyCategoryFormActions.isEditSupplyCategorySuccessful(), "When there are no rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
 
         supplyCategoryNameTextField.setText("");
         supplyCategoryTable.setRowSelectionInterval(0,0);
-        assertFalse(supplyCategoryFormActions.isEditSupplyCategorySuccessful(), "When the text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
 
         supplyCategoryNameTextField.setText("Supply Category 4");
         supplyCategoryTable.setRowSelectionInterval(0,2);
-        assertFalse(supplyCategoryFormActions.isEditSupplyCategorySuccessful(), "When there are multiple rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
 
         supplyCategoryNameTextField.setText("Supply Category 1");
         supplyCategoryTable.setRowSelectionInterval(0,0);
-        assertFalse(supplyCategoryFormActions.isEditSupplyCategorySuccessful(), "When the inputted name already exist");
+        assertThrows(NameAlreadyExistsException.class, () -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
     }
 
     @Test
     void deleting_supply_category_name_when_successful(){
         supplyCategoryFormActions.generateTableContents();
         supplyCategoryTable.setRowSelectionInterval(0,0);
-        assertTrue(supplyCategoryFormActions.isDeleteSupplyCategorySuccessful(), "Deleting one supply category");
+        assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful(), "Deleting one supply category");
 
 
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
@@ -169,7 +173,7 @@ class SupplyCategoryFormActionsTest {
 
         supplyCategoryFormActions.generateTableContents();
         supplyCategoryTable.setRowSelectionInterval(0,2);
-        assertTrue(supplyCategoryFormActions.isDeleteSupplyCategorySuccessful(), "Deleting two supply category");
+        assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful(), "Deleting two supply category");
 
         List<SupplyCategory> supplyCategories2 = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
         assertEquals(0, supplyCategories2.size(), "Check if there are 0 supply categories after deleting two");
@@ -179,7 +183,7 @@ class SupplyCategoryFormActionsTest {
     void deleting_supply_category_name_when_not_successful(){
         supplyCategoryFormActions.generateTableContents();
         supplyCategoryTable.clearSelection();
-        assertFalse(supplyCategoryFormActions.isDeleteSupplyCategorySuccessful(), "When there are no row selected");
+        assertThrows(SelectOneOrMoreRowException.class, () -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful());
 
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
         assertEquals(3, supplyCategories.size(), "Check if there are no supply categories that were deleted");

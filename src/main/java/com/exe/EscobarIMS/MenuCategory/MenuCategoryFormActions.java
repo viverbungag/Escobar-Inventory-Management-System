@@ -218,8 +218,9 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }finally{
+            clearTextField();
         }
-        clearTextField();
     }
 
 

@@ -2,6 +2,10 @@ package com.exe.EscobarIMS.SupplyCategory;
 
 import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.AddSupplyCategoryController;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.ViewEditDeleteSupplyCategoryController;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -131,51 +135,45 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
         return selectedSupplyCategoryName;
     }
 
-    private boolean isValidToEditSupplyCategory(){
-        return supplyCategoryValidations.isValidToEditSupplyCategory(supplyCategoryNameTextField, supplyCategoryTable);
+    private void validateIfEditingIsAllowed(){
+        supplyCategoryValidations.validateIfEditingIsAllowed(supplyCategoryNameTextField, supplyCategoryTable);
     }
 
-    private boolean isValidToDeleteSupplyCategory(){
-        return supplyCategoryValidations.isValidToDeleteSupplyCategory(supplyCategoryTable);
+    private void validateIfDeletingIsAllowed(){
+        supplyCategoryValidations.validateIfDeletingIsAllowed(supplyCategoryTable);
     }
 
-    private boolean isValidToAddSupplyCategory(){
-        return supplyCategoryValidations.isValidToAddSupplyCategory(supplyCategoryNameTextField);
+    private void validateIfAddingIsAllowed(){
+        supplyCategoryValidations.validateIfAddingIsAllowed(supplyCategoryNameTextField);
     }
 
-    public boolean isAddSupplyCategorySuccessful(){
-        if (isValidToAddSupplyCategory()){
-            String newSupplyCategoryName = supplyCategoryNameTextField.getText();
-            addSupplyCategoryController.addNewSupplyCategory(newSupplyCategoryName);
-            return true;
-        }
-        return false;
+    public void validateIfAddingOfSupplyCategoryIsSuccessful(){
+        validateIfAddingIsAllowed();
+        String newSupplyCategoryName = supplyCategoryNameTextField.getText();
+        addSupplyCategoryController.addNewSupplyCategory(newSupplyCategoryName);
+
     }
 
-    public boolean isEditSupplyCategorySuccessful(){
-        if (isValidToEditSupplyCategory()){
-            String newSupplyCategoryName = supplyCategoryNameTextField.getText();
-            String selectedSupplyCategoryName = getSelectedRowSupplyCategoryName();
-            Long selectedSupplyCategoryId = viewEditDeleteSupplyCategoryController
-                    .findSupplyCategoryIdBySupplyCategoryName(selectedSupplyCategoryName);
+    public void validateIfEditingOfSupplyCategoryIsSuccessful(){
+        validateIfEditingIsAllowed();
+        String newSupplyCategoryName = supplyCategoryNameTextField.getText();
+        String selectedSupplyCategoryName = getSelectedRowSupplyCategoryName();
+        Long selectedSupplyCategoryId = viewEditDeleteSupplyCategoryController
+                .findSupplyCategoryIdBySupplyCategoryName(selectedSupplyCategoryName);
 
-            viewEditDeleteSupplyCategoryController
-                    .editSupplyCategoryNameBySupplyCategoryId(selectedSupplyCategoryId,
-                            newSupplyCategoryName);
-            return true;
-        }
-        return false;
+        viewEditDeleteSupplyCategoryController
+                .editSupplyCategoryNameBySupplyCategoryId(selectedSupplyCategoryId,
+                        newSupplyCategoryName);
+
     }
 
-    public boolean isDeleteSupplyCategorySuccessful(){
-        if (isValidToDeleteSupplyCategory()){
-            List<String> supplyCategoryNames = generateToBeDeletedList(supplyCategoryTable);
+    public void validateIfDeletingOfSupplyCategoryIsSuccessful(){
+        validateIfDeletingIsAllowed();
+        List<String> supplyCategoryNames = generateToBeDeletedList(supplyCategoryTable);
 
-            viewEditDeleteSupplyCategoryController
-                    .deleteAllSupplyCategoriesByName(supplyCategoryNames);
-            return true;
-        }
-        return false;
+        viewEditDeleteSupplyCategoryController
+                .deleteAllSupplyCategoriesByName(supplyCategoryNames);
+
     }
 
     public void formWindowActivated(){
@@ -193,22 +191,39 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
     }
 
     public void editSupplyCategoryButtonActionPerformed() {
-        if (isEditSupplyCategorySuccessful()){
+        try{
+            validateIfEditingOfSupplyCategoryIsSuccessful();
             messageDialogues.showSuccessfullyEditedSupplyCategoryMessageDialogue();
             clearTextField();
+        }catch(SelectJustOneRowException e){
+            messageDialogues.showSelectJustOneRowMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+
         }
     }
 
     public void deleteSupplyCategoryButtonActionPerformed() {
-        if (isDeleteSupplyCategorySuccessful()){
+        try{
+            validateIfDeletingOfSupplyCategoryIsSuccessful();
             messageDialogues.showSuccessfullyDeletedSupplyCategoryMessageDialogue();
             clearTextField();
+        }catch(SelectOneOrMoreRowException e){
+            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
+
     }
 
     public void addSupplyCategoryButtonActionPerformed() {
-        if (isAddSupplyCategorySuccessful()){
+        try {
+            validateIfAddingOfSupplyCategoryIsSuccessful();
             messageDialogues.showSuccessfullyAddedSupplyCategoryMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
         clearTextField();
     }

@@ -157,7 +157,7 @@ class MenuCategoryFormActionsTest {
 
         menuCategoryNameTextField.setText("Menu Category 1");
         menuCategoryTable.setRowSelectionInterval(0,0);
-        assertThrows(NameAlreadyExistsException.class , () -> menuCategoryFormActions.validateIfEditingOfMenuCategoryIsSuccessful());
+        assertThrows(NameAlreadyExistsException.class, () -> menuCategoryFormActions.validateIfEditingOfMenuCategoryIsSuccessful());
     }
 
     @Test
