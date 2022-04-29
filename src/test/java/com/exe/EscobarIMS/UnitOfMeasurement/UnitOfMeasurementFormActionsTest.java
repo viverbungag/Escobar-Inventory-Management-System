@@ -2,6 +2,10 @@ package com.exe.EscobarIMS.UnitOfMeasurement;
 
 import com.exe.EscobarIMS.UnitOfMeasurement.AddUnitOfMeasurement.AddUnitOfMeasurementRepository;
 import com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.ViewEditDeleteUnitOfMeasurementRepository;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +118,7 @@ class UnitOfMeasurementFormActionsTest {
     void adding_unit_of_measurement_when_successful(){
         unitOfMeasurementNameTextField.setText("Unit of Measurement 4");
         unitOfMeasurementAbbreviationTextField.setText("UOM 4");
-        assertTrue(unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "Check if the adding of Unit of Measurement was successful");
+        assertDoesNotThrow(() -> unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful());
 
         UnitOfMeasurement acquiredUnitOfMeasurement = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 4");
         assertNotNull(acquiredUnitOfMeasurement, "Check if the Unit of Measurement added is existing");
@@ -127,14 +131,15 @@ class UnitOfMeasurementFormActionsTest {
     void adding_menu_category_name_when_not_successful(){
         unitOfMeasurementNameTextField.setText("Unit of Measurement 1");
         unitOfMeasurementAbbreviationTextField.setText("UOM 1");
-        assertFalse(unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the name inputted is existing");
+        assertThrows(NameAlreadyExistsException.class, () -> unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the name inputted is existing");
 
         unitOfMeasurementNameTextField.setText("");
-        assertFalse(unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the name text field is blank");
+        unitOfMeasurementAbbreviationTextField.setText("UOM 4");
+        assertThrows(FillOutAllTextFieldsException.class, () -> unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the name text field is blank");
 
         unitOfMeasurementNameTextField.setText("Unit of Measurement 4");
         unitOfMeasurementAbbreviationTextField.setText("");
-        assertFalse(unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the abbreviation text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> unitOfMeasurementFormActions.isAddUnitOfMeasurementSuccessful(), "When the abbreviation text field is blank");
     }
 
     @Test
@@ -143,7 +148,7 @@ class UnitOfMeasurementFormActionsTest {
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
         unitOfMeasurementNameTextField.setText("Updated Unit of Measurement 1");
         unitOfMeasurementAbbreviationTextField.setText("Updated UOM 1");
-        assertTrue(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful());
+        assertDoesNotThrow(() -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful());
 
         UnitOfMeasurement acquiredUnitOfMeasurement = unitOfMeasurementRepository.findByUnitOfMeasurementName("Updated Unit of Measurement 1");
         List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
@@ -155,7 +160,7 @@ class UnitOfMeasurementFormActionsTest {
         unitOfMeasurementTable.setRowSelectionInterval(1,1);
         unitOfMeasurementNameTextField.setText("Unit of Measurement 1");
         unitOfMeasurementAbbreviationTextField.setText("Updated again UOM 1");
-        assertTrue(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "Checks if it can update just the abbreviation");
+        assertDoesNotThrow(() -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "Checks if it can update just the abbreviation");
         UnitOfMeasurement acquiredUnitOfMeasurement2 = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 1");
         assertEquals(acquiredUnitOfMeasurement2.getUnitOfMeasurementAbbreviation(), "Updated again UOM 1", "Check if the abbreviation is updated");
     }
@@ -165,34 +170,34 @@ class UnitOfMeasurementFormActionsTest {
         unitOfMeasurementFormActions.generateTableContents();
         unitOfMeasurementTable.clearSelection();
         unitOfMeasurementNameTextField.setText("Updated Unit of Measurement 1");
-        assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When there are no rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When there are no rows selected");
 
         unitOfMeasurementNameTextField.setText("");
         unitOfMeasurementAbbreviationTextField.setText("Updated UOM 1");
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
-        assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the name text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the name text field is blank");
 
         unitOfMeasurementNameTextField.setText("Updated Unit of Measurement 1");
         unitOfMeasurementAbbreviationTextField.setText("");
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
-        assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the name text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the abbreviation text field is blank");
 
         unitOfMeasurementNameTextField.setText("Updated Unit of Measurement 1");
         unitOfMeasurementAbbreviationTextField.setText("Updated UOM 1");
         unitOfMeasurementTable.setRowSelectionInterval(0,2);
-        assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When there are multiple rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When there are multiple rows selected");
 
         unitOfMeasurementNameTextField.setText("Unit of Measurement 2");
         unitOfMeasurementAbbreviationTextField.setText("Updated UOM 1");
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
-        assertFalse(unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the inputted name already exist");
+        assertThrows(NameAlreadyExistsException.class, () -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "When the inputted name already exist");
     }
 
     @Test
     void deleting_menu_category_name_when_successful(){
         unitOfMeasurementFormActions.generateTableContents();
         unitOfMeasurementTable.setRowSelectionInterval(0,0);
-        assertTrue(unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "Deleting one Unit of Measurement");
+        assertDoesNotThrow(() -> unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "Deleting one Unit of Measurement");
 
 
         List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
@@ -200,7 +205,7 @@ class UnitOfMeasurementFormActionsTest {
 
         unitOfMeasurementFormActions.generateTableContents();
         unitOfMeasurementTable.setRowSelectionInterval(0,2);
-        assertTrue(unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "Deleting two Unit of Measurement");
+        assertDoesNotThrow(() -> unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "Deleting two Unit of Measurement");
 
         List<UnitOfMeasurement> unitOfMeasurements2 = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
         assertEquals(0, unitOfMeasurements2.size(), "Check if there are 0 Unit of Measurement after deleting two");
@@ -210,7 +215,7 @@ class UnitOfMeasurementFormActionsTest {
     void deleting_menu_category_name_when_not_successful(){
         unitOfMeasurementFormActions.generateTableContents();
         unitOfMeasurementTable.clearSelection();
-        assertFalse(unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "When there are no row selected");
+        assertThrows(SelectOneOrMoreRowException.class, () -> unitOfMeasurementFormActions.isDeleteUnitOfMeasurementSuccessful(), "When there are no row selected");
 
         List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
         assertEquals(3, unitOfMeasurements.size(), "Check if there are no menu categories that were deleted");

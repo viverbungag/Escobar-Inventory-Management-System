@@ -2,6 +2,10 @@ package com.exe.EscobarIMS.UnitOfMeasurement;
 
 import com.exe.EscobarIMS.UnitOfMeasurement.AddUnitOfMeasurement.AddUnitOfMeasurementController;
 import com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.ViewEditDeleteUnitOfMeasurementController;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -149,55 +153,48 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     }
 
 
-    private boolean isValidToEditUnitOfMeasurement(){
-        return unitOfMeasurementValidations.isValidToEditUnitOfMeasurement(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField, unitOfMeasurementTable);
+    private void validateIfEditingIsAllowed(){
+        unitOfMeasurementValidations.validateIfEditingIsAllowed(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField, unitOfMeasurementTable);
     }
 
-    private boolean isValidToDeleteUnitOfMeasurement(){
-        return unitOfMeasurementValidations.isValidToDeleteUnitOfMeasurement(unitOfMeasurementTable);
+    private void validateIfDeletingIsAllowed(){
+        unitOfMeasurementValidations.validateIfDeletingIsAllowed(unitOfMeasurementTable);
     }
 
-    private boolean isValidToAddUnitOfMeasurement(){
-        return unitOfMeasurementValidations.isValidToAddUnitOfMeasurement(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField);
+    private void validateIfAddingIsAllowed(){
+        unitOfMeasurementValidations.validateIfAddingIsAllowed(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField);
     }
 
-    public boolean isAddUnitOfMeasurementSuccessful(){
-        if (isValidToAddUnitOfMeasurement()) {
-            String newMenuCategoryName = unitOfMeasurementNameTextField.getText();
-            String newUAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
-            addUnitOfMeasurementController.addNewMenuCategory(newMenuCategoryName, newUAbbreviation);
-            return true;
-        }
-        return false;
+    public void isAddUnitOfMeasurementSuccessful(){
+        validateIfAddingIsAllowed();
+        String newMenuCategoryName = unitOfMeasurementNameTextField.getText();
+        String newUAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
+        addUnitOfMeasurementController.addNewMenuCategory(newMenuCategoryName, newUAbbreviation);
+
+
     }
 
-    public boolean isEditUnitOfMeasurementSuccessful(){
+    public void isEditUnitOfMeasurementSuccessful(){
         String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
         String newAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
-        if (isValidToEditUnitOfMeasurement()){
-            String selectedUnitOfMeasurementName = getSelectedRowUnitOfMeasurementName();
-            Long selectedUnitOfMeasurementId = viewEditDeleteUnitOfMeasurementController
-                    .findUnitOfMeasurementIdByName(selectedUnitOfMeasurementName);
+        validateIfEditingIsAllowed();
+        String selectedUnitOfMeasurementName = getSelectedRowUnitOfMeasurementName();
+        Long selectedUnitOfMeasurementId = viewEditDeleteUnitOfMeasurementController
+                .findUnitOfMeasurementIdByName(selectedUnitOfMeasurementName);
 
-            viewEditDeleteUnitOfMeasurementController
-                    .editUnitOfMeasurementNameById(selectedUnitOfMeasurementId,
-                            newUnitOfMeasurementName, newAbbreviation);
-            return true;
-        }
-        return false;
+        viewEditDeleteUnitOfMeasurementController
+                .editUnitOfMeasurementNameById(selectedUnitOfMeasurementId,
+                        newUnitOfMeasurementName, newAbbreviation);
+
+
     }
 
-    public boolean isDeleteUnitOfMeasurementSuccessful(){
-        if (isValidToDeleteUnitOfMeasurement()){
-            List<String> unitOfMeasurementNames = generateToBeDeletedList(unitOfMeasurementTable);
+    public void isDeleteUnitOfMeasurementSuccessful(){
+        validateIfDeletingIsAllowed();
+        List<String> unitOfMeasurementNames = generateToBeDeletedList(unitOfMeasurementTable);
 
-            viewEditDeleteUnitOfMeasurementController
-                    .deleteAllUnitOfMeasurementByName(unitOfMeasurementNames);
-
-            return true;
-        }
-
-        return false;
+        viewEditDeleteUnitOfMeasurementController
+                .deleteAllUnitOfMeasurementByName(unitOfMeasurementNames);
     }
 
     public void formWindowActivated(){
@@ -218,23 +215,38 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     }
 
     public void editUnitOfMeasurementButtonActionPerformed() {
-        if (isEditUnitOfMeasurementSuccessful()){
+        try{
+            isEditUnitOfMeasurementSuccessful();
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
 
+        }catch(SelectJustOneRowException e){
+            messageDialogues.showSelectJustOneRowMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
         }
     }
 
     public void deleteUnitOfMeasurementButtonActionPerformed() {
-        if (isDeleteUnitOfMeasurementSuccessful()){
+        try{
+            isDeleteUnitOfMeasurementSuccessful();
             messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
             clearTextField();
+        }catch(SelectOneOrMoreRowException e){
+            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
     }
 
     public void addUnitOfMeasurementButtonActionPerformed() {
-        if (isAddUnitOfMeasurementSuccessful()){
+        try{
+            isAddUnitOfMeasurementSuccessful();
             messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
+        }catch(NameAlreadyExistsException e){
+            messageDialogues.showNameAlreadyExistsMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
         clearTextField();
     }

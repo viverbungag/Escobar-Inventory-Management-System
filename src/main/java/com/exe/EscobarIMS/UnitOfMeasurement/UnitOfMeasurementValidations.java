@@ -1,5 +1,9 @@
 package com.exe.EscobarIMS.UnitOfMeasurement;
 
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.NameAlreadyExistsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,64 +22,53 @@ public class UnitOfMeasurementValidations {
     @Autowired
     Validations validations;
 
-    public boolean isValidToEditUnitOfMeasurement(JTextField unitOfMeasurementNameTextField, JTextField unitOfMeasurementAbbreviationTextField, JTable unitOfMeasurementTable){
+    public void validateIfEditingIsAllowed(JTextField unitOfMeasurementNameTextField, JTextField unitOfMeasurementAbbreviationTextField, JTable unitOfMeasurementTable){
         String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
 
         if (validations.isNotSelectingOneTableRow(unitOfMeasurementTable)){
-            messageDialogues.showSelectJustOneRowMessageDialogue();
-            return false;
+            throw new SelectJustOneRowException("Number of rows: " + unitOfMeasurementTable.getSelectedRowCount() + ", Should be not equals to 1");
+
         }
 
         if(validations.isTextFieldEmpty(unitOfMeasurementNameTextField)) {
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Unit of Measurement Name Text Field is empty");
         }
 
         if(validations.isTextFieldEmpty(unitOfMeasurementAbbreviationTextField)) {
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Unit of Measurement Abbreviation Text Field is empty");
         }
 
         if (validations.isTextFieldEqualsToSelectedTableValue(unitOfMeasurementNameTextField,
                 unitOfMeasurementTable, UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER)){
-            return true;
+            return;
         }
 
         if (validations.isUnitOfMeasurementExisting(newUnitOfMeasurementName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
+            throw new NameAlreadyExistsException("The Unit of Measurement: " + newUnitOfMeasurementName + " - is already existing");
         }
-
-        return true;
     }
 
-    public boolean isValidToDeleteUnitOfMeasurement(JTable unitOfMeasurementTable){
+    public void validateIfDeletingIsAllowed(JTable unitOfMeasurementTable){
         if (validations.isNotSelectingATableRow(unitOfMeasurementTable)){
-            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
-            return false;
+            throw new SelectOneOrMoreRowException("Number of rows: " + unitOfMeasurementTable.getSelectedRowCount() + ", Should be greater than 0");
         }
-
-        return true;
     }
 
-    public boolean isValidToAddUnitOfMeasurement(JTextField menuCategoryNameTextField, JTextField unitOfMeasurementAbbreviationTextField){
+    public void validateIfAddingIsAllowed(JTextField menuCategoryNameTextField, JTextField unitOfMeasurementAbbreviationTextField){
         String newUnitOfMeasurementName = menuCategoryNameTextField.getText();
 
         if (validations.isUnitOfMeasurementExisting(newUnitOfMeasurementName)){
-            messageDialogues.showNameAlreadyExistsMessageDialogue();
-            return false;
+            throw new NameAlreadyExistsException("The Unit of Measurement: " + newUnitOfMeasurementName + " - is already existing");
         }
 
         if (validations.isTextFieldEmpty(menuCategoryNameTextField)){
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Unit of Measurement Name Text Field is empty");
         }
 
         if (validations.isTextFieldEmpty(unitOfMeasurementAbbreviationTextField)){
-            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-            return false;
+            throw new FillOutAllTextFieldsException("The Unit of Measurement Abbreviation Text Field is empty");
         }
 
-        return true;
+
     }
 }
