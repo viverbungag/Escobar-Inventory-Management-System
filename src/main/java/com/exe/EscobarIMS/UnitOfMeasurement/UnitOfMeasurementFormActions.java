@@ -202,11 +202,11 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
         updateStateOfButtons();
     }
 
-    public void formWindowOpened(JTable menuCategoryTable){
-        menuCategoryTable.setDefaultEditor(Object.class, null);
+    public void formWindowOpened(JTable unitOfMeasurementTable){
+        unitOfMeasurementTable.setDefaultEditor(Object.class, null);
     }
 
-    public void menuCategoryTableMousePressed(){
+    public void unitOfMeasurementTableMousePressed(){
         String selectedMenuCategoryName = getSelectedRowUnitOfMeasurementName();
         String selectedMenuCategoryAbbreviation = getSelectedRowUnitOfMeasurementAbbreviation();
 

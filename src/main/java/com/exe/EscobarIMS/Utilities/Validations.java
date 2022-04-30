@@ -1,6 +1,7 @@
 package com.exe.EscobarIMS.Utilities;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
+import com.exe.EscobarIMS.Supplier.SupplierRepository;
 import com.exe.EscobarIMS.SupplyCategory.SupplyCategoryRepository;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurementRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +24,9 @@ public class Validations {
     private UnitOfMeasurementRepository unitOfMeasurementRepository;
 
     @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
     private MessageDialogues messageDialogues;
 
 
@@ -36,6 +40,10 @@ public class Validations {
 
     public boolean isUnitOfMeasurementExisting(String unitOfMeasurementName){
         return unitOfMeasurementRepository.findByUnitOfMeasurementName(unitOfMeasurementName) != null;
+    }
+
+    public boolean isSupplierExisting(String supplierName){
+        return supplierRepository.findBySupplierName(supplierName) != null;
     }
 
     public boolean hasExistingTableContents(JTable table){

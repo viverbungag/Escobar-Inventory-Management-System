@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.Forms;
+package com.exe.EscobarIMS.Supplier.ViewEditDeleteSupplier.Forms;
 
-import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurementFormActions;
+import com.exe.EscobarIMS.Supplier.SupplierFormActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,17 +15,17 @@ import java.awt.event.*;
  * @author Viver
  */
 @Component
-public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
+public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewEditDeleteUnitOfMeasurementForm
+     * Creates new form ViewEditDeleteSupplierForm
      */
 
     @Autowired
-    UnitOfMeasurementFormActions unitOfMeasurementFormActions;
+    SupplierFormActions supplierFormActions;
 
     
-    public ViewEditDeleteUnitOfMeasurementForm() {
+    public ViewEditDeleteSupplierForm() {
         initComponents();
     }
 
@@ -269,7 +269,7 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
                         .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, Short.MAX_VALUE)
+                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                             .addComponent(tableScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -296,77 +296,77 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActionFormComponents(){
-        unitOfMeasurementFormActions.setContentLimitComboBox(contentLimitComboBox);
-        unitOfMeasurementFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
-        unitOfMeasurementFormActions.setUnitOfMeasurementNameTextField(unitOfMeasurementNameTextField);
-        unitOfMeasurementFormActions.setUnitOfMeasurementAbbreviationTextField(unitOfMeasurementAbbreviationTextField);
-        unitOfMeasurementFormActions.setPreviousButton(previousButton);
-        unitOfMeasurementFormActions.setNextButton(nextButton);
-        unitOfMeasurementFormActions.setUnitOfMeasurementTable(unitOfMeasurementTable);
-        unitOfMeasurementFormActions.setAscendingRadioButton(ascendingRadioButton);
-        unitOfMeasurementFormActions.setDescendingRadioButton(descendingRadioButton);
-        unitOfMeasurementFormActions.setSortingMethodComboBox(sortingMethodComboBox);
+        supplierFormActions.setContentLimitComboBox(contentLimitComboBox);
+        supplierFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
+        supplierFormActions.setSupplierNameTextField(unitOfMeasurementNameTextField);
+        supplierFormActions.setSupplierAddressTextField(unitOfMeasurementAbbreviationTextField);
+        supplierFormActions.setPreviousButton(previousButton);
+        supplierFormActions.setNextButton(nextButton);
+        supplierFormActions.setSupplierTable(unitOfMeasurementTable);
+        supplierFormActions.setAscendingRadioButton(ascendingRadioButton);
+        supplierFormActions.setDescendingRadioButton(descendingRadioButton);
+        supplierFormActions.setSortingMethodComboBox(sortingMethodComboBox);
     }
 
 
     private void unitOfMeasurementTableMousePressed(MouseEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.unitOfMeasurementTableMousePressed();
+        supplierFormActions.supplierTableMousePressed();
     }
 
     private void formWindowOpened(WindowEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.formWindowOpened(unitOfMeasurementTable);
+        supplierFormActions.formWindowOpened(unitOfMeasurementTable);
     }
 
     private void formWindowActivated(WindowEvent evt) {
         setActionFormComponents();
-        unitOfMeasurementFormActions.formWindowActivated();
+        supplierFormActions.formWindowActivated();
     }
 
     private void contentLimitComboBoxActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.contentLimitComboBoxActionPerformed();
+        supplierFormActions.contentLimitComboBoxActionPerformed();
     }
 
     private void sortingMethodComboBoxActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.sortingMethodComboBoxActionPerformed();
+        supplierFormActions.sortingMethodComboBoxActionPerformed();
     }
 
     private void currentPageNumberTextFieldKeyReleased(KeyEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
+        supplierFormActions.currentPageNumberTextFieldKeyReleased(evt, paginationAndSortPanel);
     }
 
     private void currentPageNumberTextFieldFocusLost(FocusEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.currentPageNumberTextFieldFocusLost();
+        supplierFormActions.currentPageNumberTextFieldFocusLost();
     }
 
     private void ascendingRadioButtonItemStateChanged(ItemEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.ascendingRadioButtonItemStateChanged();
+        supplierFormActions.ascendingRadioButtonItemStateChanged();
     }
 
     private void previousButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.previousButtonActionPerformed();
+        supplierFormActions.previousButtonActionPerformed();
     }
 
     private void nextButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.nextButtonActionPerformed();
+        supplierFormActions.nextButtonActionPerformed();
     }
 
     private void editUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.editUnitOfMeasurementButtonActionPerformed();
+        supplierFormActions.editSupplierButtonActionPerformed();
     }
 
     private void deleteUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
-        unitOfMeasurementFormActions.deleteUnitOfMeasurementButtonActionPerformed();
+        supplierFormActions.deleteSupplierButtonActionPerformed();
     }
 
     /**
@@ -386,21 +386,23 @@ public class ViewEditDeleteUnitOfMeasurementForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewEditDeleteUnitOfMeasurementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEditDeleteSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewEditDeleteUnitOfMeasurementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEditDeleteSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewEditDeleteUnitOfMeasurementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEditDeleteSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewEditDeleteUnitOfMeasurementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEditDeleteSupplierForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewEditDeleteUnitOfMeasurementForm().setVisible(true);
+                new ViewEditDeleteSupplierForm().setVisible(true);
             }
         });
     }

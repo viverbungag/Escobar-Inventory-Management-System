@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS supplier(
     supplier_id BIGINT NOT NULL AUTO_INCREMENT,
     supplier_name VARCHAR(255),
     supplier_address VARCHAR(255),
-    supplier_contact_number INTEGER,
+    supplier_contact_number VARCHAR(255),
     supplier_contact_person VARCHAR(255),
     PRIMARY KEY (supplier_id)
 );

@@ -49,3 +49,20 @@ INSERT INTO unit_of_measurement(unit_of_measurement_name, unit_of_measurement_ab
 INSERT INTO unit_of_measurement(unit_of_measurement_name, unit_of_measurement_abbreviation) VALUES ('Unit of Measurement 15', 'UOM 15');
 INSERT INTO unit_of_measurement(unit_of_measurement_name, unit_of_measurement_abbreviation) VALUES ('Unit of Measurement 16', 'UOM 16');
 
+
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 1', 'Address 1', '09273173101', 'Person 1');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 2', 'Address 2', '09273173102', 'Person 2');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 3', 'Address 3', '09273173103', 'Person 3');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 4', 'Address 4', '09273173104', 'Person 4');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 5', 'Address 5', '09273173105', 'Person 5');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 6', 'Address 6', '09273173106', 'Person 6');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 7', 'Address 7', '09273173107', 'Person 7');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 8', 'Address 8', '09273173108', 'Person 8');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 9', 'Address 9', '09273173109', 'Person 9');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 10', 'Address 10', '09273173110', 'Person 10');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 11', 'Address 11', '09273173111', 'Person 11');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 12', 'Address 12', '09273173112', 'Person 12');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 13', 'Address 13', '09273173113', 'Person 13');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 14', 'Address 14', '09273173114', 'Person 14');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 15', 'Address 15', '09273173115', 'Person 15');
+INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 16', 'Address 16', '09273173116', 'Person 16');

@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +58,6 @@ public class MenuCategoryRepositoryTest {
     }
 
     @Test
-    @Transactional
     void deleteALlMenuCategoriesByName_when_deleting_2_existing_menu_categories(){
         Integer oldSize = viewEditDeleteMenuCategoryRepository.getAllMenuCategories().size();
         viewEditDeleteMenuCategoryRepository.deleteAllMenuCategoriesByName(List.of("Menu Category 1", "Menu Category 2"));

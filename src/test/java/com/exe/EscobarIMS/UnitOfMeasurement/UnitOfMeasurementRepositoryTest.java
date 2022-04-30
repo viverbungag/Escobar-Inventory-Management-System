@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,26 +43,25 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void findCategoryByName_when_menu_category_name_is_existing(){
+    void findByUnitOfMeasurementName_when_unit_of_measurement_name_is_existing(){
         UnitOfMeasurement acquiredMenuCategory = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 1");
         assertNotNull(acquiredMenuCategory);
     }
 
     @Test
-    void findCategoryByName_when_menu_category_name_is_not_existing(){
+    void findByUnitOfMeasurementName_when_unit_of_measurement_name_is_not_existing(){
         UnitOfMeasurement acquiredMenuCategory = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 0");
         assertNull(acquiredMenuCategory);
     }
 
     @Test
-    void getAllMenuCategories_when_there_are_24_menu_categories(){
+    void getAllUnitOfMeasurements_when_there_are_16_unit_of_measurements(){
         List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
         assertEquals(unitOfMeasurements.size(), 16);
     }
 
     @Test
-    @Transactional
-    void deleteALlMenuCategoriesByName_when_deleting_2_existing_menu_categories(){
+    void deleteAllUnitOfMeasurementByName_when_deleting_2_existing_unit_of_measurements(){
         Integer oldSize = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements().size();
         viewEditDeleteUnitOfMeasurementRepository.deleteAllUnitOfMeasurementByName(List.of("Unit of Measurement 1", "Unit of Measurement 2"));
         Integer newSize = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements().size();
@@ -71,7 +69,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void deleteALlMenuCategoriesByName_when_deleting_1_existing_and_1_non_existing_menu_categories(){
+    void deleteAllUnitOfMeasurementByName_when_deleting_1_existing_and_1_non_existing_unit_of_measurements(){
         Integer oldSize = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements().size();
         viewEditDeleteUnitOfMeasurementRepository.deleteAllUnitOfMeasurementByName(List.of("Unit of Measurement 0", "Unit of Measurement 1"));
         Integer newSize = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements().size();
@@ -79,7 +77,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void updateMenuCategoryNameById_when_updating_id_2(){
+    void findByUnitOfMeasurementId_when_updating_id_2(){
         viewEditDeleteUnitOfMeasurementRepository.updateUnitOfMeasurementNameById(2L, "Updated Unit of Measurement 2", "Updated UOM 2");
         UnitOfMeasurement acquiredUnitOfMeasurement = unitOfMeasurementRepository.findByUnitOfMeasurementId(2L);
         assertEquals(acquiredUnitOfMeasurement.getUnitOfMeasurementName(), "Updated Unit of Measurement 2");
@@ -87,28 +85,28 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void getAllPagedMenuCategories_when_page_is_0_and_the_size_is_5(){
+    void getAllPagedUnitOfMeasurement_when_page_is_0_and_the_size_is_5(){
         Pageable pageable = PageRequest.of(0, 5);
         Page<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable);
         assertEquals(5, pagedUnitOfMeasurement.getContent().size());
     }
 
     @Test
-    void getAllPagedMenuCategories_when_page_is_3_and_the_size_is_5(){
+    void getAllPagedUnitOfMeasurement_when_page_is_3_and_the_size_is_5(){
         Pageable pageable = PageRequest.of(3, 5);
         Page<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable);
         assertEquals(1, pagedUnitOfMeasurement.getContent().size());
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_total_pages_and_the_size_is_15(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_total_pages_and_the_size_is_15(){
         Pageable pageable = PageRequest.ofSize(15);
         Page<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable);
         assertEquals(2, pagedUnitOfMeasurement.getTotalPages());
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_first_menu_category_name_sorted_by_category_name_ascending(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_first_unit_of_measurement_sorted_by_name_ascending(){
         Sort sort = Sort.by("unit_of_measurement_name").ascending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable).getContent();
@@ -116,7 +114,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_last_menu_category_name_sorted_by_category_name_descending(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_last_unit_of_measurement_name_sorted_by_name_descending(){
         Sort sort = Sort.by("unit_of_measurement_name").descending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable).getContent();
@@ -124,7 +122,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_first_menu_category_abbreviation_sorted_by_category_name_ascending(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_first_unit_of_measurement_abbreviation_sorted_by_name_ascending(){
         Sort sort = Sort.by("unit_of_measurement_abbreviation").ascending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable).getContent();
@@ -132,7 +130,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_last_menu_category_abbreviation_sorted_by_category_name_descending(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_last_unit_of_measurement_abbreviation_sorted_by_name_descending(){
         Sort sort = Sort.by("unit_of_measurement_abbreviation").descending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable).getContent();
@@ -140,7 +138,7 @@ class UnitOfMeasurementRepositoryTest {
     }
 
     @Test
-    void getAllPagedMenuCategories_when_getting_the_first_menu_category_name_not_sorted(){
+    void getAllPagedUnitOfMeasurement_when_getting_the_first_unit_of_measurement_name_not_sorted(){
         Sort sort = Sort.unsorted();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<UnitOfMeasurement> pagedUnitOfMeasurement =  viewEditDeleteUnitOfMeasurementRepository.getAllPagedUnitOfMeasurement(pageable).getContent();

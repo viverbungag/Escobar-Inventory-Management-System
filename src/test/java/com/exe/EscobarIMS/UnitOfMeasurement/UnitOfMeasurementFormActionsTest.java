@@ -55,7 +55,7 @@ class UnitOfMeasurementFormActionsTest {
         unitOfMeasurementTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
                 new String [] {
-                        "Menu Category Name", "Menu Category Abbreviation"
+                        "Unit of Measurement Name", "Unit of Measurement Abbreviation"
                 })
         {
             Class[] types = new Class [] {
@@ -158,11 +158,11 @@ class UnitOfMeasurementFormActionsTest {
 
         unitOfMeasurementFormActions.generateTableContents();
         unitOfMeasurementTable.setRowSelectionInterval(1,1);
-        unitOfMeasurementNameTextField.setText("Unit of Measurement 1");
-        unitOfMeasurementAbbreviationTextField.setText("Updated again UOM 1");
+        unitOfMeasurementNameTextField.setText("Unit of Measurement 2");
+        unitOfMeasurementAbbreviationTextField.setText("Updated UOM 2");
         assertDoesNotThrow(() -> unitOfMeasurementFormActions.isEditUnitOfMeasurementSuccessful(), "Checks if it can update just the abbreviation");
-        UnitOfMeasurement acquiredUnitOfMeasurement2 = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 1");
-        assertEquals(acquiredUnitOfMeasurement2.getUnitOfMeasurementAbbreviation(), "Updated again UOM 1", "Check if the abbreviation is updated");
+        UnitOfMeasurement acquiredUnitOfMeasurement2 = unitOfMeasurementRepository.findByUnitOfMeasurementName("Unit of Measurement 2");
+        assertEquals(acquiredUnitOfMeasurement2.getUnitOfMeasurementAbbreviation(), "Updated UOM 2", "Check if the abbreviation is updated");
     }
 
     @Test
