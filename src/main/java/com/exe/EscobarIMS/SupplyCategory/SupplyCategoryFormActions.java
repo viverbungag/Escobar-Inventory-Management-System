@@ -196,12 +196,14 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyEditedSupplyCategoryMessageDialogue();
             clearTextField();
         }catch(SelectJustOneRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
-
         }
     }
 
@@ -211,6 +213,7 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyDeletedSupplyCategoryMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
 
@@ -220,12 +223,14 @@ public class SupplyCategoryFormActions extends SortAndPaginationMethods {
         try {
             validateIfAddingOfSupplyCategoryIsSuccessful();
             messageDialogues.showSuccessfullyAddedSupplyCategoryMessageDialogue();
+            clearTextField();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
-        clearTextField();
     }
 
 }

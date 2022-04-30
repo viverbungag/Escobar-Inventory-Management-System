@@ -192,10 +192,13 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             clearTextField();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(SelectJustOneRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }
     }
@@ -206,6 +209,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyDeletedMenuCategoryMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
     }
@@ -214,15 +218,13 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
         try{
             validateIfAddingOfMenuCategoryIsSuccessful();
             messageDialogues.showSuccessfullyAddedMenuCategoryMessageDialogue();
+            clearTextField();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-        }finally{
-            clearTextField();
         }
     }
-
-
-
 }

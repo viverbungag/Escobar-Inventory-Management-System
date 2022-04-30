@@ -219,12 +219,14 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
             isEditUnitOfMeasurementSuccessful();
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
-
         }catch(SelectJustOneRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }
     }
@@ -235,6 +237,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
+            System.out.println(e.getMessage());
             messageDialogues.showSelectOneOrMoreRowMessageDialogue();
         }
     }
@@ -243,12 +246,15 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
         try{
             isAddUnitOfMeasurementSuccessful();
             messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
+            clearTextField();
         }catch(NameAlreadyExistsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
-        clearTextField();
+
     }
 
 
