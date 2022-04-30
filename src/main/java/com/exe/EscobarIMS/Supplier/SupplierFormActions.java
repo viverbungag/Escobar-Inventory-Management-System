@@ -36,10 +36,11 @@ public class SupplierFormActions extends SortAndPaginationMethods {
     SupplierValidations supplierValidations;
 
     private JTextField supplierNameTextField;
-    private JTable supplierTable;
     private JTextField supplierAddressTextField;
     private JTextField supplierContactNumberTextField;
     private JTextField supplierContactPersonTextField;
+    private JTable supplierTable;
+    private Boolean shouldUpdateTableContents = true;
 
     public void setSupplierNameTextField(JTextField supplierNameTextField) {
         this.supplierNameTextField = supplierNameTextField;
@@ -59,6 +60,10 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     public void setSupplierContactPersonTextField(JTextField supplierContactPersonTextField) {
         this.supplierContactPersonTextField = supplierContactPersonTextField;
+    }
+
+    private void resetShouldUpdateTableContentsVariableToDefault(){
+        shouldUpdateTableContents = true;
     }
 
     private void clearTextField(){
@@ -140,11 +145,14 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     @Override
     public void updateTableContents(){
-
-        if(validations.hasExistingTableContents(supplierTable)){
-            deleteExistingTableContents();
+        if (shouldUpdateTableContents){
+            if(validations.hasExistingTableContents(supplierTable)){
+                deleteExistingTableContents();
+            }
+            generateTableContents();
+        }else{
+            resetShouldUpdateTableContentsVariableToDefault();
         }
-        generateTableContents();
     }
 
     private String getSelectedRowSupplierName(){
@@ -263,17 +271,20 @@ public class SupplierFormActions extends SortAndPaginationMethods {
             isEditSupplierSuccessful();
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
-
         }catch(SelectJustOneRowException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(NumericalValuesOnlyException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showNumericValuesOnlyMessageDialogue();
         }

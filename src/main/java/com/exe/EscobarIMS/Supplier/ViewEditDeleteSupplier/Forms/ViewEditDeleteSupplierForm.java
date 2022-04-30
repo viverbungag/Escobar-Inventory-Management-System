@@ -40,15 +40,24 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
 
         sortMethodGroup = new javax.swing.ButtonGroup();
         tableScrollPanel = new javax.swing.JScrollPane();
-        unitOfMeasurementTable = new javax.swing.JTable();
-        deleteUnitOfMeasurementButton = new javax.swing.JButton();
-        unitOfMeasurementFormTitle = new javax.swing.JLabel();
+        supplierTable = new javax.swing.JTable();
+        deleteSupplierButton = new javax.swing.JButton();
+        supplierFormTitle = new javax.swing.JLabel();
         editingPanel = new javax.swing.JPanel();
-        editUnitOfMeasurementButton = new javax.swing.JButton();
-        unitOfMeasurementNameLabel = new javax.swing.JLabel();
-        unitOfMeasurementNameTextField = new javax.swing.JTextField();
-        unitOfMeasurementAbbreviationLabel = new javax.swing.JLabel();
-        unitOfMeasurementAbbreviationTextField = new javax.swing.JTextField();
+        editSupplierButton = new javax.swing.JButton();
+        supplierContactNumberPanel = new javax.swing.JPanel();
+        supplierContactNumberTextField = new javax.swing.JTextField();
+        supplierContactNumberLabel = new javax.swing.JLabel();
+        supplierContactPersonPanel = new javax.swing.JPanel();
+        supplierContactPersonTextField = new javax.swing.JTextField();
+        supplierContactPersonLabel = new javax.swing.JLabel();
+        supplierAddressPanel = new javax.swing.JPanel();
+        supplierAddressTextField = new javax.swing.JTextField();
+        supplierAddressLabel = new javax.swing.JLabel();
+        supplierNamePanel = new javax.swing.JPanel();
+        supplierNameTextField = new javax.swing.JTextField();
+        supplierNameLabel = new javax.swing.JLabel();
+        noteLabel = new javax.swing.JLabel();
         paginationAndSortPanel = new javax.swing.JPanel();
         previousButton = new javax.swing.JButton();
         currentPageNumberTextField = new javax.swing.JTextField();
@@ -70,84 +79,184 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
             }
         });
 
-        unitOfMeasurementTable.setAutoCreateRowSorter(true);
-        unitOfMeasurementTable.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        unitOfMeasurementTable.setModel(new javax.swing.table.DefaultTableModel(
+        supplierTable.setAutoCreateRowSorter(true);
+        supplierTable.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Unit of Measurement Name", "Abbreviation"
+                "Supplier Name", "Supplier Address", "Supplier Contact Number", "Supplier Contact Person"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        unitOfMeasurementTable.setRowHeight(25);
-        unitOfMeasurementTable.setRowMargin(5);
-        unitOfMeasurementTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        supplierTable.setRowHeight(25);
+        supplierTable.setRowMargin(5);
+        supplierTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                unitOfMeasurementTableMousePressed(evt);
+                supplierTableMousePressed(evt);
             }
         });
-        tableScrollPanel.setViewportView(unitOfMeasurementTable);
+        tableScrollPanel.setViewportView(supplierTable);
 
-        deleteUnitOfMeasurementButton.setText("Delete");
-        deleteUnitOfMeasurementButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteSupplierButton.setText("Delete");
+        deleteSupplierButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUnitOfMeasurementButtonActionPerformed(evt);
+                deleteSupplierButtonActionPerformed(evt);
             }
         });
 
-        unitOfMeasurementFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        unitOfMeasurementFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        unitOfMeasurementFormTitle.setText("Unit of Measurement");
+        supplierFormTitle.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        supplierFormTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supplierFormTitle.setText("Supplier");
 
-        editUnitOfMeasurementButton.setText("Edit");
-        editUnitOfMeasurementButton.addActionListener(new java.awt.event.ActionListener() {
+        editSupplierButton.setText("Edit");
+        editSupplierButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUnitOfMeasurementButtonActionPerformed(evt);
+                editSupplierButtonActionPerformed(evt);
             }
         });
 
-        unitOfMeasurementNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        unitOfMeasurementNameLabel.setText("Unit of Measurement Name");
+        supplierContactNumberLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supplierContactNumberLabel.setText("Supplier Contact Number");
 
-        unitOfMeasurementAbbreviationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        unitOfMeasurementAbbreviationLabel.setText("Abbreviation");
+        javax.swing.GroupLayout supplierContactNumberPanelLayout = new javax.swing.GroupLayout(supplierContactNumberPanel);
+        supplierContactNumberPanel.setLayout(supplierContactNumberPanelLayout);
+        supplierContactNumberPanelLayout.setHorizontalGroup(
+            supplierContactNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierContactNumberPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(supplierContactNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(supplierContactNumberLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(supplierContactNumberTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+        );
+        supplierContactNumberPanelLayout.setVerticalGroup(
+            supplierContactNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierContactNumberPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(supplierContactNumberLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(supplierContactNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
+        supplierContactPersonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supplierContactPersonLabel.setText("Supplier Contact Person");
+
+        javax.swing.GroupLayout supplierContactPersonPanelLayout = new javax.swing.GroupLayout(supplierContactPersonPanel);
+        supplierContactPersonPanel.setLayout(supplierContactPersonPanelLayout);
+        supplierContactPersonPanelLayout.setHorizontalGroup(
+            supplierContactPersonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierContactPersonPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(supplierContactPersonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(supplierContactPersonLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(supplierContactPersonTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+        );
+        supplierContactPersonPanelLayout.setVerticalGroup(
+            supplierContactPersonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierContactPersonPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(supplierContactPersonLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(supplierContactPersonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
+        supplierAddressLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supplierAddressLabel.setText("Supplier Address");
+
+        javax.swing.GroupLayout supplierAddressPanelLayout = new javax.swing.GroupLayout(supplierAddressPanel);
+        supplierAddressPanel.setLayout(supplierAddressPanelLayout);
+        supplierAddressPanelLayout.setHorizontalGroup(
+            supplierAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierAddressPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(supplierAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(supplierAddressLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(supplierAddressTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+        );
+        supplierAddressPanelLayout.setVerticalGroup(
+            supplierAddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierAddressPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(supplierAddressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(supplierAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
+        supplierNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        supplierNameLabel.setText("Supplier Name");
+
+        javax.swing.GroupLayout supplierNamePanelLayout = new javax.swing.GroupLayout(supplierNamePanel);
+        supplierNamePanel.setLayout(supplierNamePanelLayout);
+        supplierNamePanelLayout.setHorizontalGroup(
+            supplierNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierNamePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(supplierNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(supplierNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(supplierNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+        );
+        supplierNamePanelLayout.setVerticalGroup(
+            supplierNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, supplierNamePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(supplierNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(supplierNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
+        noteLabel.setForeground(new java.awt.Color(255, 51, 51));
+        noteLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        noteLabel.setText("NOTE: Just input 'N/A' if it should be blank");
 
         javax.swing.GroupLayout editingPanelLayout = new javax.swing.GroupLayout(editingPanel);
         editingPanel.setLayout(editingPanelLayout);
         editingPanelLayout.setHorizontalGroup(
             editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(unitOfMeasurementNameTextField)
-            .addComponent(unitOfMeasurementNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(editingPanelLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(editUnitOfMeasurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addComponent(unitOfMeasurementAbbreviationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(62, 62, 62)
+                .addComponent(editSupplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(noteLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editingPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(supplierAddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supplierNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supplierContactNumberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supplierContactPersonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         editingPanelLayout.setVerticalGroup(
             editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(unitOfMeasurementNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(unitOfMeasurementNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(unitOfMeasurementAbbreviationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(unitOfMeasurementAbbreviationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(editUnitOfMeasurementButton)
+                .addComponent(noteLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                .addComponent(editSupplierButton)
                 .addContainerGap())
+            .addGroup(editingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editingPanelLayout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addComponent(supplierNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(supplierAddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(supplierContactNumberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(supplierContactPersonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(84, Short.MAX_VALUE)))
         );
 
         previousButton.setText("Prev");
@@ -173,7 +282,7 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
 
         limitLabel.setText("Limit:");
 
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Unit of Measurement Name", "Abbreviation" }));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supplier Name", "Supplier Address", "Supplier Contact Number", "Supplier Contact Person" }));
         sortingMethodComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortingMethodComboBoxActionPerformed(evt);
@@ -258,38 +367,39 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(unitOfMeasurementFormTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(supplierFormTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(deleteUnitOfMeasurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteSupplierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                            .addComponent(tableScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))))
-                .addContainerGap())
+                            .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tableScrollPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(unitOfMeasurementFormTitle)
-                .addGap(18, 18, 18)
-                .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierFormTitle)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(paginationAndSortPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteUnitOfMeasurementButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)))
+                .addComponent(deleteSupplierButton)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,25 +408,27 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
     private void setActionFormComponents(){
         supplierFormActions.setContentLimitComboBox(contentLimitComboBox);
         supplierFormActions.setCurrentPageNumberTextField(currentPageNumberTextField);
-        supplierFormActions.setSupplierNameTextField(unitOfMeasurementNameTextField);
-        supplierFormActions.setSupplierAddressTextField(unitOfMeasurementAbbreviationTextField);
+        supplierFormActions.setSupplierNameTextField(supplierNameTextField);
+        supplierFormActions.setSupplierAddressTextField(supplierAddressTextField);
+        supplierFormActions.setSupplierContactNumberTextField(supplierContactNumberTextField);
+        supplierFormActions.setSupplierContactPersonTextField(supplierContactPersonTextField);
         supplierFormActions.setPreviousButton(previousButton);
         supplierFormActions.setNextButton(nextButton);
-        supplierFormActions.setSupplierTable(unitOfMeasurementTable);
+        supplierFormActions.setSupplierTable(supplierTable);
         supplierFormActions.setAscendingRadioButton(ascendingRadioButton);
         supplierFormActions.setDescendingRadioButton(descendingRadioButton);
         supplierFormActions.setSortingMethodComboBox(sortingMethodComboBox);
     }
 
 
-    private void unitOfMeasurementTableMousePressed(MouseEvent evt) {
+    private void supplierTableMousePressed(MouseEvent evt) {
 //        setActionFormComponents();
         supplierFormActions.supplierTableMousePressed();
     }
 
     private void formWindowOpened(WindowEvent evt) {
 //        setActionFormComponents();
-        supplierFormActions.formWindowOpened(unitOfMeasurementTable);
+        supplierFormActions.formWindowOpened(supplierTable);
     }
 
     private void formWindowActivated(WindowEvent evt) {
@@ -359,12 +471,12 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
         supplierFormActions.nextButtonActionPerformed();
     }
 
-    private void editUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
+    private void editSupplierButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
         supplierFormActions.editSupplierButtonActionPerformed();
     }
 
-    private void deleteUnitOfMeasurementButtonActionPerformed(ActionEvent evt) {
+    private void deleteSupplierButtonActionPerformed(ActionEvent evt) {
 //        setActionFormComponents();
         supplierFormActions.deleteSupplierButtonActionPerformed();
     }
@@ -411,23 +523,32 @@ public class ViewEditDeleteSupplierForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton ascendingRadioButton;
     private javax.swing.JComboBox<String> contentLimitComboBox;
     private javax.swing.JTextField currentPageNumberTextField;
-    private javax.swing.JButton deleteUnitOfMeasurementButton;
+    private javax.swing.JButton deleteSupplierButton;
     private javax.swing.JRadioButton descendingRadioButton;
-    private javax.swing.JButton editUnitOfMeasurementButton;
+    private javax.swing.JButton editSupplierButton;
     private javax.swing.JPanel editingPanel;
     private javax.swing.JLabel limitLabel;
     private javax.swing.JButton nextButton;
+    private javax.swing.JLabel noteLabel;
     private javax.swing.JPanel paginationAndSortPanel;
     private javax.swing.JButton previousButton;
     private javax.swing.JLabel sortLabel;
     private javax.swing.ButtonGroup sortMethodGroup;
     private javax.swing.JComboBox<String> sortingMethodComboBox;
+    private javax.swing.JLabel supplierAddressLabel;
+    private javax.swing.JPanel supplierAddressPanel;
+    private javax.swing.JTextField supplierAddressTextField;
+    private javax.swing.JLabel supplierContactNumberLabel;
+    private javax.swing.JPanel supplierContactNumberPanel;
+    private javax.swing.JTextField supplierContactNumberTextField;
+    private javax.swing.JLabel supplierContactPersonLabel;
+    private javax.swing.JPanel supplierContactPersonPanel;
+    private javax.swing.JTextField supplierContactPersonTextField;
+    private javax.swing.JLabel supplierFormTitle;
+    private javax.swing.JLabel supplierNameLabel;
+    private javax.swing.JPanel supplierNamePanel;
+    private javax.swing.JTextField supplierNameTextField;
+    private javax.swing.JTable supplierTable;
     private javax.swing.JScrollPane tableScrollPanel;
-    private javax.swing.JLabel unitOfMeasurementAbbreviationLabel;
-    private javax.swing.JTextField unitOfMeasurementAbbreviationTextField;
-    private javax.swing.JLabel unitOfMeasurementFormTitle;
-    private javax.swing.JLabel unitOfMeasurementNameLabel;
-    private javax.swing.JTextField unitOfMeasurementNameTextField;
-    private javax.swing.JTable unitOfMeasurementTable;
     // End of variables declaration//GEN-END:variables
 }

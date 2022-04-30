@@ -40,6 +40,7 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
 
     private JTextField menuCategoryNameTextField;
     private JTable menuCategoryTable;
+    private Boolean shouldUpdateTableContents = true;
 
     public void setMenuCategoryNameTextField(JTextField menuCategoryNameTextField) {
         this.menuCategoryNameTextField = menuCategoryNameTextField;
@@ -47,6 +48,10 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
 
     public void setMenuCategoryTable(JTable menuCategoryTable) {
         this.menuCategoryTable = menuCategoryTable;
+    }
+
+    private void resetShouldUpdateTableContentsVariableToDefault(){
+        shouldUpdateTableContents = true;
     }
 
     private void clearTextField(){
@@ -117,11 +122,14 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
 
     @Override
     public void updateTableContents(){
-
-        if(validations.hasExistingTableContents(menuCategoryTable)){
-            deleteExistingTableContents();
+        if(shouldUpdateTableContents){
+            if(validations.hasExistingTableContents(menuCategoryTable)){
+                deleteExistingTableContents();
+            }
+            generateTableContents();
+        }else{
+            resetShouldUpdateTableContentsVariableToDefault();
         }
-        generateTableContents();
     }
 
     private String getSelectedRowMenuCategoryName(){
@@ -192,12 +200,15 @@ public class MenuCategoryFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyEditedMenuCategoryMessageDialogue();
             clearTextField();
         }catch(FillOutAllTextFieldsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }catch(SelectJustOneRowException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }

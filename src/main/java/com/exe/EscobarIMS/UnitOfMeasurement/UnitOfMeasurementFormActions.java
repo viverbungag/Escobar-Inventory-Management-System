@@ -40,8 +40,9 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
     UnitOfMeasurementValidations unitOfMeasurementValidations;
 
     private JTextField unitOfMeasurementNameTextField;
-    private JTable unitOfMeasurementTable;
     private JTextField unitOfMeasurementAbbreviationTextField;
+    private JTable unitOfMeasurementTable;
+    private Boolean shouldUpdateTableContents = true;
 
     public void setUnitOfMeasurementNameTextField(JTextField unitOfMeasurementNameTextField) {
         this.unitOfMeasurementNameTextField = unitOfMeasurementNameTextField;
@@ -53,6 +54,10 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void setUnitOfMeasurementAbbreviationTextField(JTextField unitOfMeasurementAbbreviationTextField) {
         this.unitOfMeasurementAbbreviationTextField = unitOfMeasurementAbbreviationTextField;
+    }
+
+    private void resetShouldUpdateTableContentsVariableToDefault(){
+        shouldUpdateTableContents = true;
     }
 
     private void clearTextField(){
@@ -126,11 +131,15 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     @Override
     public void updateTableContents(){
-
-        if(validations.hasExistingTableContents(unitOfMeasurementTable)){
-            deleteExistingTableContents();
+        if(shouldUpdateTableContents){
+            if(validations.hasExistingTableContents(unitOfMeasurementTable)){
+                deleteExistingTableContents();
+            }
+            generateTableContents();
+        }else{
+            resetShouldUpdateTableContentsVariableToDefault();
         }
-        generateTableContents();
+
     }
 
     private String getSelectedRowUnitOfMeasurementName(){
@@ -220,12 +229,15 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectJustOneRowException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showSelectJustOneRowMessageDialogue();
         }catch(FillOutAllTextFieldsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }catch(NameAlreadyExistsException e){
+            shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
         }
@@ -254,7 +266,6 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
             System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
         }
-
     }
 
 
