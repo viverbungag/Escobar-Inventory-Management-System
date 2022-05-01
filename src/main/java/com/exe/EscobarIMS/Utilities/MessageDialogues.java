@@ -154,4 +154,12 @@ public class MessageDialogues {
                 ERROR_TITLE,
                 ERROR_MESSAGE);
     }
+
+    public void showInvalidPhoneNumberMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    INVALID_PHONE_NUMBER_MESSAGE,
+                    ERROR_TITLE,
+                    ERROR_MESSAGE);
+    }
 }

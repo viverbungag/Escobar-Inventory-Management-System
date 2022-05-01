@@ -283,10 +283,10 @@ public class SupplierFormActions extends SortAndPaginationMethods {
             shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
             messageDialogues.showNameAlreadyExistsMessageDialogue();
-        }catch(NumericalValuesOnlyException e){
+        }catch(InvalidPhoneNumberException e){
             shouldUpdateTableContents = false;
             System.out.println(e.getMessage());
-            messageDialogues.showNumericValuesOnlyMessageDialogue();
+            messageDialogues.showInvalidPhoneNumberMessageDialogue();
         }
     }
 
@@ -312,9 +312,9 @@ public class SupplierFormActions extends SortAndPaginationMethods {
         }catch(FillOutAllTextFieldsException e){
             System.out.println(e.getMessage());
             messageDialogues.showFillOutAllTextFieldsMessageDialogue();
-        }catch(NumericalValuesOnlyException e){
+        }catch(InvalidPhoneNumberException e){
             System.out.println(e.getMessage());
-            messageDialogues.showNumericValuesOnlyMessageDialogue();
+            messageDialogues.showInvalidPhoneNumberMessageDialogue();
         }
     }
 

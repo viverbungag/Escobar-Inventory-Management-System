@@ -154,7 +154,7 @@ class SupplierFormActionsTest {
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("Not a number");
         supplierContactPersonTextField.setText("Person 4");
-        assertThrows(NumericalValuesOnlyException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the contact number inputted is not a number");
+        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the contact number inputted is not valid");
 
         supplierNameTextField.setText("");
         supplierAddressTextField.setText("Address 4");
@@ -223,7 +223,7 @@ class SupplierFormActionsTest {
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("Not a number");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(NumericalValuesOnlyException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the contact number inputted is not a number");
+        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the contact number inputted is not valid");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("");

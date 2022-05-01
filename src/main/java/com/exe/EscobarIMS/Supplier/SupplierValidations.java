@@ -55,8 +55,8 @@ public class SupplierValidations {
             throw new NameAlreadyExistsException("The Supplier: " + newSupplierName + " - is already existing");
         }
 
-        if (!validations.isTextFieldContainingOnlyNumericalValues(supplierContactNumberTextField)){
-            throw new NumericalValuesOnlyException("The String: " + supplierContactNumberTextField.getText() + " - should not contain any number");
+        if (!validations.isTextFieldContainingOnlyPositiveInteger(supplierContactNumberTextField)){
+            throw new InvalidPhoneNumberException("The String: " + supplierContactNumberTextField.getText() + " - is not a valid phone number");
         }
     }
 
@@ -92,8 +92,8 @@ public class SupplierValidations {
             throw new NameAlreadyExistsException("The Supplier: " + newSupplierName + " - is already existing");
         }
 
-        if (!validations.isTextFieldContainingOnlyNumericalValues(supplierContactNumberTextField)){
-            throw new NumericalValuesOnlyException("The String: " + supplierContactNumberTextField.getText() + " - should not contain any number");
+        if (!validations.isTextFieldContainingOnlyPositiveInteger(supplierContactNumberTextField)){
+            throw new InvalidPhoneNumberException("The String: " + supplierContactNumberTextField.getText() + " - is not a valid phone number");
         }
 
 

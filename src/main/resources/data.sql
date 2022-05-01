@@ -66,3 +66,5 @@ INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, s
 INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 14', 'Address 14', '09273173114', 'Person 14');
 INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 15', 'Address 15', '09273173115', 'Person 15');
 INSERT INTO supplier(supplier_name, supplier_address, supplier_contact_number, supplier_contact_person) VALUES ('Supplier 16', 'Address 16', '09273173116', 'Person 16');
+
+INSERT INTO supply(supply_name, supply_quantity, supplier_id, unit_of_measurement_id, supply_category_id, minimum_quantity, in_minimum_quantity) VALUES ('Supply 1', 0, 1, 1, 1, 10, false);

@@ -67,6 +67,15 @@ public class Validations {
     }
 
     public boolean isTextFieldContainingOnlyNumericalValues(JTextField textField) {
+        try{
+            Integer.parseInt(textField.getText());
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public boolean isTextFieldContainingOnlyPositiveInteger(JTextField textField){
         return StringUtils.isNumeric(textField.getText());
     }
 
