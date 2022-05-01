@@ -66,12 +66,24 @@ public class Supply {
         return supplier;
     }
 
+    public String getSupplierName(){
+        return supplier.getSupplierName();
+    }
+
     public UnitOfMeasurement getUnitOfMeasurement() {
         return unitOfMeasurement;
     }
 
+    public String getUnitOfMeasurementName(){
+        return unitOfMeasurement.getUnitOfMeasurementName();
+    }
+
     public SupplyCategory getSupplyCategory() {
         return supplyCategory;
+    }
+
+    public String getSupplyCategoryName(){
+        return supplyCategory.getSupplyCategoryName();
     }
 
     @Override

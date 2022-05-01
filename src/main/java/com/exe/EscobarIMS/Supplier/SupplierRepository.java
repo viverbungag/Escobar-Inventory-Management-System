@@ -16,4 +16,6 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
             nativeQuery = true)
     Supplier findBySupplierId(@Param("supplierId") Long id);
 
+
+
 }

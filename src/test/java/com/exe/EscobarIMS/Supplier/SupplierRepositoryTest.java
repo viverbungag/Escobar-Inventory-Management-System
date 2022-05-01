@@ -77,8 +77,8 @@ class SupplierRepositoryTest {
     }
 
     @Test
-    void updateSupplierNameById_when_updating_id_2(){
-        viewEditDeleteSupplierRepository.updateSupplierNameById(2L, "Updated Supplier 2", "Updated Address 2", "19273173102", "Updated Person 2");
+    void updateSupplierById_when_updating_id_2(){
+        viewEditDeleteSupplierRepository.updateSupplierById(2L, "Updated Supplier 2", "Updated Address 2", "19273173102", "Updated Person 2");
         Supplier supplier = supplierRepository.findBySupplierId(2L);
         assertEquals(supplier.getSupplierName(), "Updated Supplier 2");
         assertEquals(supplier.getSupplierAddress(), "Updated Address 2");
@@ -108,15 +108,15 @@ class SupplierRepositoryTest {
     }
 
     @Test
-    void getAllPagedSuppliers_when_getting_the_first_supplier_name_sorted_by_supplier_ascending(){
+    void getAllPagedSuppliers_when_getting_the_first_supplier_name_sorted_by_supplier_name_ascending(){
         Sort sort = Sort.by("supplier_name").ascending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<Supplier> suppliers =  viewEditDeleteSupplierRepository.getAllPagedSupplier(pageable).getContent();
         assertEquals("Supplier 1", suppliers.get(0).getSupplierName());
     }
-//
+
     @Test
-    void getAllPagedSuppliers_when_getting_the_first_supplier_name_sorted_by_supplier_descending(){
+    void getAllPagedSuppliers_when_getting_the_first_supplier_name_sorted_by_supplier_name_descending(){
         Sort sort = Sort.by("supplier_name").descending();
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<Supplier> suppliers =  viewEditDeleteSupplierRepository.getAllPagedSupplier(pageable).getContent();

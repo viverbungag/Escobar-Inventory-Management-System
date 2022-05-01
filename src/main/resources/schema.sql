@@ -125,9 +125,9 @@ CREATE TABLE IF NOT EXISTS supply(
     minimum_quantity DECIMAL(10, 2),
     in_minimum_quantity BOOLEAN,
     PRIMARY KEY (supply_id),
-    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
-    FOREIGN KEY (unit_of_measurement_id) REFERENCES unit_of_measurement(unit_of_measurement_id),
-    FOREIGN KEY (supply_category_id) REFERENCES supply_category(supply_category_id)
+    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (unit_of_measurement_id) REFERENCES unit_of_measurement(unit_of_measurement_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (supply_category_id) REFERENCES supply_category(supply_category_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS transactions(
@@ -140,9 +140,9 @@ CREATE TABLE IF NOT EXISTS transactions(
     supply_per_unit_cost DECIMAL(10, 2),
     transaction_total_cost DECIMAL(10, 2),
     PRIMARY KEY (transaction_id),
-    FOREIGN KEY (supply_id) REFERENCES supply(supply_id),
-    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
-    FOREIGN KEY (transact_by) REFERENCES employee(employee_id)
+    FOREIGN KEY (supply_id) REFERENCES supply(supply_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (transact_by) REFERENCES employee(employee_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS menu(
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS menu(
     ingredients BIGINT,
     number_of_servings_left INTEGER,
     PRIMARY KEY (menu_id),
-    FOREIGN KEY (menu_category_id) REFERENCES menu_category(menu_category_id),
-    FOREIGN KEY (ingredients) REFERENCES supply(supply_id)
+    FOREIGN KEY (menu_category_id) REFERENCES menu_category(menu_category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ingredients) REFERENCES supply(supply_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS customer(
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS food_order(
     menu_id BIGINT,
     order_quantity INTEGER,
     PRIMARY KEY (food_order_id),
-    FOREIGN KEY (menu_id) REFERENCES menu(menu_id)
+    FOREIGN KEY (menu_id) REFERENCES menu(menu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS serving(
@@ -180,9 +180,9 @@ CREATE TABLE IF NOT EXISTS serving(
     customer_id BIGINT,
     total_cost DECIMAL(10, 2),
     PRIMARY KEY (serving_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-    FOREIGN KEY (food_order_id) REFERENCES food_order(food_order_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (food_order_id) REFERENCES food_order(food_order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS utility(
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS monthly_utility(
     utility_month DATE NOT NULL,
     utility_id BIGINT,
     PRIMARY KEY (monthly_utility_id),
-    FOREIGN KEY (utility_id) REFERENCES utility(utility_id)
+    FOREIGN KEY (utility_id) REFERENCES utility(utility_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS monthly_transactions(
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS monthly_transactions(
     transaction_month DATE NOT NULL,
     transaction_id BIGINT,
     PRIMARY KEY (monthly_transaction_id),
-    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id)
+    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS monthly_income_expenses(
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS monthly_income_expenses(
     income_expenses_month DATE,
     income_id BIGINT,
     PRIMARY KEY (monthly_income_expenses_id),
-    FOREIGN KEY (income_id) REFERENCES employee_income_per_month(income_id)
+    FOREIGN KEY (income_id) REFERENCES employee_income_per_month(income_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS monthly_expenses(
@@ -223,9 +223,9 @@ CREATE TABLE IF NOT EXISTS monthly_expenses(
     monthly_utility_id BIGINT,
     monthly_income_expenses_id BIGINT,
     PRIMARY KEY (monthly_expenses_id),
-    FOREIGN KEY (monthly_income_expenses_id) REFERENCES monthly_income_expenses(monthly_income_expenses_id),
-    FOREIGN KEY (monthly_utility_id) REFERENCES monthly_utility(monthly_utility_id),
-    FOREIGN KEY (monthly_transactions_id) REFERENCES monthly_transactions(monthly_transaction_id)
+    FOREIGN KEY (monthly_income_expenses_id) REFERENCES monthly_income_expenses(monthly_income_expenses_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (monthly_utility_id) REFERENCES monthly_utility(monthly_utility_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (monthly_transactions_id) REFERENCES monthly_transactions(monthly_transaction_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS daily_sales(
     daily_sales_earned DECIMAL(10, 2),
     serving_id BIGINT,
     PRIMARY KEY (daily_sales_id),
-    FOREIGN KEY (serving_id) REFERENCES serving(serving_id)
+    FOREIGN KEY (serving_id) REFERENCES serving(serving_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS monthly_sales(
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS monthly_sales(
     sales_month DATE NOT NULL,
     daily_sales_id BIGINT,
     PRIMARY KEY (monthly_sales_id),
-    FOREIGN KEY (daily_sales_id) REFERENCES daily_sales(daily_sales_id)
+    FOREIGN KEY (daily_sales_id) REFERENCES daily_sales(daily_sales_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS monthly_report(
@@ -253,8 +253,8 @@ CREATE TABLE IF NOT EXISTS monthly_report(
     monthly_sales_id BIGINT,
     monthly_expenses_id BIGINT,
     PRIMARY KEY (monthly_report_id),
-    FOREIGN KEY (monthly_sales_id) REFERENCES monthly_sales(monthly_sales_id),
-    FOREIGN KEY (monthly_expenses_id) REFERENCES monthly_expenses(monthly_expenses_id)
+    FOREIGN KEY (monthly_sales_id) REFERENCES monthly_sales(monthly_sales_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (monthly_expenses_id) REFERENCES monthly_expenses(monthly_expenses_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 

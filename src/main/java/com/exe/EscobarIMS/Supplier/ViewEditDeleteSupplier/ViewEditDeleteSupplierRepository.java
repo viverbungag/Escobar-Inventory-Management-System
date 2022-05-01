@@ -30,16 +30,16 @@ public interface ViewEditDeleteSupplierRepository extends JpaRepository<Supplier
     void deleteAllSupplierByName(@Param("listOfSupplierNames") List<String> names);
 
     @Modifying
-    @Query(value = "UPDATE #{#entityName} " +
-            "SET supplier_name = :supplierName," +
+    @Query(value = "UPDATE #{#entityName}" +
+            " SET supplier_name = :supplierName," +
             " supplier_address = :supplierAddress," +
             " supplier_contact_number = :supplierContactNumber," +
             " supplier_contact_person = :supplierContactPerson" +
             " WHERE supplier_id = :supplierId",
             nativeQuery = true)
-    void updateSupplierNameById(@Param("supplierId") Long id,
-                                @Param("supplierName") String name,
-                                @Param("supplierAddress") String address,
-                                @Param("supplierContactNumber") String contactNumber,
-                                @Param("supplierContactPerson") String contactPerson);
+    void updateSupplierById(@Param("supplierId") Long id,
+                            @Param("supplierName") String name,
+                            @Param("supplierAddress") String address,
+                            @Param("supplierContactNumber") String contactNumber,
+                            @Param("supplierContactPerson") String contactPerson);
 }

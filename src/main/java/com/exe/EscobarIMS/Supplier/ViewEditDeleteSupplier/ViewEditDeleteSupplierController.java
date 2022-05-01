@@ -40,7 +40,7 @@ public class ViewEditDeleteSupplierController {
 
     @Transactional
     public void editSupplierNameById(Long Id, String newName, String newAddress, String newContactNumber, String newContactPerson){
-        viewEditDeleteSupplierRepository.updateSupplierNameById(Id, newName, newAddress, newContactNumber, newContactPerson);
+        viewEditDeleteSupplierRepository.updateSupplierById(Id, newName, newAddress, newContactNumber, newContactPerson);
     }
 
     public int getTotalNumberOfPages(int pageSize){
