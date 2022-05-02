@@ -5,7 +5,6 @@ import com.exe.EscobarIMS.SupplyCategory.SupplyCategory;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurement;
 
 import javax.persistence.*;
-
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -41,6 +40,27 @@ public class Supply {
     @ManyToOne
     @JoinColumn(name = "supply_category_id")
     private SupplyCategory supplyCategory;
+
+    public Supply() {
+    }
+
+    public Supply(String supplyName, Double minimumQuantity, Supplier supplier, UnitOfMeasurement unitOfMeasurement, SupplyCategory supplyCategory) {
+        this.supplyName = supplyName;
+        this.supplyQuantity = 0D;
+        this.minimumQuantity = minimumQuantity;
+        this.supplier = supplier;
+        this.unitOfMeasurement = unitOfMeasurement;
+        this.supplyCategory = supplyCategory;
+        validateIfInMinimum();
+    }
+
+
+    public void validateIfInMinimum(){
+        if (supplyQuantity < minimumQuantity){
+            inMinimumQuantity = true;
+        }
+        inMinimumQuantity = false;
+    }
 
     public Long getSupplyId() {
         return supplyId;

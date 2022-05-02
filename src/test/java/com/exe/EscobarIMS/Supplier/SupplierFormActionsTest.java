@@ -54,7 +54,7 @@ class SupplierFormActionsTest {
         supplierTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
                 new String [] {
-                        "Supplier Name", "Supplier Address, Supplier Contact Number, Supplier Contact Person"
+                        "Supplier Name", "Supplier Address", "Supplier Contact Number", "Supplier Contact Person"
                 })
         {
             Class[] types = new Class [] {
@@ -66,9 +66,8 @@ class SupplierFormActionsTest {
             }
         });
         currentPageNumberTextField.setText("1");
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supplier Name", "Supplier Address, Supplier Contact Number, Supplier Contact Person" }));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supplier Name", "Supplier Address", "Supplier Contact Number", "Supplier Contact Person" }));
         contentLimitComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "5", "15", "30", "50", "100" }));
-        setActionFormComponents();
     }
 
     private void setActionFormComponents(){

@@ -11,8 +11,10 @@ public interface Constants {
         String SELECT_ONE_OR_MORE_ROW_MESSAGE = "Please select one or more rows in the table";
         String SELECT_JUST_ONE_ROW_MESSAGE = "Please select just one row in the table";
         String FILL_OUT_ALL_TEXT_FIELD_MESSAGE = "Please fill out all text fields";
-        String NUMERIC_VALUES_ONLY_MESSAGE = "Please input numeric values only";
+        String INTEGER_VALUES_ONLY_MESSAGE = "Please input integer values only";
         String INVALID_PHONE_NUMBER_MESSAGE = "Please input a valid phone number";
+        String NUMERICAL_VALUES_ONLY_MESSAGE = "Please input numerical values only";
+        String POSITIVE_VALUES_ONLY_MESSAGE = "Please input positive values only";
     }
 
     interface SuccessfulTitles{

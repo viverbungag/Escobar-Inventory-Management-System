@@ -28,6 +28,11 @@ public class ViewEditDeleteSupplyCategoryController {
         return pagedSupplyCategories.getContent();
     }
 
+    public List<SupplyCategory> getAllSupplyCategories(){
+        List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
+        return supplyCategories;
+    }
+
     public Long findSupplyCategoryIdBySupplyCategoryName(String supplyCategoryName){
         SupplyCategory currentSupplyCategory = supplyCategoryRepository.findBySupplyCategoryName(supplyCategoryName);
         Long currentSupplyCategoryId = currentSupplyCategory.getSupplyCategoryId();

@@ -27,6 +27,11 @@ public class ViewEditDeleteUnitOfMeasurementController {
         return pagedUnitOfMeasurement.getContent();
     }
 
+    public List<UnitOfMeasurement> getAllUnitOfMeasurement(){
+        List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementRepository.getAllUnitOfMeasurements();
+        return unitOfMeasurements;
+    }
+
     public Long findUnitOfMeasurementIdByName(String unitOfMeasurementName){
         UnitOfMeasurement currentUnitOfMeasurement = unitOfMeasurementRepository.findByUnitOfMeasurementName(unitOfMeasurementName);
         Long currentUnitOfMeasurementId = currentUnitOfMeasurement.getUnitOfMeasurementId();

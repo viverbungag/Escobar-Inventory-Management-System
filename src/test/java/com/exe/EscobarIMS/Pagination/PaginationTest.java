@@ -5,7 +5,7 @@ import com.exe.EscobarIMS.MenuCategory.MenuCategory;
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryFormActions;
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryRepository;
-import com.exe.EscobarIMS.Utilities.Exceptions.NumericalValuesOnlyException;
+import com.exe.EscobarIMS.Utilities.Exceptions.IntegerValuesOnlyException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,7 +170,7 @@ public class PaginationTest {
     @Test
     void currentPageNumberTextFieldFocusLost(){
         currentPageNumberTextField.setText("one");
-        assertThrows(NumericalValuesOnlyException.class, () -> menuCategoryFormActions.validateCurrentPageNumberTextFieldFocusLost());
+        assertThrows(IntegerValuesOnlyException.class, () -> menuCategoryFormActions.validateCurrentPageNumberTextFieldFocusLost());
 
         currentPageNumberTextField.setText("-1");
         assertDoesNotThrow(() -> menuCategoryFormActions.validateCurrentPageNumberTextFieldFocusLost());

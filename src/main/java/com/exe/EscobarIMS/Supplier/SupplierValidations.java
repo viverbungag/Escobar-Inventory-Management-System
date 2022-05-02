@@ -1,7 +1,6 @@
 package com.exe.EscobarIMS.Supplier;
 
 import com.exe.EscobarIMS.Utilities.Exceptions.*;
-import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,9 +11,6 @@ import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_
 
 @Component
 public class SupplierValidations {
-
-    @Autowired
-    MessageDialogues messageDialogues;
 
     @Autowired
     Validations validations;
@@ -55,7 +51,7 @@ public class SupplierValidations {
             throw new NameAlreadyExistsException("The Supplier: " + newSupplierName + " - is already existing");
         }
 
-        if (!validations.isTextFieldContainingOnlyPositiveInteger(supplierContactNumberTextField)){
+        if (!validations.isTextFieldContainingOnlyPositiveIntegerValues(supplierContactNumberTextField)){
             throw new InvalidPhoneNumberException("The String: " + supplierContactNumberTextField.getText() + " - is not a valid phone number");
         }
     }
@@ -92,7 +88,7 @@ public class SupplierValidations {
             throw new NameAlreadyExistsException("The Supplier: " + newSupplierName + " - is already existing");
         }
 
-        if (!validations.isTextFieldContainingOnlyPositiveInteger(supplierContactNumberTextField)){
+        if (!validations.isTextFieldContainingOnlyPositiveIntegerValues(supplierContactNumberTextField)){
             throw new InvalidPhoneNumberException("The String: " + supplierContactNumberTextField.getText() + " - is not a valid phone number");
         }
 

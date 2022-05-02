@@ -147,10 +147,10 @@ public class MessageDialogues {
                 ERROR_MESSAGE);
     }
 
-    public void showNumericValuesOnlyMessageDialogue(){
+    public void showIntegerValuesOnlyMessageDialogue(){
         if (shouldShowMessageDialog)
             showMessageDialog(null,
-                NUMERIC_VALUES_ONLY_MESSAGE,
+                INTEGER_VALUES_ONLY_MESSAGE,
                 ERROR_TITLE,
                 ERROR_MESSAGE);
     }
@@ -162,4 +162,22 @@ public class MessageDialogues {
                     ERROR_TITLE,
                     ERROR_MESSAGE);
     }
+
+    public void showNumericalValuesMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    NUMERICAL_VALUES_ONLY_MESSAGE,
+                    ERROR_TITLE,
+                    ERROR_MESSAGE);
+    }
+
+    public void showPositiveValuesMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    POSITIVE_VALUES_ONLY_MESSAGE,
+                    ERROR_TITLE,
+                    ERROR_MESSAGE);
+    }
+
+
 }

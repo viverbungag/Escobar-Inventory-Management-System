@@ -186,10 +186,4 @@ class SupplyRepositoryTest {
         List<Supply> suppliers =  viewEditDeleteSupplyRepository.getAllPagedSupplies(pageable).getContent();
         assertEquals("Supply 1", suppliers.get(0).getSupplyName());
     }
-
-
-
-
-
-
 }

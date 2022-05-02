@@ -1,6 +1,6 @@
 package com.exe.EscobarIMS.Utilities;
 
-import com.exe.EscobarIMS.Utilities.Exceptions.NumericalValuesOnlyException;
+import com.exe.EscobarIMS.Utilities.Exceptions.IntegerValuesOnlyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
@@ -153,13 +153,13 @@ public class SortAndPaginationMethods {
 
     public void validateCurrentPageNumberTextFieldFocusLost(){
         String currentPageNumber = currentPageNumberTextField.getText();
-        if (validations.isTextFieldContainingOnlyNumericalValues(currentPageNumberTextField)){
+        if (validations.isTextFieldContainingOnlyIntegerValues(currentPageNumberTextField)){
             handleCurrentPageNumberTextFieldWrongInputs();
             updateTableContents();
             updateStateOfButtons();
         }else{
             resetCurrentPageToDefault();
-            throw new NumericalValuesOnlyException("The String: " + currentPageNumber + " - should not contain any number");
+            throw new IntegerValuesOnlyException("The String: " + currentPageNumber + " - should not contain any number");
         }
     }
 
@@ -167,9 +167,9 @@ public class SortAndPaginationMethods {
         try{
             validateCurrentPageNumberTextFieldFocusLost();
 
-        }catch(NumericalValuesOnlyException e){
+        }catch(IntegerValuesOnlyException e){
             System.out.println(e.getMessage());
-            messageDialogues.showNumericValuesOnlyMessageDialogue();
+            messageDialogues.showIntegerValuesOnlyMessageDialogue();
         }
     }
 

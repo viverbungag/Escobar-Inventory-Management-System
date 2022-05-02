@@ -27,6 +27,11 @@ public class ViewEditDeleteSupplierController {
         return pagedSupplier.getContent();
     }
 
+    public List<Supplier> getAllSupplier(){
+        List<Supplier> suppliers = viewEditDeleteSupplierRepository.getAllSupplier();
+        return suppliers;
+    }
+
     public Long findSupplierIdByName(String supplierName){
         Supplier currentSupplier = supplierRepository.findBySupplierName(supplierName);
         Long currentSupplierId = currentSupplier.getSupplierId();

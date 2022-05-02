@@ -5,6 +5,7 @@ import com.exe.EscobarIMS.Supplier.SupplierRepository;
 import com.exe.EscobarIMS.SupplyCategory.SupplyCategoryRepository;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurementRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -66,17 +67,32 @@ public class Validations {
         return evt.getKeyCode() == KeyEvent.VK_ENTER;
     }
 
-    public boolean isTextFieldContainingOnlyNumericalValues(JTextField textField) {
-        try{
-            Integer.parseInt(textField.getText());
-            return true;
-        }catch(NumberFormatException e){
-            return false;
+    public boolean isTextFieldContainingOnlyIntegerValues(JTextField textField) {
+        if (NumberUtils.isParsable(textField.getText())){
+            double num = Double.parseDouble(textField.getText());
+            if (num == (int)num){
+                return true;
+            }
         }
+        return false;
     }
 
-    public boolean isTextFieldContainingOnlyPositiveInteger(JTextField textField){
+    public boolean isTextFieldContainingOnlyPositiveIntegerValues(JTextField textField){
         return StringUtils.isNumeric(textField.getText());
+    }
+
+    public boolean isTextFieldContainingOnlyDecimalValues(JTextField textField){
+        return NumberUtils.isParsable(textField.getText());
+    }
+
+    public boolean isTextFieldNegativeValue(JTextField textField){
+        if (NumberUtils.isParsable(textField.getText())){
+            double num = Double.parseDouble(textField.getText());
+            if (num < 0){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isTextFieldEqualsToSelectedTableValue(JTextField textField, JTable table, int columnNumber){
