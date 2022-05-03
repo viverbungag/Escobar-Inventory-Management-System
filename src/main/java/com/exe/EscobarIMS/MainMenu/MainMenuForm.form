@@ -63,12 +63,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="viewEditDeleteSupplyNavigationButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="unitOfMeasurementLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="addUnitOfMeasurementNavigationButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="viewEditDeleteUnitOfMeasurementNavigationButton" alignment="0" max="32767" attributes="0"/>
                               <Component id="supplyLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="addSupplyNavigationButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -103,12 +103,12 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton4" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="addSupplyNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jButton7" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton6" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="viewEditDeleteSupplyNavigationButton" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jButton8" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jButton13" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -238,22 +238,22 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="addSupplyNavigationButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add Supply"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSupplyNavigationButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="viewEditDeleteSupplyNavigationButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View/Delete/Edit Supplies"/>
+            <Property name="text" type="java.lang.String" value="View/Edit/Delete Supplies"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewEditDeleteSupplyNavigationButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">
@@ -267,7 +267,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View/Delete/Edit Menus"/>
+            <Property name="text" type="java.lang.String" value="View//Edit/Delete Menus"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>

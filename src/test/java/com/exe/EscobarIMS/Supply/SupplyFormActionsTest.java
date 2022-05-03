@@ -50,9 +50,9 @@ public class SupplyFormActionsTest {
     private JComboBox<String> sortingMethodComboBox;
     private JTextField supplyNameTextField;
     private JTextField minimumQuantityTextField;
-    private JComboBox<String> supplierNameComboBox;
-    private JComboBox<String> unitOfMeasurementNameComboBox;
-    private JComboBox<String> supplyCategoryNameComboBox;
+    private JComboBox<String> supplierComboBox;
+    private JComboBox<String> unitOfMeasurementComboBox;
+    private JComboBox<String> supplyCategoryComboBox;
     private JTable supplyTable;
     private Supplier supplier1;
     private Supplier supplier2;
@@ -76,9 +76,9 @@ public class SupplyFormActionsTest {
         sortingMethodComboBox = new JComboBox<>();
         supplyNameTextField = new JTextField();
         minimumQuantityTextField = new JTextField();
-        supplierNameComboBox = new JComboBox<>();
-        unitOfMeasurementNameComboBox = new JComboBox<>();
-        supplyCategoryNameComboBox = new JComboBox<>();
+        supplierComboBox = new JComboBox<>();
+        unitOfMeasurementComboBox = new JComboBox<>();
+        supplyCategoryComboBox = new JComboBox<>();
 
         supplyTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
@@ -106,9 +106,9 @@ public class SupplyFormActionsTest {
         supplyFormActions.setDescendingRadioButton(descendingRadioButton);
         supplyFormActions.setSupplyNameTextField(supplyNameTextField);
         supplyFormActions.setMinimumQuantityTextField(minimumQuantityTextField);
-        supplyFormActions.setSupplierNameComboBox(supplierNameComboBox);
-        supplyFormActions.setUnitOfMeasurementNameComboBox(unitOfMeasurementNameComboBox);
-        supplyFormActions.setSupplyCategoryNameComboBox(supplyCategoryNameComboBox);
+        supplyFormActions.setSupplierComboBox(supplierComboBox);
+        supplyFormActions.setUnitOfMeasurementComboBox(unitOfMeasurementComboBox);
+        supplyFormActions.setSupplyCategoryComboBox(supplyCategoryComboBox);
         supplyFormActions.setSupplyTable(supplyTable);
         supplyFormActions.setSortingMethodComboBox(sortingMethodComboBox);
     }
@@ -197,9 +197,9 @@ public class SupplyFormActionsTest {
         supplyFormActions.updateComboBoxContents();
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("14");
-        supplierNameComboBox.setSelectedItem("Supplier 4");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
+        supplierComboBox.setSelectedItem("Supplier 4");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 4");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 4");
         assertDoesNotThrow(() -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         Supply supply = supplyRepository.findBySupplyName("Supply 4");
@@ -217,30 +217,30 @@ public class SupplyFormActionsTest {
         supplyFormActions.updateComboBoxContents();
         supplyNameTextField.setText("");
         minimumQuantityTextField.setText("14");
-        supplierNameComboBox.setSelectedItem("Supplier 4");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
+        supplierComboBox.setSelectedItem("Supplier 4");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 4");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 4");
         assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("");
-        supplierNameComboBox.setSelectedItem("Supplier 4");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
+        supplierComboBox.setSelectedItem("Supplier 4");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 4");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 4");
         assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("one");
-        supplierNameComboBox.setSelectedItem("Supplier 4");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
+        supplierComboBox.setSelectedItem("Supplier 4");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 4");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 4");
         assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("-1");
-        supplierNameComboBox.setSelectedItem("Supplier 4");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
+        supplierComboBox.setSelectedItem("Supplier 4");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 4");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 4");
         assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
     }
 
@@ -251,9 +251,9 @@ public class SupplyFormActionsTest {
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
         minimumQuantityTextField.setText("13");
-        supplierNameComboBox.setSelectedItem("Supplier 2");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertDoesNotThrow(() -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         Supply supply = supplyRepository.findBySupplyName("Updated Supply 1");
@@ -272,33 +272,33 @@ public class SupplyFormActionsTest {
         supplyTable.clearSelection();
         supplyNameTextField.setText("Updated Supply 1");
         minimumQuantityTextField.setText("13");
-        supplierNameComboBox.setSelectedItem("Supplier 2");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertThrows(SelectJustOneRowException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
         minimumQuantityTextField.setText("Not a number");
-        supplierNameComboBox.setSelectedItem("Supplier 2");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("");
         minimumQuantityTextField.setText("Not a number");
-        supplierNameComboBox.setSelectedItem("Supplier 2");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
         minimumQuantityTextField.setText("");
-        supplierNameComboBox.setSelectedItem("Supplier 2");
-        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
-        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
     }
 
@@ -340,9 +340,9 @@ public class SupplyFormActionsTest {
 
         assertEquals("Supply 1", supplyNameTextField.getText());
         assertEquals("11.0", minimumQuantityTextField.getText());
-        assertEquals("Supplier 1", supplierNameComboBox.getSelectedItem());
-        assertEquals("Unit of Measurement 1", unitOfMeasurementNameComboBox.getSelectedItem());
-        assertEquals("Supply Category 1", supplyCategoryNameComboBox.getSelectedItem());
+        assertEquals("Supplier 1", supplierComboBox.getSelectedItem());
+        assertEquals("Unit of Measurement 1", unitOfMeasurementComboBox.getSelectedItem());
+        assertEquals("Supply Category 1", supplyCategoryComboBox.getSelectedItem());
 
     }
 }

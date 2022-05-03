@@ -41,6 +41,9 @@ public class ValidationsTest {
 
         textField.setText("0");
         assertTrue(validations.isTextFieldContainingOnlyDecimalValues(textField));
+
+        textField.setText("one");
+        assertFalse(validations.isTextFieldContainingOnlyIntegerValues(textField));
     }
 
     @Test
@@ -49,6 +52,9 @@ public class ValidationsTest {
         assertFalse(validations.isTextFieldContainingOnlyIntegerValues(textField));
 
         textField.setText("-1.1");
+        assertFalse(validations.isTextFieldContainingOnlyIntegerValues(textField));
+
+        textField.setText("one");
         assertFalse(validations.isTextFieldContainingOnlyIntegerValues(textField));
 
         textField.setText("1");

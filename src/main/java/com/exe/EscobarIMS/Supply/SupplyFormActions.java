@@ -59,9 +59,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
     private JTextField supplyNameTextField;
     private JTextField minimumQuantityTextField;
-    private JComboBox<String> supplierNameComboBox;
-    private JComboBox<String> unitOfMeasurementNameComboBox;
-    private JComboBox<String> supplyCategoryNameComboBox;
+    private JComboBox<String> supplierComboBox;
+    private JComboBox<String> unitOfMeasurementComboBox;
+    private JComboBox<String> supplyCategoryComboBox;
     private JTable supplyTable;
     private Boolean shouldUpdateTableContents = true;
 
@@ -73,16 +73,16 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         this.minimumQuantityTextField = minimumQuantityTextField;
     }
 
-    public void setSupplierNameComboBox(JComboBox<String> supplierNameComboBox) {
-        this.supplierNameComboBox = supplierNameComboBox;
+    public void setSupplierComboBox(JComboBox<String> supplierComboBox) {
+        this.supplierComboBox = supplierComboBox;
     }
 
-    public void setUnitOfMeasurementNameComboBox(JComboBox<String> unitOfMeasurementNameComboBox) {
-        this.unitOfMeasurementNameComboBox = unitOfMeasurementNameComboBox;
+    public void setUnitOfMeasurementComboBox(JComboBox<String> unitOfMeasurementComboBox) {
+        this.unitOfMeasurementComboBox = unitOfMeasurementComboBox;
     }
 
-    public void setSupplyCategoryNameComboBox(JComboBox<String> supplyCategoryNameComboBox) {
-        this.supplyCategoryNameComboBox = supplyCategoryNameComboBox;
+    public void setSupplyCategoryComboBox(JComboBox<String> supplyCategoryComboBox) {
+        this.supplyCategoryComboBox = supplyCategoryComboBox;
     }
 
     public void setSupplyTable(JTable supplyTable) {
@@ -96,9 +96,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     private void resetComponentsValuesToDefault(){
         supplyNameTextField.setText("");
         minimumQuantityTextField.setText("");
-        supplierNameComboBox.setSelectedIndex(0);
-        unitOfMeasurementNameComboBox.setSelectedIndex(0);
-        supplyCategoryNameComboBox.setSelectedIndex(0);
+        supplierComboBox.setSelectedIndex(0);
+        unitOfMeasurementComboBox.setSelectedIndex(0);
+        supplyCategoryComboBox.setSelectedIndex(0);
     }
 
     @Override
@@ -111,21 +111,21 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     public void generateSupplierNameComboBoxItems(){
         List<Supplier> suppliers = viewEditDeleteSupplierController.getAllSupplier();
         for (Supplier supplier: suppliers){
-            supplierNameComboBox.addItem(supplier.getSupplierName());
+            supplierComboBox.addItem(supplier.getSupplierName());
         }
     }
 
     public void generateUnitOfMeasurementNameComboBoxItems(){
         List<UnitOfMeasurement> unitOfMeasurements = viewEditDeleteUnitOfMeasurementController.getAllUnitOfMeasurement();
         for(UnitOfMeasurement unitOfMeasurement: unitOfMeasurements){
-            unitOfMeasurementNameComboBox.addItem(unitOfMeasurement.getUnitOfMeasurementName());
+            unitOfMeasurementComboBox.addItem(unitOfMeasurement.getUnitOfMeasurementName());
         }
     }
 
     public void generateSupplyCategoryNameComboBoxItems(){
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryController.getAllSupplyCategories();
         for(SupplyCategory supplyCategory: supplyCategories){
-            supplyCategoryNameComboBox.addItem(supplyCategory.getSupplyCategoryName());
+            supplyCategoryComboBox.addItem(supplyCategory.getSupplyCategoryName());
         }
     }
 
@@ -137,16 +137,16 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
     public void updateComboBoxContents(){
         if (shouldUpdateTableContents){
-            if (validations.hasExistingComboBoxContents(supplierNameComboBox)){
-                supplierNameComboBox.removeAllItems();
+            if (validations.hasExistingComboBoxContents(supplierComboBox)){
+                supplierComboBox.removeAllItems();
             }
 
-            if (validations.hasExistingComboBoxContents(unitOfMeasurementNameComboBox)){
-                unitOfMeasurementNameComboBox.removeAllItems();
+            if (validations.hasExistingComboBoxContents(unitOfMeasurementComboBox)){
+                unitOfMeasurementComboBox.removeAllItems();
             }
 
-            if (validations.hasExistingComboBoxContents(supplyCategoryNameComboBox)){
-                supplyCategoryNameComboBox.removeAllItems();
+            if (validations.hasExistingComboBoxContents(supplyCategoryComboBox)){
+                supplyCategoryComboBox.removeAllItems();
             }
 
             generateComboBoxContents();
@@ -308,9 +308,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         validateIfAddingIsAllowed();
         String supplyName = supplyNameTextField.getText();
         Double minimumQuantity = Double.valueOf(minimumQuantityTextField.getText());
-        String supplierName = supplierNameComboBox.getSelectedItem().toString();
-        String unitOfMeasurementName = unitOfMeasurementNameComboBox.getSelectedItem().toString();
-        String supplyCategoryName = supplyCategoryNameComboBox.getSelectedItem().toString();
+        String supplierName = supplierComboBox.getSelectedItem().toString();
+        String unitOfMeasurementName = unitOfMeasurementComboBox.getSelectedItem().toString();
+        String supplyCategoryName = supplyCategoryComboBox.getSelectedItem().toString();
 
         addSupplyController.addNewSupply(supplyName, supplierName, unitOfMeasurementName, supplyCategoryName, minimumQuantity);
     }
@@ -320,9 +320,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         String selectedSupplyName = getSelectedRowSupplyName();
         String newSupplyName = supplyNameTextField.getText();
         Double newMinimumQuantity = Double.valueOf(minimumQuantityTextField.getText());
-        String newSupplierName = supplierNameComboBox.getSelectedItem().toString();
-        String newUnitOfMeasurementName = unitOfMeasurementNameComboBox.getSelectedItem().toString();
-        String newSupplyCategoryName = supplyCategoryNameComboBox.getSelectedItem().toString();
+        String newSupplierName = supplierComboBox.getSelectedItem().toString();
+        String newUnitOfMeasurementName = unitOfMeasurementComboBox.getSelectedItem().toString();
+        String newSupplyCategoryName = supplyCategoryComboBox.getSelectedItem().toString();
 
         viewEditDeleteSupplyController.editSupplyById(selectedSupplyName, newSupplyName, newMinimumQuantity, newSupplierName, newUnitOfMeasurementName, newSupplyCategoryName);
     }
@@ -353,9 +353,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
         supplyNameTextField.setText(selectedSupplyName);
         minimumQuantityTextField.setText(selectedSupplyMinimumQuantity);
-        supplyCategoryNameComboBox.setSelectedItem(selectedSupplyCategory);
-        supplierNameComboBox.setSelectedItem(selectedSupplier);
-        unitOfMeasurementNameComboBox.setSelectedItem(selectedUnitOfMeasurement);
+        supplyCategoryComboBox.setSelectedItem(selectedSupplyCategory);
+        supplierComboBox.setSelectedItem(selectedSupplier);
+        unitOfMeasurementComboBox.setSelectedItem(selectedUnitOfMeasurement);
     }
 
     public void editSupplyButtonActionPerformed(){
