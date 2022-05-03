@@ -1,9 +1,6 @@
-package com.exe.EscobarIMS.Pagination;
+package com.exe.EscobarIMS.MenuCategory;
 
 import com.exe.EscobarIMS.MenuCategory.AddMenuCategory.AddMenuCategoryRepository;
-import com.exe.EscobarIMS.MenuCategory.MenuCategory;
-import com.exe.EscobarIMS.MenuCategory.MenuCategoryFormActions;
-import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
 import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.ViewEditDeleteMenuCategoryRepository;
 import com.exe.EscobarIMS.Utilities.Exceptions.IntegerValuesOnlyException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
@@ -19,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = {"spring.main.lazy-initialization=true"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PaginationTest {
+public class MenuCategoryPaginationTest {
     @Autowired
     MenuCategoryRepository menuCategoryRepository;
     @Autowired

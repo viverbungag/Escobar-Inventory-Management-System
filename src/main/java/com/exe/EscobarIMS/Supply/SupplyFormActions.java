@@ -181,19 +181,19 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
         switch(sortingMethodName){
             case "Supply Name":
-                return Sort.by("supply.supply_name");
+                return Sort.by("supply_name");
             case "Supply Category":
-                return Sort.by("supply.supply_category");
+                return Sort.by("supply_category.supply_category_name");
             case "Supplier":
                 return Sort.by("supplier.supplier_name");
             case "Quantity":
-                return Sort.by("supply.supply_quantity");
+                return Sort.by("supply_quantity");
             case "Unit of Measurement":
                 return Sort.by("unit_of_measurement.unit_of_measurement_name");
             case "Minimum Quantity":
-                return Sort.by("supply.minimum_quantity");
-            case "Is below Minimum Quantity?":
-                return Sort.by("supply.in_minimum_quantity");
+                return Sort.by("minimum_quantity");
+            case "Below Minimum":
+                return Sort.by("in_minimum_quantity");
             default:
                 disableSortRadioButtons();
                 return Sort.unsorted();

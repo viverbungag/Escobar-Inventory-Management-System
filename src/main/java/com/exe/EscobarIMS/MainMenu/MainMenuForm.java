@@ -9,6 +9,7 @@ import com.exe.EscobarIMS.MenuCategory.ViewEditDeleteMenuCategory.Forms.ViewEdit
 import com.exe.EscobarIMS.Supplier.AddSupplier.Forms.AddSupplierForm;
 import com.exe.EscobarIMS.Supplier.ViewEditDeleteSupplier.Forms.ViewEditDeleteSupplierForm;
 import com.exe.EscobarIMS.Supply.AddSupply.Forms.AddSupplyForm;
+import com.exe.EscobarIMS.Supply.ViewEditDeleteSupply.Forms.ViewEditDeleteSupplyForm;
 import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.Forms.AddSupplyCategoryForm;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.Forms.ViewEditDeleteSupplyCategoryForm;
 import com.exe.EscobarIMS.UnitOfMeasurement.AddUnitOfMeasurement.Forms.AddUnitOfMeasurementForm;
@@ -47,15 +48,19 @@ public class MainMenuForm extends javax.swing.JFrame {
 
     @Autowired
     ViewEditDeleteUnitOfMeasurementForm viewEditDeleteUnitOfMeasurementForm;
-
+    
     @Autowired
-    AddSupplyForm addSupplyForm;
+    AddSupplierForm addSupplierForm;
 
     @Autowired
     ViewEditDeleteSupplierForm viewEditDeleteSupplierForm;
     
     @Autowired
-    AddSupplierForm addSupplierForm;
+    AddSupplyForm addSupplyForm;
+    
+    @Autowired
+    ViewEditDeleteSupplyForm viewEditDeleteSupplyForm;
+
 
     
 
@@ -360,7 +365,7 @@ public class MainMenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addSupplyNavigationButtonActionPerformed
 
     private void viewEditDeleteSupplyNavigationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditDeleteSupplyNavigationButtonActionPerformed
-        // TODO add your handling code here:
+        viewEditDeleteSupplyForm.setVisible(true);
     }//GEN-LAST:event_viewEditDeleteSupplyNavigationButtonActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

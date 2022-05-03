@@ -83,7 +83,7 @@ public class SupplyFormActionsTest {
         supplyTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
                 new String [] {
-                        "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Is below Minimum Quantity?"
+                        "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Below Minimum"
                 })
         {
             Class[] types = new Class [] {
@@ -95,7 +95,7 @@ public class SupplyFormActionsTest {
             }
         });
         currentPageNumberTextField.setText("1");
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Is below Minimum Quantity?"}));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Below Minimum"}));
         contentLimitComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "5", "15", "30", "50", "100" }));
     }
 
