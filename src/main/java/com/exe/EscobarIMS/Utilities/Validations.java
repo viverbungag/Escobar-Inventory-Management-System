@@ -51,6 +51,10 @@ public class Validations {
         return table.getRowCount() > 0;
     }
 
+    public boolean hasExistingComboBoxContents(JComboBox comboBox){
+        return comboBox.getItemCount() > 0;
+    }
+
     public boolean isNotSelectingATableRow(JTable table){
         return table.getSelectedRowCount() == 0;
     }

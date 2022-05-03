@@ -269,7 +269,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
     public void editSupplierButtonActionPerformed() {
         try{
             validateIfEditingOfSupplierIsSuccessful();
-            messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
+            messageDialogues.showSuccessfullyEditedSupplierMessageDialogue();
             clearTextField();
         }catch(SelectJustOneRowException e){
             shouldUpdateTableContents = false;
@@ -293,7 +293,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
     public void deleteSupplierButtonActionPerformed() {
         try{
             validateIfDeletingOfSupplierIsSuccessful();
-            messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
+            messageDialogues.showSuccessfullyDeletedSupplierMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
             System.out.println(e.getMessage());
@@ -304,7 +304,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
     public void addSupplierButtonActionPerformed() {
         try{
             validateIfAddingOfSupplierIsSuccessful();
-            messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
+            messageDialogues.showSuccessfullyAddedSupplierMessageDialogue();
             clearTextField();
         }catch(NameAlreadyExistsException e){
             System.out.println(e.getMessage());

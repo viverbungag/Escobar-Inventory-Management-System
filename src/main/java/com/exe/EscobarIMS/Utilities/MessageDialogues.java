@@ -53,9 +53,17 @@ public class MessageDialogues {
     public void showSuccessfullyAddedSupplierMessageDialogue(){
         if (shouldShowMessageDialog)
             showMessageDialog(null,
-                SUPPLIER_CATEGORY_ADDED_MESSAGE,
+                SUPPLIER_ADDED_MESSAGE,
                 SUCCESSFUL_TITLE,
                 INFORMATION_MESSAGE);
+    }
+
+    public void showSuccessfullyAddedSupplyMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    SUPPLY_ADDED_MESSAGE,
+                    SUCCESSFUL_TITLE,
+                    INFORMATION_MESSAGE);
     }
 
 
@@ -86,7 +94,15 @@ public class MessageDialogues {
     public void showSuccessfullyDeletedSupplierMessageDialogue(){
         if (shouldShowMessageDialog)
             showMessageDialog(null,
-                    SUPPLIER_CATEGORY_DELETED_MESSAGE,
+                    SUPPLIER_DELETED_MESSAGE,
+                    SUCCESSFUL_TITLE,
+                    INFORMATION_MESSAGE);
+    }
+
+    public void showSuccessfullyDeletedSupplyMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    SUPPLY_DELETED_MESSAGE,
                     SUCCESSFUL_TITLE,
                     INFORMATION_MESSAGE);
     }
@@ -118,7 +134,15 @@ public class MessageDialogues {
     public void showSuccessfullyEditedSupplierMessageDialogue(){
         if (shouldShowMessageDialog)
             showMessageDialog(null,
-                    SUPPLIER_CATEGORY_UPDATED_MESSAGE,
+                    SUPPLIER_UPDATED_MESSAGE,
+                    SUCCESSFUL_TITLE,
+                    INFORMATION_MESSAGE);
+    }
+
+    public void showSuccessfullyEditedSupplyMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    SUPPLY_UPDATED_MESSAGE,
                     SUCCESSFUL_TITLE,
                     INFORMATION_MESSAGE);
     }

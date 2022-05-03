@@ -8,6 +8,10 @@ import com.exe.EscobarIMS.SupplyCategory.SupplyCategory;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.ViewEditDeleteSupplyCategoryController;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurement;
 import com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.ViewEditDeleteUnitOfMeasurementController;
+import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
+import com.exe.EscobarIMS.Utilities.Exceptions.InvalidMinimumQuantityException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -118,7 +122,7 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         }
     }
 
-    public void generateSupplyCategoryComboBoxItems(){
+    public void generateSupplyCategoryNameComboBoxItems(){
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryController.getAllSupplyCategories();
         for(SupplyCategory supplyCategory: supplyCategories){
             supplyCategoryNameComboBox.addItem(supplyCategory.getSupplyCategoryName());
@@ -128,7 +132,27 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     public void generateComboBoxContents(){
         generateSupplierNameComboBoxItems();
         generateUnitOfMeasurementNameComboBoxItems();
-        generateSupplyCategoryComboBoxItems();
+        generateSupplyCategoryNameComboBoxItems();
+    }
+
+    public void updateComboBoxContents(){
+        if (shouldUpdateTableContents){
+            if (validations.hasExistingComboBoxContents(supplierNameComboBox)){
+                supplierNameComboBox.removeAllItems();
+            }
+
+            if (validations.hasExistingComboBoxContents(unitOfMeasurementNameComboBox)){
+                unitOfMeasurementNameComboBox.removeAllItems();
+            }
+
+            if (validations.hasExistingComboBoxContents(supplyCategoryNameComboBox)){
+                supplyCategoryNameComboBox.removeAllItems();
+            }
+
+            generateComboBoxContents();
+        }else{
+            resetShouldUpdateTableContentsVariableToDefault();
+        }
     }
 
 
@@ -246,16 +270,6 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         return selectedSupplier;
     }
 
-    private String getSelectedRowQuantity(){
-        int selectedTableRow = supplyTable.getSelectedRow();
-        String selectedQuantity = supplyTable
-                .getValueAt(selectedTableRow,
-                        SUPPLY_QUANTITY_COLUMN_NUMBER)
-                .toString();
-
-        return selectedQuantity;
-    }
-
     private String getSelectedRowUnitOfMeasurement(){
         int selectedTableRow = supplyTable.getSelectedRow();
         String selectedUnitOfMeasurement = supplyTable
@@ -274,16 +288,6 @@ public class SupplyFormActions extends SortAndPaginationMethods {
                 .toString();
 
         return selectedMinimumQuantity;
-    }
-
-    private String getSelectedRowIsBelowMinimumQuantity(){
-        int selectedTableRow = supplyTable.getSelectedRow();
-        String selectedIsBelowMinimumQuantity = supplyTable
-                .getValueAt(selectedTableRow,
-                        SUPPLY_IN_MINIMUM_QUANTITY_COLUMN_NUMBER)
-                .toString();
-
-        return selectedIsBelowMinimumQuantity;
     }
 
 
@@ -334,6 +338,7 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     public void formWindowActivated(){
         updateTableContents();
         updateStateOfButtons();
+        updateComboBoxContents();
     }
     public void formWindowOpened(JTable supplyTable){
         supplyTable.setDefaultEditor(Object.class, null);
@@ -351,6 +356,48 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         supplyCategoryNameComboBox.setSelectedItem(selectedSupplyCategory);
         supplierNameComboBox.setSelectedItem(selectedSupplier);
         unitOfMeasurementNameComboBox.setSelectedItem(selectedUnitOfMeasurement);
+    }
+
+    public void editSupplyButtonActionPerformed(){
+        try{
+            validateIfEditingOfSupplyIsSuccessful();
+            messageDialogues.showSuccessfullyEditedSupplyMessageDialogue();
+            resetComponentsValuesToDefault();
+        }catch(SelectJustOneRowException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showSelectJustOneRowMessageDialogue();
+        }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }catch(InvalidMinimumQuantityException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showInvalidMinimumQuantityMessageDialogue();
+        }
+    }
+
+    public void addSupplyButtonActionPerformed(){
+        try{
+            validateIfAddingOfSupplyIsSuccessful();
+            messageDialogues.showSuccessfullyAddedSupplyMessageDialogue();
+            resetComponentsValuesToDefault();
+        }catch(FillOutAllTextFieldsException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showFillOutAllTextFieldsMessageDialogue();
+        }catch(InvalidMinimumQuantityException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showInvalidMinimumQuantityMessageDialogue();
+        }
+    }
+
+    public void deleteSupplyButtonActionPerformed(){
+        try{
+            validateIfDeletingOfSupplyIsSuccessful();
+            messageDialogues.showSuccessfullyDeletedSupplyMessageDialogue();
+            resetComponentsValuesToDefault();
+        }catch(SelectOneOrMoreRowException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showSelectOneOrMoreRowMessageDialogue();
+        }
     }
 
 }

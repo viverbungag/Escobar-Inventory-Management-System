@@ -36,9 +36,13 @@ public interface Constants {
         String UNIT_OF_MEASUREMENT_DELETED_MESSAGE = "The Unit of Measurement was deleted";
         String UNIT_OF_MEASUREMENT_UPDATED_MESSAGE = "The Unit of Measurement was updated";
 
-        String SUPPLIER_CATEGORY_ADDED_MESSAGE = "The Supplier Category was added";
-        String SUPPLIER_CATEGORY_DELETED_MESSAGE = "The Supplier Category was deleted";
-        String SUPPLIER_CATEGORY_UPDATED_MESSAGE = "The Supplier Category was updated";
+        String SUPPLIER_ADDED_MESSAGE = "The Supplier Category was added";
+        String SUPPLIER_DELETED_MESSAGE = "The Supplier Category was deleted";
+        String SUPPLIER_UPDATED_MESSAGE = "The Supplier Category was updated";
+
+        String SUPPLY_ADDED_MESSAGE = "The Supply was added";
+        String SUPPLY_DELETED_MESSAGE = "The Supply was deleted";
+        String SUPPLY_UPDATED_MESSAGE = "The Supply was updated";
     }
 
     interface TableColumnNumbers{

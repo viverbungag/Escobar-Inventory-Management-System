@@ -194,7 +194,7 @@ public class SupplyFormActionsTest {
 
     @Test
     void adding_supply_when_successful(){
-        supplyFormActions.generateComboBoxContents();
+        supplyFormActions.updateComboBoxContents();
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("14");
         supplierNameComboBox.setSelectedItem("Supplier 4");
@@ -214,7 +214,7 @@ public class SupplyFormActionsTest {
 
     @Test
     void adding_supply_when_not_successful(){
-        supplyFormActions.generateComboBoxContents();
+        supplyFormActions.updateComboBoxContents();
         supplyNameTextField.setText("");
         minimumQuantityTextField.setText("14");
         supplierNameComboBox.setSelectedItem("Supplier 4");
@@ -246,7 +246,7 @@ public class SupplyFormActionsTest {
 
     @Test
     void editing_supply_when_successful(){
-        supplyFormActions.generateComboBoxContents();
+        supplyFormActions.updateComboBoxContents();
         supplyFormActions.updateTableContents();
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
@@ -267,7 +267,7 @@ public class SupplyFormActionsTest {
 
     @Test
     void editing_supply_when_not_successful(){
-        supplyFormActions.generateComboBoxContents();
+        supplyFormActions.updateComboBoxContents();
         supplyFormActions.updateTableContents();
         supplyTable.clearSelection();
         supplyNameTextField.setText("Updated Supply 1");
@@ -304,6 +304,7 @@ public class SupplyFormActionsTest {
 
     @Test
     void deleting_supply_when_successful(){
+        supplyFormActions.updateComboBoxContents();
         supplyFormActions.updateTableContents();
         supplyTable.setRowSelectionInterval(0,0);
         assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplyIsSuccessful(), "Deleting one supplier");
@@ -321,11 +322,27 @@ public class SupplyFormActionsTest {
 
     @Test
     void deleting_supply_when_not_successful(){
+        supplyFormActions.updateComboBoxContents();
         supplyFormActions.updateTableContents();
         supplyTable.clearSelection();
         assertThrows(SelectOneOrMoreRowException.class, () -> supplyFormActions.validateIfDeletingOfSupplyIsSuccessful(), "When there are no row selected");
 
         List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
         assertEquals(3, supplies.size(), "Check if there are no supply deleted");
+    }
+
+    @Test
+    void checking_the_text_fields_when_clicking_rows_in_the_table(){
+        supplyFormActions.updateComboBoxContents();
+        supplyFormActions.updateTableContents();
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyFormActions.supplyTableMousePressed();
+
+        assertEquals("Supply 1", supplyNameTextField.getText());
+        assertEquals("11.0", minimumQuantityTextField.getText());
+        assertEquals("Supplier 1", supplierNameComboBox.getSelectedItem());
+        assertEquals("Unit of Measurement 1", unitOfMeasurementNameComboBox.getSelectedItem());
+        assertEquals("Supply Category 1", supplyCategoryNameComboBox.getSelectedItem());
+
     }
 }
