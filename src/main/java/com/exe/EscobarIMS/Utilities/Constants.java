@@ -15,6 +15,7 @@ public interface Constants {
         String INVALID_PHONE_NUMBER_MESSAGE = "Please input a valid phone number";
         String NUMERICAL_VALUES_ONLY_MESSAGE = "Please input numerical values only";
         String POSITIVE_VALUES_ONLY_MESSAGE = "Please input positive values only";
+        String INVALID_MINIMUM_QUANTITY_NUMBER_MESSAGE = "Please input a valid minimum quantity";
     }
 
     interface SuccessfulTitles{
@@ -52,5 +53,13 @@ public interface Constants {
         int SUPPLIER_ADDRESS_COLUMN_NUMBER = 1;
         int SUPPLIER_CONTACT_NUMBER_COLUMN_NUMBER = 2;
         int SUPPLIER_CONTACT_PERSON_COLUMN_NUMBER = 3;
+
+        int SUPPLY_NAME_COLUMN_NUMBER = 0;
+        int SUPPLY_CATEGORY_COLUMN_NUMBER = 1;
+        int SUPPLY_SUPPLIER_COLUMN_NUMBER = 2;
+        int SUPPLY_QUANTITY_COLUMN_NUMBER = 3;
+        int SUPPLY_UNIT_OF_MEASUREMENT_COLUMN_NUMBER = 4;
+        int SUPPLY_MINIMUM_QUANTITY_COLUMN_NUMBER = 5;
+        int SUPPLY_IN_MINIMUM_QUANTITY_COLUMN_NUMBER = 6;
     }
 }

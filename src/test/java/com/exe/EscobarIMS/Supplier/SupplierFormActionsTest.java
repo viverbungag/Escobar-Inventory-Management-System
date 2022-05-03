@@ -132,7 +132,7 @@ class SupplierFormActionsTest {
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("09273173104");
         supplierContactPersonTextField.setText("Person 4");
-        assertDoesNotThrow(() -> supplierFormActions.isAddSupplierSuccessful());
+        assertDoesNotThrow(() -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful());
 
         Supplier supplier = supplierRepository.findBySupplierName("Supplier 4");
         assertNotNull(supplier, "Check if the Supplier added is existing");
@@ -147,64 +147,64 @@ class SupplierFormActionsTest {
         supplierAddressTextField.setText("Address 1");
         supplierContactNumberTextField.setText("09273173101");
         supplierContactPersonTextField.setText("Person 1");
-        assertThrows(NameAlreadyExistsException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the name inputted is existing");
+        assertThrows(NameAlreadyExistsException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the name inputted is existing");
 
         supplierNameTextField.setText("Supplier 4");
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("Not a number");
         supplierContactPersonTextField.setText("Person 4");
-        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the contact number inputted is not valid");
+        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the contact number inputted is not valid");
 
         supplierNameTextField.setText("");
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("09273173104");
         supplierContactPersonTextField.setText("Person 4");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the name text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the name text field is blank");
 
         supplierNameTextField.setText("Supplier 4");
         supplierAddressTextField.setText("");
         supplierContactNumberTextField.setText("09273173104");
         supplierContactPersonTextField.setText("Person 4");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the Address text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the Address text field is blank");
 
         supplierNameTextField.setText("Supplier 4");
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("");
         supplierContactPersonTextField.setText("Person 4");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the Contact Number text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the Contact Number text field is blank");
 
         supplierNameTextField.setText("Supplier 4");
         supplierAddressTextField.setText("Address 4");
         supplierContactNumberTextField.setText("09273173104");
         supplierContactPersonTextField.setText("");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isAddSupplierSuccessful(), "When the Contact Person text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfAddingOfSupplierIsSuccessful(), "When the Contact Person text field is blank");
     }
 
     @Test
     void editing_supplier_when_successful(){
-        supplierFormActions.generateTableContents();
+        supplierFormActions.updateTableContents();
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertDoesNotThrow(() -> supplierFormActions.isEditSupplierSuccessful());
+        assertDoesNotThrow(() -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful());
 
         Supplier supplier = supplierRepository.findBySupplierName("Updated Supplier 1");
         List<Supplier> suppliers = viewEditDeleteSupplierRepository.getAllSupplier();
         assertNotNull(supplier, "Check if the editing of supplier was successful");
-        assertEquals(supplier.getSupplierAddress(), "Updated Address 1", "Check if the address is updated");
-        assertEquals(supplier.getSupplierContactNumber(), "19273173101", "Check if the contact number is updated");
-        assertEquals(supplier.getSupplierContactPerson(), "Updated Person 1", "Check if the contact person is updated");
+        assertEquals("Updated Address 1", supplier.getSupplierAddress(),  "Check if the address is updated");
+        assertEquals("19273173101", supplier.getSupplierContactNumber(), "Check if the contact number is updated");
+        assertEquals("Updated Person 1", supplier.getSupplierContactPerson(), "Check if the contact person is updated");
         assertEquals(3, suppliers.size(), "Check if there are still 3 suppliers");
 
-        supplierFormActions.generateTableContents();
+        supplierFormActions.updateTableContents();
         supplierTable.setRowSelectionInterval(1,1);
         supplierNameTextField.setText("Supplier 2");
         supplierAddressTextField.setText("Updated Supplier Address 2");
         supplierContactNumberTextField.setText("19273173102");
         supplierContactPersonTextField.setText("Updated Person 2");
-        assertDoesNotThrow(() -> supplierFormActions.isEditSupplierSuccessful(), "Checks if it can update everything other than the name");
+        assertDoesNotThrow(() -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "Checks if it can update everything other than the name");
         Supplier supplier2 = supplierRepository.findBySupplierName("Supplier 2");
         assertEquals(supplier2.getSupplierAddress(), "Updated Supplier Address 2", "Check if the address is updated");
         assertEquals(supplier2.getSupplierContactNumber(), "19273173102", "Check if the contact number is updated");
@@ -213,73 +213,73 @@ class SupplierFormActionsTest {
 
     @Test
     void editing_supplier_when_not_successful(){
-        supplierFormActions.generateTableContents();
+        supplierFormActions.updateTableContents();
         supplierTable.clearSelection();
-        assertThrows(SelectJustOneRowException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When there are no rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When there are no rows selected");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("Not a number");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the contact number inputted is not valid");
+        assertThrows(InvalidPhoneNumberException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the contact number inputted is not valid");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the name text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the name text field is blank");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the Address text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the Address text field is blank");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the Contact Number text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the Contact Number text field is blank");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the Contact Person text field is blank");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the Contact Person text field is blank");
 
         supplierTable.setRowSelectionInterval(0,2);
         supplierNameTextField.setText("Updated Supplier 1");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(SelectJustOneRowException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When there are multiple rows selected");
+        assertThrows(SelectJustOneRowException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When there are multiple rows selected");
 
         supplierTable.setRowSelectionInterval(0,0);
         supplierNameTextField.setText("Supplier 2");
         supplierAddressTextField.setText("Updated Address 1");
         supplierContactNumberTextField.setText("19273173101");
         supplierContactPersonTextField.setText("Updated Person 1");
-        assertThrows(NameAlreadyExistsException.class, () -> supplierFormActions.isEditSupplierSuccessful(), "When the inputted name already exist");
+        assertThrows(NameAlreadyExistsException.class, () -> supplierFormActions.validateIfEditingOfSupplierIsSuccessful(), "When the inputted name already exist");
     }
 
     @Test
     void deleting_supplier_when_successful(){
-        supplierFormActions.generateTableContents();
+        supplierFormActions.updateTableContents();
         supplierTable.setRowSelectionInterval(0,0);
-        assertDoesNotThrow(() -> supplierFormActions.isDeleteSupplierSuccessful(), "Deleting one Supplier");
+        assertDoesNotThrow(() -> supplierFormActions.validateIfDeletingOfSupplierIsSuccessful(), "Deleting one Supplier");
 
 
         List<Supplier> suppliers = viewEditDeleteSupplierRepository.getAllSupplier();
         assertEquals(2, suppliers.size(), "Check if there are 2 Suppliers after deleting one");
 
-        supplierFormActions.generateTableContents();
-        supplierTable.setRowSelectionInterval(0,2);
-        assertDoesNotThrow(() -> supplierFormActions.isDeleteSupplierSuccessful(), "Deleting two Supplier");
+        supplierFormActions.updateTableContents();
+        supplierTable.setRowSelectionInterval(0,1);
+        assertDoesNotThrow(() -> supplierFormActions.validateIfDeletingOfSupplierIsSuccessful(), "Deleting two Supplier");
 
         List<Supplier> suppliers2 = viewEditDeleteSupplierRepository.getAllSupplier();
         assertEquals(0, suppliers2.size(), "Check if there are 0 Suppliers after deleting two");
@@ -287,9 +287,9 @@ class SupplierFormActionsTest {
 
     @Test
     void deleting_supplier_when_not_successful(){
-        supplierFormActions.generateTableContents();
+        supplierFormActions.updateTableContents();
         supplierTable.clearSelection();
-        assertThrows(SelectOneOrMoreRowException.class, () -> supplierFormActions.isDeleteSupplierSuccessful(), "When there are no row selected");
+        assertThrows(SelectOneOrMoreRowException.class, () -> supplierFormActions.validateIfDeletingOfSupplierIsSuccessful(), "When there are no row selected");
 
         List<Supplier> suppliers = viewEditDeleteSupplierRepository.getAllSupplier();
         assertEquals(3, suppliers.size(), "Check if there are no suppliers that were deleted");

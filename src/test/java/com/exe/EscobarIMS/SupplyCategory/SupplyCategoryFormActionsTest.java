@@ -130,7 +130,7 @@ class SupplyCategoryFormActionsTest {
 
     @Test
     void editing_supply_category_name_when_successful(){
-        supplyCategoryFormActions.generateTableContents();
+        supplyCategoryFormActions.updateTableContents();
         supplyCategoryTable.setRowSelectionInterval(0,0);
         supplyCategoryNameTextField.setText("Supply Category 4");
         assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
@@ -143,7 +143,7 @@ class SupplyCategoryFormActionsTest {
 
     @Test
     void editing_supply_category_name_when_not_successful(){
-        supplyCategoryFormActions.generateTableContents();
+        supplyCategoryFormActions.updateTableContents();
         supplyCategoryTable.clearSelection();
         supplyCategoryNameTextField.setText("Supply Category 4");
         assertThrows(SelectJustOneRowException.class, () -> supplyCategoryFormActions.validateIfEditingOfSupplyCategoryIsSuccessful());
@@ -163,7 +163,7 @@ class SupplyCategoryFormActionsTest {
 
     @Test
     void deleting_supply_category_name_when_successful(){
-        supplyCategoryFormActions.generateTableContents();
+        supplyCategoryFormActions.updateTableContents();
         supplyCategoryTable.setRowSelectionInterval(0,0);
         assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful(), "Deleting one supply category");
 
@@ -171,8 +171,8 @@ class SupplyCategoryFormActionsTest {
         List<SupplyCategory> supplyCategories = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
         assertEquals(2, supplyCategories.size(), "Check if there are 2 supply categories after deleting one");
 
-        supplyCategoryFormActions.generateTableContents();
-        supplyCategoryTable.setRowSelectionInterval(0,2);
+        supplyCategoryFormActions.updateTableContents();
+        supplyCategoryTable.setRowSelectionInterval(0,1);
         assertDoesNotThrow(() -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful(), "Deleting two supply category");
 
         List<SupplyCategory> supplyCategories2 = viewEditDeleteSupplyCategoryRepository.getAllSupplyCategories();
@@ -181,7 +181,7 @@ class SupplyCategoryFormActionsTest {
 
     @Test
     void deleting_supply_category_name_when_not_successful(){
-        supplyCategoryFormActions.generateTableContents();
+        supplyCategoryFormActions.updateTableContents();
         supplyCategoryTable.clearSelection();
         assertThrows(SelectOneOrMoreRowException.class, () -> supplyCategoryFormActions.validateIfDeletingOfSupplyCategoryIsSuccessful());
 

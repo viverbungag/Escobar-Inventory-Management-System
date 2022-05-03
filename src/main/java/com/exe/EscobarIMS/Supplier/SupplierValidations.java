@@ -23,7 +23,7 @@ public class SupplierValidations {
         String newSupplierName = supplierNameTextField.getText();
 
         if (validations.isNotSelectingOneTableRow(unitOfMeasurementTable)){
-            throw new SelectJustOneRowException("Number of rows: " + unitOfMeasurementTable.getSelectedRowCount() + ", Should be not equals to 1");
+            throw new SelectJustOneRowException("Number of selected rows: " + unitOfMeasurementTable.getSelectedRowCount() + ", Should be always 1");
         }
 
         if(validations.isTextFieldEmpty(supplierNameTextField)) {

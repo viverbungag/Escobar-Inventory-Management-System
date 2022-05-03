@@ -1,8 +1,6 @@
 package com.exe.EscobarIMS.Supply;
 
-import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
-import com.exe.EscobarIMS.Utilities.Exceptions.NumericalValuesOnlyException;
-import com.exe.EscobarIMS.Utilities.Exceptions.PositiveValuesOnlyException;
+import com.exe.EscobarIMS.Utilities.Exceptions.*;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,15 +25,19 @@ public class SupplyValidations {
         }
 
         if(!validations.isTextFieldContainingOnlyDecimalValues(minimumQuantityTextField)){
-            throw new NumericalValuesOnlyException("The String: " + minimumQuantityTextField.getText() + " - should just contain a decimal value");
+            throw new InvalidMinimumQuantityException("The String: " + minimumQuantityTextField.getText() + " - should just contain a decimal value");
         }
 
         if(validations.isTextFieldNegativeValue(minimumQuantityTextField)){
-            throw new PositiveValuesOnlyException("The Value: " + minimumQuantityTextField.getText() + " - should not be negative");
+            throw new InvalidMinimumQuantityException("The Value: " + minimumQuantityTextField.getText() + " - should not be negative");
         }
     }
 
-    public void validateIfEditingIsAllowed(JTextField supplyNameTextField, JTextField minimumQuantityTextField){
+    public void validateIfEditingIsAllowed(JTextField supplyNameTextField, JTextField minimumQuantityTextField, JTable supplyTable){
+        if (validations.isNotSelectingOneTableRow(supplyTable)){
+            throw new SelectJustOneRowException("Number of selected rows: " + supplyTable.getSelectedRowCount() + ", Should be always 1");
+        }
+
         if (validations.isTextFieldEmpty(supplyNameTextField)){
             throw new FillOutAllTextFieldsException("The Supply Name Text Field is empty");
         }
@@ -45,11 +47,11 @@ public class SupplyValidations {
         }
 
         if(!validations.isTextFieldContainingOnlyDecimalValues(minimumQuantityTextField)){
-            throw new NumericalValuesOnlyException("The String: " + minimumQuantityTextField.getText() + " - should just contain a decimal value");
+            throw new InvalidMinimumQuantityException("The String: " + minimumQuantityTextField.getText() + " - should just contain a decimal value");
         }
 
         if(validations.isTextFieldNegativeValue(minimumQuantityTextField)){
-            throw new PositiveValuesOnlyException("The Value: " + minimumQuantityTextField.getText() + " - should not be negative");
+            throw new InvalidMinimumQuantityException("The Value: " + minimumQuantityTextField.getText() + " - should not be negative");
         }
     }
 

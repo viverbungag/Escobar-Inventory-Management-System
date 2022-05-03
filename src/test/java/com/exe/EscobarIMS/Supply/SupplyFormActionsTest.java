@@ -8,9 +8,7 @@ import com.exe.EscobarIMS.SupplyCategory.AddSupplyCategory.AddSupplyCategoryRepo
 import com.exe.EscobarIMS.SupplyCategory.SupplyCategory;
 import com.exe.EscobarIMS.UnitOfMeasurement.AddUnitOfMeasurement.AddUnitOfMeasurementRepository;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurement;
-import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
-import com.exe.EscobarIMS.Utilities.Exceptions.NumericalValuesOnlyException;
-import com.exe.EscobarIMS.Utilities.Exceptions.PositiveValuesOnlyException;
+import com.exe.EscobarIMS.Utilities.Exceptions.*;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,7 +83,7 @@ public class SupplyFormActionsTest {
         supplyTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {},
                 new String [] {
-                        "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity, Is below Minimum Quantity?"
+                        "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Is below Minimum Quantity?"
                 })
         {
             Class[] types = new Class [] {
@@ -97,7 +95,7 @@ public class SupplyFormActionsTest {
             }
         });
         currentPageNumberTextField.setText("1");
-        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Is below Minimum Quantity?"}));
+        sortingMethodComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Supply Name", "Supply Category", "Supplier", "Quantity", "Unit of Measurement", "Minimum Quantity", "Is below Minimum Quantity?"}));
         contentLimitComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "5", "15", "30", "50", "100" }));
     }
 
@@ -111,6 +109,8 @@ public class SupplyFormActionsTest {
         supplyFormActions.setSupplierNameComboBox(supplierNameComboBox);
         supplyFormActions.setUnitOfMeasurementNameComboBox(unitOfMeasurementNameComboBox);
         supplyFormActions.setSupplyCategoryNameComboBox(supplyCategoryNameComboBox);
+        supplyFormActions.setSupplyTable(supplyTable);
+        supplyFormActions.setSortingMethodComboBox(sortingMethodComboBox);
     }
 
     @BeforeAll
@@ -200,7 +200,7 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 4");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
-        assertDoesNotThrow(() -> supplyFormActions.isAddSupplySuccessful());
+        assertDoesNotThrow(() -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         Supply supply = supplyRepository.findBySupplyName("Supply 4");
         assertNotNull(supply, "Check if the supply added is existing");
@@ -220,39 +220,102 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 4");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.isAddSupplySuccessful());
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("");
         supplierNameComboBox.setSelectedItem("Supplier 4");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.isAddSupplySuccessful());
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("one");
         supplierNameComboBox.setSelectedItem("Supplier 4");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
-        assertThrows(NumericalValuesOnlyException.class, () -> supplyFormActions.isAddSupplySuccessful());
+        assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
 
         supplyNameTextField.setText("Supply 4");
         minimumQuantityTextField.setText("-1");
         supplierNameComboBox.setSelectedItem("Supplier 4");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 4");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 4");
-        assertThrows(PositiveValuesOnlyException.class, () -> supplyFormActions.isAddSupplySuccessful());
+        assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfAddingOfSupplyIsSuccessful());
     }
 
     @Test
     void editing_supply_when_successful(){
         supplyFormActions.generateComboBoxContents();
-        supplyNameTextField.setText("Supply 5");
+        supplyFormActions.updateTableContents();
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyNameTextField.setText("Updated Supply 1");
         minimumQuantityTextField.setText("13");
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertDoesNotThrow(() -> supplyFormActions.isEditSupplySuccessful());
+        assertDoesNotThrow(() -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+
+        Supply supply = supplyRepository.findBySupplyName("Updated Supply 1");
+        List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
+        assertNotNull(supplies, "Check if the editing of supplies was successful");
+        assertEquals(13, supply.getMinimumQuantity());
+        assertEquals("Supplier 2", supply.getSupplierName());
+        assertEquals("Unit of Measurement 3", supply.getUnitOfMeasurementName());
+        assertEquals("Supply Category 2", supply.getSupplyCategoryName());
     }
 
+    @Test
+    void editing_supply_when_not_successful(){
+        supplyFormActions.generateComboBoxContents();
+        supplyFormActions.updateTableContents();
+        supplyTable.clearSelection();
+        supplyNameTextField.setText("Updated Supply 1");
+        minimumQuantityTextField.setText("13");
+        supplierNameComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        assertThrows(SelectJustOneRowException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyNameTextField.setText("Updated Supply 1");
+        minimumQuantityTextField.setText("Not a number");
+        supplierNameComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyNameTextField.setText("");
+        minimumQuantityTextField.setText("Not a number");
+        supplierNameComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyNameTextField.setText("Updated Supply 1");
+        minimumQuantityTextField.setText("");
+        supplierNameComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+    }
+
+    @Test
+    void deleting_supply_when_successful(){
+        supplyFormActions.updateTableContents();
+        supplyTable.setRowSelectionInterval(0,0);
+        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplySuccessful(), "Deleting one supplier");
+
+        List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
+        assertEquals(2, supplies.size(), "Check if there are 2 supplies after deleting one");
+
+        supplyFormActions.updateTableContents();
+        supplyTable.setRowSelectionInterval(0,1);
+        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplySuccessful(), "Deleting two supplies");
+
+        List<Supply> supplies2 = viewEditDeleteSupplyRepository.getAllSupply();
+        assertEquals(0, supplies2.size(), "Check if there are 0 supplies after deleting two");
+    }
 }

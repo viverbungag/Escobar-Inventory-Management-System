@@ -12,10 +12,15 @@ import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.*;
 
 @Component
 public class SupplyFormActions extends SortAndPaginationMethods {
@@ -36,6 +41,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     ViewEditDeleteSupplyCategoryController viewEditDeleteSupplyCategoryController;
 
     @Autowired
+    SupplyRepository supplyRepository;
+
+    @Autowired
     MessageDialogues messageDialogues;
 
     @Autowired
@@ -43,6 +51,7 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
     @Autowired
     SupplyValidations supplyValidations;
+
 
     private JTextField supplyNameTextField;
     private JTextField minimumQuantityTextField;
@@ -83,9 +92,16 @@ public class SupplyFormActions extends SortAndPaginationMethods {
     private void resetComponentsValuesToDefault(){
         supplyNameTextField.setText("");
         minimumQuantityTextField.setText("");
-        supplierNameComboBox.setSelectedItem("");
-        unitOfMeasurementNameComboBox.setSelectedItem("");
-        supplyCategoryNameComboBox.setSelectedItem("");
+        supplierNameComboBox.setSelectedIndex(0);
+        unitOfMeasurementNameComboBox.setSelectedIndex(0);
+        supplyCategoryNameComboBox.setSelectedIndex(0);
+    }
+
+    @Override
+    public int getNumberOfPages(){
+        int selectedContentLimit = getCurrentSelectedPageLimit();
+        int numberOfPages = viewEditDeleteSupplyController.getTotalNumberOfPages(selectedContentLimit);
+        return numberOfPages;
     }
 
     public void generateSupplierNameComboBoxItems(){
@@ -115,15 +131,172 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         generateSupplyCategoryComboBoxItems();
     }
 
+
+    private void addTableRow(Supply supply,
+                             DefaultTableModel tableModel){
+        String[] itemsOfRow = new String[]{
+                supply.getSupplyName(),
+                supply.getSupplyCategoryName(),
+                supply.getSupplierName(),
+                String.valueOf(supply.getSupplyQuantity()),
+                supply.getUnitOfMeasurementName(),
+                String.valueOf(supply.getMinimumQuantity()),
+                String.valueOf(supply.getInMinimumQuantity())};
+        tableModel.addRow(itemsOfRow);
+    }
+
+    private void deleteExistingTableContents(){
+        DefaultTableModel tableModel = (DefaultTableModel) supplyTable.getModel();
+        tableModel.setRowCount(0);
+    }
+
+    @Override
+    public Sort getSortingComboBoxValue(){
+        String sortingMethodName = sortingMethodComboBox.getSelectedItem().toString();
+        enableSortRadioButtons();
+
+        switch(sortingMethodName){
+            case "Supply Name":
+                return Sort.by("supply.supply_name");
+            case "Supply Category":
+                return Sort.by("supply.supply_category");
+            case "Supplier":
+                return Sort.by("supplier.supplier_name");
+            case "Quantity":
+                return Sort.by("supply.supply_quantity");
+            case "Unit of Measurement":
+                return Sort.by("unit_of_measurement.unit_of_measurement_name");
+            case "Minimum Quantity":
+                return Sort.by("supply.minimum_quantity");
+            case "Is below Minimum Quantity?":
+                return Sort.by("supply.in_minimum_quantity");
+            default:
+                disableSortRadioButtons();
+                return Sort.unsorted();
+        }
+    }
+
+    public void generateTableContents(){
+        DefaultTableModel tableModel = (DefaultTableModel) supplyTable.getModel();
+        int currentPageNumber = getCurrentPageNumber();
+        int currentSelectedPageLimit = getCurrentSelectedPageLimit();
+        Sort sort = getSortingMethod();
+
+        List<Supply> supplies =  viewEditDeleteSupplyController
+                .getAllPagedSupplies(currentPageNumber, currentSelectedPageLimit, sort);
+
+        for (Supply supply :supplies){
+            addTableRow(supply, tableModel);
+        }
+    }
+
+    private List<String> generateToBeDeletedList(){
+        List<String> supplyNames = new ArrayList<>();
+        int[] selectedTableRows = supplyTable.getSelectedRows();
+        for (int selectedTableRow:selectedTableRows){
+
+            String selectedSupplierName =  supplyTable
+                    .getValueAt(selectedTableRow,
+                            SUPPLIER_NAME_COLUMN_NUMBER).toString();
+
+            supplyNames.add(selectedSupplierName);
+        }
+        return supplyNames;
+    }
+
+    @Override
+    public void updateTableContents(){
+        if (shouldUpdateTableContents){
+            if(validations.hasExistingTableContents(supplyTable)){
+                deleteExistingTableContents();
+            }
+            generateTableContents();
+        }else{
+            resetShouldUpdateTableContentsVariableToDefault();
+        }
+    }
+
+    private String getSelectedRowSupplyName(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedSupplyName = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_NAME_COLUMN_NUMBER)
+                .toString();
+
+        return selectedSupplyName;
+    }
+
+    private String getSelectedRowSupplyCategory(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedSupplyCategory = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_CATEGORY_COLUMN_NUMBER)
+                .toString();
+
+        return selectedSupplyCategory;
+    }
+
+    private String getSelectedRowSupplier(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedSupplier = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_SUPPLIER_COLUMN_NUMBER)
+                .toString();
+
+        return selectedSupplier;
+    }
+
+    private String getSelectedRowQuantity(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedQuantity = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_QUANTITY_COLUMN_NUMBER)
+                .toString();
+
+        return selectedQuantity;
+    }
+
+    private String getSelectedRowUnitOfMeasurement(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedUnitOfMeasurement = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_UNIT_OF_MEASUREMENT_COLUMN_NUMBER)
+                .toString();
+
+        return selectedUnitOfMeasurement;
+    }
+
+    private String getSelectedRowMinimumQuantity(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedMinimumQuantity = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_MINIMUM_QUANTITY_COLUMN_NUMBER)
+                .toString();
+
+        return selectedMinimumQuantity;
+    }
+
+    private String getSelectedRowIsBelowMinimumQuantity(){
+        int selectedTableRow = supplyTable.getSelectedRow();
+        String selectedIsBelowMinimumQuantity = supplyTable
+                .getValueAt(selectedTableRow,
+                        SUPPLY_IN_MINIMUM_QUANTITY_COLUMN_NUMBER)
+                .toString();
+
+        return selectedIsBelowMinimumQuantity;
+    }
+
+
+
     private void validateIfAddingIsAllowed(){
         supplyValidations.validateIfAddingIsAllowed(supplyNameTextField, minimumQuantityTextField);
     }
 
     private void validateIfEditingIsAllowed(){
-        supplyValidations.validateIfEditingIsAllowed(supplyNameTextField, minimumQuantityTextField);
+        supplyValidations.validateIfEditingIsAllowed(supplyNameTextField, minimumQuantityTextField, supplyTable);
     }
 
-    public void isAddSupplySuccessful(){
+    public void validateIfAddingOfSupplyIsSuccessful(){
         validateIfAddingIsAllowed();
         String supplyName = supplyNameTextField.getText();
         Double minimumQuantity = Double.valueOf(minimumQuantityTextField.getText());
@@ -134,14 +307,19 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         addSupplyController.addNewSupply(supplyName, supplierName, unitOfMeasurementName, supplyCategoryName, minimumQuantity);
     }
 
-    public void isEditSupplySuccessful(){
+    public void validateIfEditingOfSupplySuccessful(){
         validateIfEditingIsAllowed();
-        String supplyName = supplyNameTextField.getText();
-        Double minimumQuantity = Double.valueOf(minimumQuantityTextField.getText());
-        String supplierName = supplierNameComboBox.getSelectedItem().toString();
-        String unitOfMeasurementName = unitOfMeasurementNameComboBox.getSelectedItem().toString();
-        String supplyCategoryName = supplyCategoryNameComboBox.getSelectedItem().toString();
+        String selectedSupplyName = getSelectedRowSupplyName();
+        String newSupplyName = supplyNameTextField.getText();
+        Double newMinimumQuantity = Double.valueOf(minimumQuantityTextField.getText());
+        String newSupplierName = supplierNameComboBox.getSelectedItem().toString();
+        String newUnitOfMeasurementName = unitOfMeasurementNameComboBox.getSelectedItem().toString();
+        String newSupplyCategoryName = supplyCategoryNameComboBox.getSelectedItem().toString();
 
+        viewEditDeleteSupplyController.editSupplyById(selectedSupplyName, newSupplyName, newMinimumQuantity, newSupplierName, newUnitOfMeasurementName, newSupplyCategoryName);
+    }
+
+    public void validateIfDeletingOfSupplySuccessful(){
 
     }
 }

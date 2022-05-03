@@ -209,7 +209,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
                 supplierContactNumberTextField, supplierContactPersonTextField);
     }
 
-    public void isAddSupplierSuccessful(){
+    public void validateIfAddingOfSupplierIsSuccessful(){
         validateIfAddingIsAllowed();
         String newName = supplierNameTextField.getText();
         String newAddress = supplierAddressTextField.getText();
@@ -220,7 +220,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     }
 
-    public void isEditSupplierSuccessful(){
+    public void validateIfEditingOfSupplierIsSuccessful(){
         String newName = supplierNameTextField.getText();
         String newAddress = supplierAddressTextField.getText();
         String newContactNumber = supplierContactNumberTextField.getText();
@@ -237,7 +237,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     }
 
-    public void isDeleteSupplierSuccessful(){
+    public void validateIfDeletingOfSupplierIsSuccessful(){
         validateIfDeletingIsAllowed();
         List<String> supplierNames = generateToBeDeletedList();
 
@@ -268,7 +268,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     public void editSupplierButtonActionPerformed() {
         try{
-            isEditSupplierSuccessful();
+            validateIfEditingOfSupplierIsSuccessful();
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectJustOneRowException e){
@@ -292,7 +292,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     public void deleteSupplierButtonActionPerformed() {
         try{
-            isDeleteSupplierSuccessful();
+            validateIfDeletingOfSupplierIsSuccessful();
             messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
@@ -303,7 +303,7 @@ public class SupplierFormActions extends SortAndPaginationMethods {
 
     public void addSupplierButtonActionPerformed() {
         try{
-            isAddSupplierSuccessful();
+            validateIfAddingOfSupplierIsSuccessful();
             messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(NameAlreadyExistsException e){

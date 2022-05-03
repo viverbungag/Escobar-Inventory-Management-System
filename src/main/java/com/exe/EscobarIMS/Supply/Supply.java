@@ -51,11 +51,11 @@ public class Supply {
         this.supplier = supplier;
         this.unitOfMeasurement = unitOfMeasurement;
         this.supplyCategory = supplyCategory;
-        validateIfInMinimum();
+        updateInMinimumQuantity();
     }
 
 
-    public void validateIfInMinimum(){
+    public void updateInMinimumQuantity(){
         if (supplyQuantity < minimumQuantity){
             inMinimumQuantity = true;
         }

@@ -179,5 +179,13 @@ public class MessageDialogues {
                     ERROR_MESSAGE);
     }
 
+    public void showInvalidMinimumQuantityMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    INVALID_MINIMUM_QUANTITY_NUMBER_MESSAGE,
+                    ERROR_TITLE,
+                    ERROR_MESSAGE);
+    }
+
 
 }

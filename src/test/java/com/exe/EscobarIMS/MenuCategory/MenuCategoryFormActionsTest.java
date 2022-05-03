@@ -129,7 +129,7 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void editing_menu_category_name_when_successful(){
-        menuCategoryFormActions.generateTableContents();
+        menuCategoryFormActions.updateTableContents();
         menuCategoryTable.setRowSelectionInterval(0,0);
         menuCategoryNameTextField.setText("Updated Menu Category 1");
         assertDoesNotThrow(() -> menuCategoryFormActions.validateIfEditingOfMenuCategoryIsSuccessful());
@@ -142,7 +142,7 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void editing_menu_category_name_when_not_successful(){
-        menuCategoryFormActions.generateTableContents();
+        menuCategoryFormActions.updateTableContents();
         menuCategoryTable.clearSelection();
         menuCategoryNameTextField.setText("Updated Menu Category 1");
         assertThrows(SelectJustOneRowException.class, () -> menuCategoryFormActions.validateIfEditingOfMenuCategoryIsSuccessful());
@@ -162,7 +162,7 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void deleting_menu_category_name_when_successful(){
-        menuCategoryFormActions.generateTableContents();
+        menuCategoryFormActions.updateTableContents();
         menuCategoryTable.setRowSelectionInterval(0,0);
         assertDoesNotThrow(() -> menuCategoryFormActions.validateIfDeletingOfMenuCategoryIsSuccessful());
 
@@ -170,8 +170,8 @@ class MenuCategoryFormActionsTest {
         List<MenuCategory> menuCategories = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
         assertEquals(2, menuCategories.size(), "Check if there are 2 menu categories after deleting one");
 
-        menuCategoryFormActions.generateTableContents();
-        menuCategoryTable.setRowSelectionInterval(0,2);
+        menuCategoryFormActions.updateTableContents();
+        menuCategoryTable.setRowSelectionInterval(0,1);
         assertDoesNotThrow(() -> menuCategoryFormActions.validateIfDeletingOfMenuCategoryIsSuccessful());
 
         List<MenuCategory> menuCategories2 = viewEditDeleteMenuCategoryRepository.getAllMenuCategories();
@@ -180,7 +180,7 @@ class MenuCategoryFormActionsTest {
 
     @Test
     void deleting_menu_category_name_when_not_successful(){
-        menuCategoryFormActions.generateTableContents();
+        menuCategoryFormActions.updateTableContents();
         menuCategoryTable.clearSelection();
         assertThrows(SelectOneOrMoreRowException.class, () -> menuCategoryFormActions.validateIfDeletingOfMenuCategoryIsSuccessful());
 

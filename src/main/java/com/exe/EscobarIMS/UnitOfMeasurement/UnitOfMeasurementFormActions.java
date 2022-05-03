@@ -174,16 +174,15 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
         unitOfMeasurementValidations.validateIfAddingIsAllowed(unitOfMeasurementNameTextField, unitOfMeasurementAbbreviationTextField);
     }
 
-    public void isAddUnitOfMeasurementSuccessful(){
+    public void validateIfAddingOfUnitOfMeasurementIsSuccessful(){
         validateIfAddingIsAllowed();
         String newMenuCategoryName = unitOfMeasurementNameTextField.getText();
         String newUAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
         addUnitOfMeasurementController.addNewMenuCategory(newMenuCategoryName, newUAbbreviation);
 
-
     }
 
-    public void isEditUnitOfMeasurementSuccessful(){
+    public void validateIfEditingOfUnitOfMeasurementIsSuccessful(){
         String newUnitOfMeasurementName = unitOfMeasurementNameTextField.getText();
         String newAbbreviation = unitOfMeasurementAbbreviationTextField.getText();
         validateIfEditingIsAllowed();
@@ -198,7 +197,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     }
 
-    public void isDeleteUnitOfMeasurementSuccessful(){
+    public void validateIfDeletingOfUnitOfMeasurementIsSuccessful(){
         validateIfDeletingIsAllowed();
         List<String> unitOfMeasurementNames = generateToBeDeletedList(unitOfMeasurementTable);
 
@@ -225,7 +224,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void editUnitOfMeasurementButtonActionPerformed() {
         try{
-            isEditUnitOfMeasurementSuccessful();
+            validateIfEditingOfUnitOfMeasurementIsSuccessful();
             messageDialogues.showSuccessfullyEditedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectJustOneRowException e){
@@ -245,7 +244,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void deleteUnitOfMeasurementButtonActionPerformed() {
         try{
-            isDeleteUnitOfMeasurementSuccessful();
+            validateIfDeletingOfUnitOfMeasurementIsSuccessful();
             messageDialogues.showSuccessfullyDeletedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(SelectOneOrMoreRowException e){
@@ -256,7 +255,7 @@ public class UnitOfMeasurementFormActions extends SortAndPaginationMethods {
 
     public void addUnitOfMeasurementButtonActionPerformed() {
         try{
-            isAddUnitOfMeasurementSuccessful();
+            validateIfAddingOfUnitOfMeasurementIsSuccessful();
             messageDialogues.showSuccessfullyAddedUnitOfMeasurementMessageDialogue();
             clearTextField();
         }catch(NameAlreadyExistsException e){
