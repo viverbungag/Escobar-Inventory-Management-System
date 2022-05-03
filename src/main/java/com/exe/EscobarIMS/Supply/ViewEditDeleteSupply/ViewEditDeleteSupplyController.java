@@ -53,6 +53,11 @@ public class ViewEditDeleteSupplyController {
     }
 
     @Transactional
+    public void deleteAllSupplyByName(List<String> supplyNames){
+        viewEditDeleteSupplyRepository.deleteAllSupplyByName(supplyNames);
+    }
+
+    @Transactional
     public void editSupplyById(String selectedSupplyName, String newSupplyName,
                                Double newMinimumQuantity, String newSupplierName,
                                String newUnitOfMeasurementName, String newSupplyCategoryName){

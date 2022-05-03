@@ -27,9 +27,9 @@ public interface ViewEditDeleteSupplyRepository extends JpaRepository<Supply, Lo
 
     @Modifying
     @Query(value = "DELETE FROM #{#entityName}" +
-            " WHERE supply_name IN :supplierNames",
+            " WHERE supply_name IN :supplyNames",
             nativeQuery = true)
-    void deleteAllSupplyByName(@Param("supplierNames")List<String> names);
+    void deleteAllSupplyByName(@Param("supplyNames")List<String> names);
 
     @Modifying
     @Query(value = "UPDATE #{#entityName}" +

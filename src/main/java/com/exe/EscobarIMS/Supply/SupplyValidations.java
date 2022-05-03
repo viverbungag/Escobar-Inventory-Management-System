@@ -55,4 +55,10 @@ public class SupplyValidations {
         }
     }
 
+    public void validateIfDeletingIsAllowed(JTable supplyTable){
+        if (validations.isNotSelectingATableRow(supplyTable)){
+            throw new SelectOneOrMoreRowException("Number of rows: " + supplyTable.getSelectedRowCount() + ", Should be greater than 0");
+        }
+    }
+
 }

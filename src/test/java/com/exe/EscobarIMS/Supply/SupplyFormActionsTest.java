@@ -254,7 +254,7 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertDoesNotThrow(() -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+        assertDoesNotThrow(() -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         Supply supply = supplyRepository.findBySupplyName("Updated Supply 1");
         List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
@@ -275,7 +275,7 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertThrows(SelectJustOneRowException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+        assertThrows(SelectJustOneRowException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
@@ -283,7 +283,7 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+        assertThrows(InvalidMinimumQuantityException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("");
@@ -291,7 +291,7 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
 
         supplyTable.setRowSelectionInterval(0,0);
         supplyNameTextField.setText("Updated Supply 1");
@@ -299,23 +299,33 @@ public class SupplyFormActionsTest {
         supplierNameComboBox.setSelectedItem("Supplier 2");
         unitOfMeasurementNameComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryNameComboBox.setSelectedItem("Supply Category 2");
-        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplySuccessful());
+        assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
     }
 
     @Test
     void deleting_supply_when_successful(){
         supplyFormActions.updateTableContents();
         supplyTable.setRowSelectionInterval(0,0);
-        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplySuccessful(), "Deleting one supplier");
+        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplyIsSuccessful(), "Deleting one supplier");
 
         List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
         assertEquals(2, supplies.size(), "Check if there are 2 supplies after deleting one");
 
         supplyFormActions.updateTableContents();
         supplyTable.setRowSelectionInterval(0,1);
-        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplySuccessful(), "Deleting two supplies");
+        assertDoesNotThrow(() -> supplyFormActions.validateIfDeletingOfSupplyIsSuccessful(), "Deleting two supplies");
 
         List<Supply> supplies2 = viewEditDeleteSupplyRepository.getAllSupply();
         assertEquals(0, supplies2.size(), "Check if there are 0 supplies after deleting two");
+    }
+
+    @Test
+    void deleting_supply_when_not_successful(){
+        supplyFormActions.updateTableContents();
+        supplyTable.clearSelection();
+        assertThrows(SelectOneOrMoreRowException.class, () -> supplyFormActions.validateIfDeletingOfSupplyIsSuccessful(), "When there are no row selected");
+
+        List<Supply> supplies = viewEditDeleteSupplyRepository.getAllSupply();
+        assertEquals(3, supplies.size(), "Check if there are no supply deleted");
     }
 }

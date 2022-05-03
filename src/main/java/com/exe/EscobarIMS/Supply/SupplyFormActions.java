@@ -195,11 +195,11 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         int[] selectedTableRows = supplyTable.getSelectedRows();
         for (int selectedTableRow:selectedTableRows){
 
-            String selectedSupplierName =  supplyTable
+            String selectedSupplyName =  supplyTable
                     .getValueAt(selectedTableRow,
-                            SUPPLIER_NAME_COLUMN_NUMBER).toString();
+                            SUPPLY_NAME_COLUMN_NUMBER).toString();
 
-            supplyNames.add(selectedSupplierName);
+            supplyNames.add(selectedSupplyName);
         }
         return supplyNames;
     }
@@ -296,6 +296,10 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         supplyValidations.validateIfEditingIsAllowed(supplyNameTextField, minimumQuantityTextField, supplyTable);
     }
 
+    private void validateIfDeletingIsAllowed(){
+        supplyValidations.validateIfDeletingIsAllowed(supplyTable);
+    }
+
     public void validateIfAddingOfSupplyIsSuccessful(){
         validateIfAddingIsAllowed();
         String supplyName = supplyNameTextField.getText();
@@ -307,7 +311,7 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         addSupplyController.addNewSupply(supplyName, supplierName, unitOfMeasurementName, supplyCategoryName, minimumQuantity);
     }
 
-    public void validateIfEditingOfSupplySuccessful(){
+    public void validateIfEditingOfSupplyIsSuccessful(){
         validateIfEditingIsAllowed();
         String selectedSupplyName = getSelectedRowSupplyName();
         String newSupplyName = supplyNameTextField.getText();
@@ -319,7 +323,34 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         viewEditDeleteSupplyController.editSupplyById(selectedSupplyName, newSupplyName, newMinimumQuantity, newSupplierName, newUnitOfMeasurementName, newSupplyCategoryName);
     }
 
-    public void validateIfDeletingOfSupplySuccessful(){
+    public void validateIfDeletingOfSupplyIsSuccessful(){
+        validateIfDeletingIsAllowed();
+        List<String> supplyNames = generateToBeDeletedList();
 
+        viewEditDeleteSupplyController
+                .deleteAllSupplyByName(supplyNames);
     }
+
+    public void formWindowActivated(){
+        updateTableContents();
+        updateStateOfButtons();
+    }
+    public void formWindowOpened(JTable supplyTable){
+        supplyTable.setDefaultEditor(Object.class, null);
+    }
+
+    public void supplyTableMousePressed(){
+        String selectedSupplyName = getSelectedRowSupplyName();
+        String selectedSupplyMinimumQuantity = getSelectedRowMinimumQuantity();
+        String selectedSupplyCategory = getSelectedRowSupplyCategory();
+        String selectedSupplier = getSelectedRowSupplier();
+        String selectedUnitOfMeasurement = getSelectedRowUnitOfMeasurement();
+
+        supplyNameTextField.setText(selectedSupplyName);
+        minimumQuantityTextField.setText(selectedSupplyMinimumQuantity);
+        supplyCategoryNameComboBox.setSelectedItem(selectedSupplyCategory);
+        supplierNameComboBox.setSelectedItem(selectedSupplier);
+        unitOfMeasurementNameComboBox.setSelectedItem(selectedUnitOfMeasurement);
+    }
+
 }
