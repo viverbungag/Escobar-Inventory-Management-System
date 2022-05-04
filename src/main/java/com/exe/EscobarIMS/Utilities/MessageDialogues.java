@@ -211,5 +211,15 @@ public class MessageDialogues {
                     ERROR_MESSAGE);
     }
 
+    public void showSupplyAlreadyExistMessageDialogue(){
+        if (shouldShowMessageDialog)
+            showMessageDialog(null,
+                    SUPPLY_ALREADY_EXIST_MESSAGE,
+                    ERROR_TITLE,
+                    ERROR_MESSAGE);
+    }
+
+
+
 
 }

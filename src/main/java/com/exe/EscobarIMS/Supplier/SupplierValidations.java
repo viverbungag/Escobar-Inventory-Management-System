@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
-import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER;
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.SUPPLIER_NAME_COLUMN_NUMBER;
 
 @Component
 public class SupplierValidations {
@@ -43,7 +43,7 @@ public class SupplierValidations {
         }
 
         if (validations.isTextFieldEqualsToSelectedTableValue(supplierNameTextField,
-                unitOfMeasurementTable, UNIT_OF_MEASUREMENT_NAME_COLUMN_NUMBER)){
+                unitOfMeasurementTable, SUPPLIER_NAME_COLUMN_NUMBER)){
             return;
         }
 

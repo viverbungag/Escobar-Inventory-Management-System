@@ -53,8 +53,11 @@ public class ViewEditDeleteSupplyController {
     }
 
     @Transactional
-    public void deleteAllSupplyByName(List<String> supplyNames){
-        viewEditDeleteSupplyRepository.deleteAllSupplyByName(supplyNames);
+    public void deleteAllSupplyByNameAndSupplier(List<List<String>> supplyNamesAndSuppliers){
+        for (List<String> supplyNameAndSupplier: supplyNamesAndSuppliers){
+            Long supplierId = findSupplierIdByName(supplyNameAndSupplier.get(1));
+            viewEditDeleteSupplyRepository.deleteSupplyByNameAndSupplier(supplyNameAndSupplier.get(0), supplierId);
+        }
     }
 
     @Transactional

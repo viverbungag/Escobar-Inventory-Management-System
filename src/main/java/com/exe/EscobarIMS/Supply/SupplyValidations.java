@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.SUPPLY_NAME_COLUMN_NUMBER;
+import static com.exe.EscobarIMS.Utilities.Constants.TableColumnNumbers.SUPPLY_SUPPLIER_COLUMN_NUMBER;
+
 @Component
 public class SupplyValidations {
 
@@ -14,7 +17,10 @@ public class SupplyValidations {
     Validations validations;
 
     public void validateIfAddingIsAllowed(JTextField supplyNameTextField,
-                                          JTextField minimumQuantityTextField){
+                                          JTextField minimumQuantityTextField,
+                                          JComboBox supplierComboBox){
+        String supplyName = supplyNameTextField.getText();
+        String supplierName = supplierComboBox.getSelectedItem().toString();
 
         if (validations.isTextFieldEmpty(supplyNameTextField)){
             throw new FillOutAllTextFieldsException("The Supply Name Text Field is empty");
@@ -22,6 +28,10 @@ public class SupplyValidations {
 
         if (validations.isTextFieldEmpty(minimumQuantityTextField)){
             throw new FillOutAllTextFieldsException("The minimum quantity Text Field is empty");
+        }
+
+        if (validations.isSupplyExisting(supplyName, supplierName)){
+            throw new SupplyAlreadyExistException("The Supply name: " + supplyNameTextField.getText() + " and the supplier: " + supplierComboBox.getSelectedItem() + " is already an existing supply");
         }
 
         if(!validations.isTextFieldContainingOnlyDecimalValues(minimumQuantityTextField)){
@@ -33,7 +43,13 @@ public class SupplyValidations {
         }
     }
 
-    public void validateIfEditingIsAllowed(JTextField supplyNameTextField, JTextField minimumQuantityTextField, JTable supplyTable){
+    public void validateIfEditingIsAllowed(JTextField supplyNameTextField,
+                                           JTextField minimumQuantityTextField,
+                                           JComboBox supplierComboBox,
+                                           JTable supplyTable){
+        String supplyName = supplyNameTextField.getText();
+        String supplierName = supplierComboBox.getSelectedItem().toString();
+
         if (validations.isNotSelectingOneTableRow(supplyTable)){
             throw new SelectJustOneRowException("Number of selected rows: " + supplyTable.getSelectedRowCount() + ", Should be always 1");
         }
@@ -44,6 +60,17 @@ public class SupplyValidations {
 
         if (validations.isTextFieldEmpty(minimumQuantityTextField)){
             throw new FillOutAllTextFieldsException("The minimum quantity Text Field is empty");
+        }
+
+        if(validations.isTextFieldEqualsToSelectedTableValue(supplyNameTextField,
+                supplyTable, SUPPLY_NAME_COLUMN_NUMBER) &&
+        validations.isComboBoxEqualsToSelectedTableValue(supplierComboBox,
+                supplyTable, SUPPLY_SUPPLIER_COLUMN_NUMBER)){
+            return;
+        }
+
+        if (validations.isSupplyExisting(supplyName, supplierName)){
+            throw new SupplyAlreadyExistException("The Supply name: " + supplyNameTextField.getText() + " and the supplier: " + supplierComboBox.getSelectedItem() + " is already an existing supply");
         }
 
         if(!validations.isTextFieldContainingOnlyDecimalValues(minimumQuantityTextField)){

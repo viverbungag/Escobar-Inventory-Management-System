@@ -25,11 +25,16 @@ public interface ViewEditDeleteSupplyRepository extends JpaRepository<Supply, Lo
             nativeQuery = true)
     Page<Supply> getAllPagedSupplies(Pageable pageable);
 
+//    @Modifying
+//    @Query(value = "DELETE FROM #{#entityName}" +
+//            " WHERE supply_name IN :supplyNames AND supp",
+//            nativeQuery = true)
+//    void deleteAllSupplyByName(@Param("supplyNames")List<String> names, @Param("suppliers")List<String> suppliers);
     @Modifying
     @Query(value = "DELETE FROM #{#entityName}" +
-            " WHERE supply_name IN :supplyNames",
+            " WHERE supply_name = :supplyName AND supplier_id = :supplierId",
             nativeQuery = true)
-    void deleteAllSupplyByName(@Param("supplyNames")List<String> names);
+    void deleteSupplyByNameAndSupplier(@Param("supplyName")String name, @Param("supplierId")Long supplierId);
 
     @Modifying
     @Query(value = "UPDATE #{#entityName}" +

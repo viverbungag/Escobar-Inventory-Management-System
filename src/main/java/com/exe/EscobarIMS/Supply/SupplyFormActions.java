@@ -8,10 +8,7 @@ import com.exe.EscobarIMS.SupplyCategory.SupplyCategory;
 import com.exe.EscobarIMS.SupplyCategory.ViewEditDeleteSupplyCategory.ViewEditDeleteSupplyCategoryController;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurement;
 import com.exe.EscobarIMS.UnitOfMeasurement.ViewEditDeleteUnitOfMeasurement.ViewEditDeleteUnitOfMeasurementController;
-import com.exe.EscobarIMS.Utilities.Exceptions.FillOutAllTextFieldsException;
-import com.exe.EscobarIMS.Utilities.Exceptions.InvalidMinimumQuantityException;
-import com.exe.EscobarIMS.Utilities.Exceptions.SelectJustOneRowException;
-import com.exe.EscobarIMS.Utilities.Exceptions.SelectOneOrMoreRowException;
+import com.exe.EscobarIMS.Utilities.Exceptions.*;
 import com.exe.EscobarIMS.Utilities.MessageDialogues;
 import com.exe.EscobarIMS.Utilities.SortAndPaginationMethods;
 import com.exe.EscobarIMS.Utilities.Validations;
@@ -214,8 +211,8 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         }
     }
 
-    private List<String> generateToBeDeletedList(){
-        List<String> supplyNames = new ArrayList<>();
+    private List<List<String>> generateToBeDeletedList(){
+        List<List<String>> supplyNamesAndSuppliers = new ArrayList<>();
         int[] selectedTableRows = supplyTable.getSelectedRows();
         for (int selectedTableRow:selectedTableRows){
 
@@ -223,9 +220,13 @@ public class SupplyFormActions extends SortAndPaginationMethods {
                     .getValueAt(selectedTableRow,
                             SUPPLY_NAME_COLUMN_NUMBER).toString();
 
-            supplyNames.add(selectedSupplyName);
+            String selectedSupplier =  supplyTable
+                    .getValueAt(selectedTableRow,
+                            SUPPLY_SUPPLIER_COLUMN_NUMBER).toString();
+
+            supplyNamesAndSuppliers.add(List.of(selectedSupplyName, selectedSupplier));
         }
-        return supplyNames;
+        return supplyNamesAndSuppliers;
     }
 
     @Override
@@ -293,11 +294,11 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
 
     private void validateIfAddingIsAllowed(){
-        supplyValidations.validateIfAddingIsAllowed(supplyNameTextField, minimumQuantityTextField);
+        supplyValidations.validateIfAddingIsAllowed(supplyNameTextField, minimumQuantityTextField, supplierComboBox);
     }
 
     private void validateIfEditingIsAllowed(){
-        supplyValidations.validateIfEditingIsAllowed(supplyNameTextField, minimumQuantityTextField, supplyTable);
+        supplyValidations.validateIfEditingIsAllowed(supplyNameTextField, minimumQuantityTextField, supplierComboBox, supplyTable);
     }
 
     private void validateIfDeletingIsAllowed(){
@@ -329,10 +330,10 @@ public class SupplyFormActions extends SortAndPaginationMethods {
 
     public void validateIfDeletingOfSupplyIsSuccessful(){
         validateIfDeletingIsAllowed();
-        List<String> supplyNames = generateToBeDeletedList();
+        List<List<String>> supplyNamesAndSuppliers = generateToBeDeletedList();
 
         viewEditDeleteSupplyController
-                .deleteAllSupplyByName(supplyNames);
+                .deleteAllSupplyByNameAndSupplier(supplyNamesAndSuppliers);
     }
 
     public void formWindowActivated(){
@@ -372,6 +373,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         }catch(InvalidMinimumQuantityException e){
             System.out.println(e.getMessage());
             messageDialogues.showInvalidMinimumQuantityMessageDialogue();
+        }catch(SupplyAlreadyExistException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showSupplyAlreadyExistMessageDialogue();
         }
     }
 
@@ -386,6 +390,9 @@ public class SupplyFormActions extends SortAndPaginationMethods {
         }catch(InvalidMinimumQuantityException e){
             System.out.println(e.getMessage());
             messageDialogues.showInvalidMinimumQuantityMessageDialogue();
+        }catch(SupplyAlreadyExistException e){
+            System.out.println(e.getMessage());
+            messageDialogues.showSupplyAlreadyExistMessageDialogue();
         }
     }
 

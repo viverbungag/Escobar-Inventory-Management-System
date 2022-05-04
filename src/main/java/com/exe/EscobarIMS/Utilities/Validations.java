@@ -2,6 +2,7 @@ package com.exe.EscobarIMS.Utilities;
 
 import com.exe.EscobarIMS.MenuCategory.MenuCategoryRepository;
 import com.exe.EscobarIMS.Supplier.SupplierRepository;
+import com.exe.EscobarIMS.Supply.SupplyRepository;
 import com.exe.EscobarIMS.SupplyCategory.SupplyCategoryRepository;
 import com.exe.EscobarIMS.UnitOfMeasurement.UnitOfMeasurementRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,9 @@ public class Validations {
     private SupplierRepository supplierRepository;
 
     @Autowired
+    private SupplyRepository supplyRepository;
+
+    @Autowired
     private MessageDialogues messageDialogues;
 
 
@@ -45,6 +49,11 @@ public class Validations {
 
     public boolean isSupplierExisting(String supplierName){
         return supplierRepository.findBySupplierName(supplierName) != null;
+    }
+
+    public boolean isSupplyExisting(String supplyName, String supplierName){
+        Long supplierId = supplierRepository.findBySupplierName(supplierName).getSupplierId();
+        return supplyRepository.findBySupplyNameAndCategory(supplyName, supplierId) != null;
     }
 
     public boolean hasExistingTableContents(JTable table){
@@ -101,5 +110,9 @@ public class Validations {
 
     public boolean isTextFieldEqualsToSelectedTableValue(JTextField textField, JTable table, int columnNumber){
         return textField.getText().equals(table.getValueAt(table.getSelectedRow(), columnNumber).toString());
+    }
+
+    public boolean isComboBoxEqualsToSelectedTableValue(JComboBox comboBox, JTable table, int columnNumber){
+        return comboBox.getSelectedItem().toString().equals(table.getValueAt(table.getSelectedRow(), columnNumber).toString());
     }
 }

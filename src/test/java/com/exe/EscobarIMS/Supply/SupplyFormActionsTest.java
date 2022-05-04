@@ -263,6 +263,19 @@ public class SupplyFormActionsTest {
         assertEquals("Supplier 2", supply.getSupplierName());
         assertEquals("Unit of Measurement 3", supply.getUnitOfMeasurementName());
         assertEquals("Supply Category 2", supply.getSupplyCategoryName());
+
+        supplyFormActions.updateTableContents();
+        supplyTable.setRowSelectionInterval(1,1);
+        supplyNameTextField.setText("Supply 2");
+        minimumQuantityTextField.setText("15");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 2");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 1");
+        assertDoesNotThrow(() -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful(), "Check if it can update everything other than the name and the supplier");
+        Supply supply2 = supplyRepository.findBySupplyName("Supply 2");
+        assertEquals(15D, supply2.getMinimumQuantity());
+        assertEquals("Unit of Measurement 2", supply2.getUnitOfMeasurementName());
+        assertEquals("Supply Category 1", supply2.getSupplyCategoryName());
     }
 
     @Test
@@ -300,6 +313,14 @@ public class SupplyFormActionsTest {
         unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
         supplyCategoryComboBox.setSelectedItem("Supply Category 2");
         assertThrows(FillOutAllTextFieldsException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
+
+        supplyTable.setRowSelectionInterval(0,0);
+        supplyNameTextField.setText("Supply 2");
+        minimumQuantityTextField.setText("16");
+        supplierComboBox.setSelectedItem("Supplier 2");
+        unitOfMeasurementComboBox.setSelectedItem("Unit of Measurement 3");
+        supplyCategoryComboBox.setSelectedItem("Supply Category 2");
+        assertThrows(SupplyAlreadyExistException.class, () -> supplyFormActions.validateIfEditingOfSupplyIsSuccessful());
     }
 
     @Test

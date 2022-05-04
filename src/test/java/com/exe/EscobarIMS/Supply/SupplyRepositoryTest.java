@@ -54,17 +54,9 @@ class SupplyRepositoryTest {
     @Test
     void deleteAllSuppliesByName_when_deleting_1_existing_supply() {
         Integer oldSize = viewEditDeleteSupplyRepository.getAllSupply().size();
-        viewEditDeleteSupplyRepository.deleteAllSupplyByName(List.of("Supply 1"));
+        viewEditDeleteSupplyRepository.deleteSupplyByNameAndSupplier("Supply 1", 1L);
         Integer newSize = viewEditDeleteSupplyRepository.getAllSupply().size();
         assertEquals(oldSize - 1, newSize);
-    }
-
-    @Test
-    void deleteAllSuppliesByName_when_deleting_2_existing_supplies() {
-        Integer oldSize = viewEditDeleteSupplyRepository.getAllSupply().size();
-        viewEditDeleteSupplyRepository.deleteAllSupplyByName(List.of("Supply 2", "Supply 3"));
-        Integer newSize = viewEditDeleteSupplyRepository.getAllSupply().size();
-        assertEquals(oldSize - 2, newSize);
     }
 
     @Test
@@ -185,5 +177,23 @@ class SupplyRepositoryTest {
         Pageable pageable = PageRequest.of(0, 100, sort);
         List<Supply> suppliers =  viewEditDeleteSupplyRepository.getAllPagedSupplies(pageable).getContent();
         assertEquals("Supply 1", suppliers.get(0).getSupplyName());
+    }
+
+    @Test
+    void findBySupplyNameAndCategory_when_getting_the_supply_exists(){
+        Supply supply = supplyRepository.findBySupplyNameAndCategory("Supply 1", 1L);
+        assertNotNull(supply);
+
+        Supply supply1 = supplyRepository.findBySupplyNameAndCategory("Supply 2", 2L);
+        assertNotNull(supply1);
+    }
+
+    @Test
+    void findBySupplyNameAndCategory_when_getting_the_supply_does_not_exists(){
+        Supply supply = supplyRepository.findBySupplyNameAndCategory("Supply 1", 2L);
+        assertNull(supply);
+
+        Supply supply1 = supplyRepository.findBySupplyNameAndCategory("Supply 2", 5L);
+        assertNull(supply1);
     }
 }
