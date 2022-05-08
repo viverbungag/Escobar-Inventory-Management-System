@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS transactions(
     transaction_supply_quantity DECIMAL(10, 5),
     supply_id BIGINT,
     supply_per_unit_cost DECIMAL(10, 2),
-    transaction_total_cost DECIMAL(10, 2),
+    expiry_date DATETIME,
     PRIMARY KEY (transaction_id)
 --    FOREIGN KEY (supply_id) REFERENCES supply(supply_id) ON DELETE CASCADE ON UPDATE CASCADE,
 --    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id) ON DELETE CASCADE ON UPDATE CASCADE,

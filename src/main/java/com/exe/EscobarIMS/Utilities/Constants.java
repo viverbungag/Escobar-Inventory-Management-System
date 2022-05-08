@@ -16,7 +16,7 @@ public interface Constants {
         String NUMERICAL_VALUES_ONLY_MESSAGE = "Please input numerical values only";
         String POSITIVE_VALUES_ONLY_MESSAGE = "Please input positive values only";
         String INVALID_MINIMUM_QUANTITY_NUMBER_MESSAGE = "Please input a valid minimum quantity";
-        String SUPPLY_ALREADY_EXIST_MESSAGE = "This supply already exist\nplease input another name or choose another supplier";
+        String SUPPLY_ALREADY_EXIST_MESSAGE = "This supply already exist, please input another name or choose another supplier";
     }
 
     interface SuccessfulTitles{
